@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class myconnexion {
-    private final   String url="jdbc:mysql://localhost:3306/workshopjdbc3a";
+    private final   String url="jdbc:mysql://localhost:3306/javafx_Pidev";
     private   final   String user ="root";
     private   final String pws ="";
 

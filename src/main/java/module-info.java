@@ -6,5 +6,7 @@ module com.pidev.pidev {
 
 
     opens com.pidev to javafx.fxml;
+    opens com.pidev.controllers to javafx.fxml;
     exports com.pidev;
+    exports com.pidev.entities;
 }
