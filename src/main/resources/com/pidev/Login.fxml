@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pidev.controllers.LoginController"
+            prefHeight="420.0" prefWidth="420.0"
+            style="-fx-background-color: #f4f4f4;">
+
+    <!-- Titre -->
+    <Label text="🔐 Connexion"
+           style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"
+           AnchorPane.topAnchor="30" AnchorPane.leftAnchor="130"/>
+
+    <!-- Email -->
+    <Label text="Email :"
+           style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="100" AnchorPane.leftAnchor="40"/>
+    <TextField fx:id="tfEmail" promptText="Entrez votre email"
+               prefWidth="300"
+               AnchorPane.topAnchor="120" AnchorPane.leftAnchor="40"/>
+
+    <!-- Mot de passe -->
+    <Label text="Mot de passe :"
+           style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="170" AnchorPane.leftAnchor="40"/>
+    <PasswordField fx:id="pfPassword" promptText="Entrez votre mot de passe"
+                  prefWidth="300"
+                  AnchorPane.topAnchor="190" AnchorPane.leftAnchor="40"/>
+
+    <!-- Message erreur -->
+    <Label fx:id="lblMessage"
+           style="-fx-text-fill: red; -fx-font-size: 12;"
+           AnchorPane.topAnchor="235" AnchorPane.leftAnchor="40"/>
+
+    <!-- Bouton Login -->
+    <Button text="Se connecter" onAction="#seConnecter"
+            prefWidth="300"
+            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-font-size: 14;"
+            AnchorPane.topAnchor="265" AnchorPane.leftAnchor="40"/>
+
+    <!-- Lien Register -->
+    <Label text="Pas encore de compte ?"
+           style="-fx-text-fill: #7f8c8d;"
+           AnchorPane.topAnchor="320" AnchorPane.leftAnchor="80"/>
+    <Hyperlink text="S'inscrire" onAction="#ouvrirRegister"
+               style="-fx-text-fill: #2980b9; -fx-font-weight: bold;"
+               AnchorPane.topAnchor="318" AnchorPane.leftAnchor="255"/>
+
+</AnchorPane>

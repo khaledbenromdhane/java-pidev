@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pidev.controllers.UserListController"
+            prefHeight="550.0" prefWidth="820.0"
+            style="-fx-background-color: #f4f4f4;">
+
+    <!-- Titre -->
+    <Label text="👥 Gestion des Utilisateurs"
+           style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"
+           AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"/>
+
+    <!-- Boutons -->
+    <HBox spacing="10"
+          AnchorPane.topAnchor="65" AnchorPane.leftAnchor="20">
+        <Button text="➕ Ajouter" onAction="#ouvrirAjouter"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
+        <Button text="✏️ Modifier" onAction="#ouvrirModifier"
+                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
+        <Button text="🗑️ Supprimer" onAction="#supprimer"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
+        <Button text="🔄 Actualiser" onAction="#actualiser"
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <!-- Tableau -->
+    <TableView fx:id="tableUser"
+               AnchorPane.topAnchor="115" AnchorPane.leftAnchor="20"
+               AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+        <columns>
+            <TableColumn fx:id="colId"        text="ID"         prefWidth="50"/>
+            <TableColumn fx:id="colNom"       text="Nom"        prefWidth="130"/>
+            <TableColumn fx:id="colPrenom"    text="Prénom"     prefWidth="130"/>
+            <TableColumn fx:id="colEmail"     text="Email"      prefWidth="200"/>
+            <TableColumn fx:id="colTelephone" text="Téléphone"  prefWidth="120"/>
+            <TableColumn fx:id="colRole"      text="Rôle"       prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</AnchorPane>
