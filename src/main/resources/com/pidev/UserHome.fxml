@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pidev.controllers.UserHomeController"
+            prefHeight="700.0" prefWidth="1100.0"
+            style="-fx-background-color: #f8faff;">
+
+    <!-- TOPBAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="0"
+              style="-fx-background-color: white;
+                     -fx-border-color: #e2e8f0;
+                     -fx-border-width: 0 0 1 0;
+                     -fx-padding: 0 30;">
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 18 0;">
+                <Label text="PIDEV"
+                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1a56db;"/>
+                <Label text="| Espace Utilisateur"
+                       style="-fx-font-size: 13; -fx-text-fill: #94a3b8;"/>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <HBox alignment="CENTER" spacing="15" style="-fx-padding: 0 0 0 0;">
+                <VBox alignment="CENTER_RIGHT">
+                    <Label fx:id="lblNomUser" text="Utilisateur"
+                           style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                    <Label fx:id="lblRoleUser" text="USER"
+                           style="-fx-font-size: 10; -fx-text-fill: #1a56db; -fx-font-weight: bold;"/>
+                </VBox>
+                <Label text="👤" style="-fx-font-size: 28;"/>
+                <Button text="Deconnexion" onAction="#deconnecter"
+                        style="-fx-background-color: #fee2e2;
+                               -fx-text-fill: #dc2626;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 12;
+                               -fx-padding: 8 18;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- CONTENU -->
+    <center>
+        <VBox spacing="0" style="-fx-padding: 50 60;">
+
+            <!-- Bienvenue -->
+            <VBox spacing="6" style="-fx-padding: 0 0 45 0;">
+                <Label fx:id="lblBienvenue" text="Bonjour !"
+                       style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                <Label text="Que souhaitez-vous explorer aujourd'hui ?"
+                       style="-fx-font-size: 15; -fx-text-fill: #64748b;"/>
+            </VBox>
+
+            <!-- Cartes modules -->
+            <HBox spacing="25" alignment="CENTER">
+
+                <!-- Formation -->
+                <VBox alignment="CENTER" spacing="14" prefWidth="200" prefHeight="210"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 18;
+                             -fx-border-color: #e2e8f0;
+                             -fx-border-width: 1;
+                             -fx-border-radius: 18;
+                             -fx-cursor: hand;
+                             -fx-effect: dropshadow(gaussian, rgba(26,86,219,0.08), 20, 0, 0, 4);
+                             -fx-padding: 30 20;">
+                    <Label text="&#127891;" style="-fx-font-size: 42;"/>
+                    <Label text="Formation"
+                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                    <Label text="Decouvrez nos formations"
+                           style="-fx-font-size: 11; -fx-text-fill: #94a3b8; -fx-text-alignment: center;"
+                           wrapText="true"/>
+                    <Button text="Acceder" onAction="#allerFormation"
+                            style="-fx-background-color: #eff6ff;
+                                   -fx-text-fill: #1a56db;
+                                   -fx-font-weight: bold;
+                                   -fx-font-size: 12;
+                                   -fx-padding: 7 18;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;"/>
+                </VBox>
+
+                <!-- Evenement -->
+                <VBox alignment="CENTER" spacing="14" prefWidth="200" prefHeight="210"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 18;
+                             -fx-border-color: #e2e8f0;
+                             -fx-border-width: 1;
+                             -fx-border-radius: 18;
+                             -fx-cursor: hand;
+                             -fx-effect: dropshadow(gaussian, rgba(26,86,219,0.08), 20, 0, 0, 4);
+                             -fx-padding: 30 20;">
+                    <Label text="&#128197;" style="-fx-font-size: 42;"/>
+                    <Label text="Evenement"
+                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                    <Label text="Tous les evenements"
+                           style="-fx-font-size: 11; -fx-text-fill: #94a3b8; -fx-text-alignment: center;"
+                           wrapText="true"/>
+                    <Button text="Acceder" onAction="#allerEvenement"
+                            style="-fx-background-color: #eff6ff;
+                                   -fx-text-fill: #1a56db;
+                                   -fx-font-weight: bold;
+                                   -fx-font-size: 12;
+                                   -fx-padding: 7 18;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;"/>
+                </VBox>
+
+                <!-- Publication -->
+                <VBox alignment="CENTER" spacing="14" prefWidth="200" prefHeight="210"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 18;
+                             -fx-border-color: #e2e8f0;
+                             -fx-border-width: 1;
+                             -fx-border-radius: 18;
+                             -fx-cursor: hand;
+                             -fx-effect: dropshadow(gaussian, rgba(26,86,219,0.08), 20, 0, 0, 4);
+                             -fx-padding: 30 20;">
+                    <Label text="&#128221;" style="-fx-font-size: 42;"/>
+                    <Label text="Publication"
+                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                    <Label text="Articles et actualites"
+                           style="-fx-font-size: 11; -fx-text-fill: #94a3b8; -fx-text-alignment: center;"
+                           wrapText="true"/>
+                    <Button text="Acceder" onAction="#allerPublication"
+                            style="-fx-background-color: #eff6ff;
+                                   -fx-text-fill: #1a56db;
+                                   -fx-font-weight: bold;
+                                   -fx-font-size: 12;
+                                   -fx-padding: 7 18;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;"/>
+                </VBox>
+
+                <!-- Galerie -->
+                <VBox alignment="CENTER" spacing="14" prefWidth="200" prefHeight="210"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 18;
+                             -fx-border-color: #e2e8f0;
+                             -fx-border-width: 1;
+                             -fx-border-radius: 18;
+                             -fx-cursor: hand;
+                             -fx-effect: dropshadow(gaussian, rgba(26,86,219,0.08), 20, 0, 0, 4);
+                             -fx-padding: 30 20;">
+                    <Label text="&#128247;" style="-fx-font-size: 42;"/>
+                    <Label text="Galerie"
+                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                    <Label text="Photos et medias"
+                           style="-fx-font-size: 11; -fx-text-fill: #94a3b8; -fx-text-alignment: center;"
+                           wrapText="true"/>
+                    <Button text="Acceder" onAction="#allerGalerie"
+                            style="-fx-background-color: #eff6ff;
+                                   -fx-text-fill: #1a56db;
+                                   -fx-font-weight: bold;
+                                   -fx-font-size: 12;
+                                   -fx-padding: 7 18;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;"/>
+                </VBox>
+
+                <!-- Mon Profil -->
+                <VBox alignment="CENTER" spacing="14" prefWidth="200" prefHeight="210"
+                      style="-fx-background-color: #1a56db;
+                             -fx-background-radius: 18;
+                             -fx-cursor: hand;
+                             -fx-effect: dropshadow(gaussian, rgba(26,86,219,0.30), 20, 0, 0, 6);
+                             -fx-padding: 30 20;">
+                    <Label text="&#9881;" style="-fx-font-size: 42;"/>
+                    <Label text="Mon Profil"
+                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <Label text="Modifier mes infos"
+                           style="-fx-font-size: 11; -fx-text-fill: #bfdbfe; -fx-text-alignment: center;"
+                           wrapText="true"/>
+                    <Button text="Acceder" onAction="#allerProfil"
+                            style="-fx-background-color: white;
+                                   -fx-text-fill: #1a56db;
+                                   -fx-font-weight: bold;
+                                   -fx-font-size: 12;
+                                   -fx-padding: 7 18;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;"/>
+                </VBox>
+
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

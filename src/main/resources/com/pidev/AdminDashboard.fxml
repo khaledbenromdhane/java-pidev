@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pidev.controllers.AdminDashboardController"
+            prefHeight="700.0" prefWidth="1100.0"
+            style="-fx-background-color: #f8faff;">
+
+    <!-- ══════════════════════════════════════════════
+         SIDEBAR ADMIN
+    ══════════════════════════════════════════════ -->
+    <left>
+        <VBox prefWidth="240"
+              style="-fx-background-color: #0f172a; -fx-padding: 0;">
+
+            <!-- Logo -->
+            <VBox alignment="CENTER" style="-fx-padding: 28 20; -fx-background-color: #1e293b;">
+                <Label text="◈ PIDEV ADMIN"
+                       style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label text="Panneau d'administration"
+                       style="-fx-font-size: 10; -fx-text-fill: #64748b;"/>
+            </VBox>
+
+            <!-- Admin info -->
+            <VBox alignment="CENTER" spacing="4"
+                  style="-fx-padding: 20; -fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-width: 1 0 1 0;">
+                <Label text="👑" style="-fx-font-size: 28;"/>
+                <Label fx:id="lblAdminNom" text="Admin"
+                       style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label text="ADMINISTRATEUR"
+                       style="-fx-font-size: 10; -fx-text-fill: #f59e0b; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <!-- Menu -->
+            <VBox spacing="4" style="-fx-padding: 20 12;">
+                <Label text="GESTION"
+                       style="-fx-font-size: 10; -fx-text-fill: #475569; -fx-font-weight: bold; -fx-padding: 0 8 8 8;"/>
+                <Button text="  📊  Dashboard" onAction="#afficherStats"
+                        maxWidth="Infinity"
+                        style="-fx-background-color: #1a56db; -fx-text-fill: white;
+                               -fx-font-size: 13; -fx-padding: 11 16;
+                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;"/>
+                <Button text="  👥  Utilisateurs" onAction="#afficherUsers"
+                        maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #cbd5e1;
+                               -fx-font-size: 13; -fx-padding: 11 16;
+                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Boutons bas -->
+            <VBox spacing="8" style="-fx-padding: 15 12;">
+                <Button text="  🔙  Retour Accueil" onAction="#retourAccueil"
+                        maxWidth="Infinity"
+                        style="-fx-background-color: #1e293b; -fx-text-fill: #94a3b8;
+                               -fx-font-size: 12; -fx-padding: 10 16;
+                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;
+                               -fx-border-color: #334155; -fx-border-radius: 8;"/>
+                <Button text="  🚪  Déconnexion" onAction="#deconnecter"
+                        maxWidth="Infinity"
+                        style="-fx-background-color: #7f1d1d; -fx-text-fill: white;
+                               -fx-font-size: 12; -fx-padding: 10 16;
+                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- ══════════════════════════════════════════════
+         CONTENU ADMIN
+    ══════════════════════════════════════════════ -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 30;">
+
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <VBox>
+                    <Label text="Gestion des Utilisateurs"
+                           style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                    <Label fx:id="lblCompteur" text="Chargement..."
+                           style="-fx-font-size: 12; -fx-text-fill: #64748b;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <!-- Stats rapides -->
+                <HBox spacing="12">
+                    <VBox alignment="CENTER" prefWidth="90" prefHeight="60"
+                          style="-fx-background-color: #eff6ff; -fx-background-radius: 10; -fx-padding: 10;">
+                        <Label fx:id="lblStatTotal" text="0"
+                               style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1a56db;"/>
+                        <Label text="Total" style="-fx-font-size: 10; -fx-text-fill: #64748b;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" prefWidth="90" prefHeight="60"
+                          style="-fx-background-color: #fef3c7; -fx-background-radius: 10; -fx-padding: 10;">
+                        <Label fx:id="lblStatAdmin" text="0"
+                               style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #d97706;"/>
+                        <Label text="Admins" style="-fx-font-size: 10; -fx-text-fill: #64748b;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" prefWidth="90" prefHeight="60"
+                          style="-fx-background-color: #dcfce7; -fx-background-radius: 10; -fx-padding: 10;">
+                        <Label fx:id="lblStatUser" text="0"
+                               style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #16a34a;"/>
+                        <Label text="Users" style="-fx-font-size: 10; -fx-text-fill: #64748b;"/>
+                    </VBox>
+                </HBox>
+            </HBox>
+
+            <!-- Barre outils -->
+            <HBox spacing="10" alignment="CENTER_LEFT"
+                  style="-fx-background-color: white; -fx-background-radius: 12;
+                         -fx-padding: 14 18; -fx-border-color: #e2e8f0;
+                         -fx-border-radius: 12; -fx-border-width: 1;">
+                <TextField fx:id="tfRecherche" promptText="🔍  Rechercher un utilisateur..."
+                           prefWidth="300"
+                           style="-fx-background-color: #f8faff; -fx-border-color: #e2e8f0;
+                                  -fx-border-radius: 8; -fx-padding: 8 12; -fx-font-size: 13;"/>
+                <ComboBox fx:id="cbTri" prefWidth="160"
+                          style="-fx-font-size: 12;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="➕  Ajouter" onAction="#ouvrirAjouter"
+                        style="-fx-background-color: #1a56db; -fx-text-fill: white;
+                               -fx-font-weight: bold; -fx-font-size: 12;
+                               -fx-padding: 9 18; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="✏️  Modifier" onAction="#ouvrirModifier"
+                        style="-fx-background-color: #f59e0b; -fx-text-fill: white;
+                               -fx-font-weight: bold; -fx-font-size: 12;
+                               -fx-padding: 9 18; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="🗑️  Supprimer" onAction="#supprimer"
+                        style="-fx-background-color: #ef4444; -fx-text-fill: white;
+                               -fx-font-weight: bold; -fx-font-size: 12;
+                               -fx-padding: 9 18; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="🔄" onAction="#actualiser"
+                        style="-fx-background-color: #f1f5f9; -fx-text-fill: #475569;
+                               -fx-font-size: 14; -fx-padding: 9 14;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- Tableau -->
+            <VBox VBox.vgrow="ALWAYS"
+                  style="-fx-background-color: white; -fx-background-radius: 12;
+                         -fx-border-color: #e2e8f0; -fx-border-radius: 12; -fx-border-width: 1;">
+                <TableView fx:id="tableUser" VBox.vgrow="ALWAYS"
+                           style="-fx-background-color: transparent; -fx-background-radius: 12;">
+                    <columns>
+                        <TableColumn fx:id="colId"        text="ID"        prefWidth="55"/>
+                        <TableColumn fx:id="colNom"       text="Nom"       prefWidth="130"/>
+                        <TableColumn fx:id="colPrenom"    text="Prénom"    prefWidth="130"/>
+                        <TableColumn fx:id="colEmail"     text="Email"     prefWidth="220"/>
+                        <TableColumn fx:id="colTelephone" text="Téléphone" prefWidth="120"/>
+                        <TableColumn fx:id="colRole"      text="Rôle"      prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
