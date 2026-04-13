@@ -4,6 +4,9 @@ module com.pidev.pidev {
     requires javafx.web;
     requires java.sql;
     requires kotlin.stdlib;
+    requires java.desktop;        // ← pour java.awt.Color
+    requires com.github.librepdf.openpdf;
+    requires javafx.base;
 
     opens com.pidev to javafx.fxml;
     opens com.pidev.controllers to javafx.fxml;
