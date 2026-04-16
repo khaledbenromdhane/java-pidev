@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="app-root" stylesheets="@styles/blog.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pidev.controllers.AdminStatsController">
+    <children>
+        <VBox spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="navbar">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#retour" styleClass="btn-ghost" text="⬅" />
+                        <VBox>
+                            <children>
+                                <Label styleClass="title" text="ANALYSES &amp; STATISTIQUES" />
+                                <Label styleClass="subtitle" text="Visualisation des données d'engagement et utilisateurs" />
+                            </children>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button onAction="#refresh" styleClass="btn-gold" text="🔄 ACTUALISER" />
+                    </children>
+                </HBox>
+                
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox spacing="30.0" style="-fx-padding: 30;">
+                            <children>
+                                <!-- High Level Stats Cards -->
+                                <HBox spacing="20.0">
+                                    <children>
+                                        <VBox alignment="CENTER" prefHeight="120.0" prefWidth="250.0" styleClass="publication-card" style="-fx-border-color: -fx-gold;">
+                                            <children>
+                                                <Label style="-fx-text-fill: grey;" text="TOTAL PUBLICATIONS" />
+                                                <Label fx:id="totalPubsLabel" style="-fx-text-fill: white; -fx-font-size: 32; -fx-font-weight: bold;" text="0" />
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="CENTER" prefHeight="120.0" prefWidth="250.0" styleClass="publication-card">
+                                            <children>
+                                                <Label style="-fx-text-fill: grey;" text="MEMBRES ACTIFS" />
+                                                <Label fx:id="totalUsersLabel" style="-fx-text-fill: #22c55e; -fx-font-size: 32; -fx-font-weight: bold;" text="0" />
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="CENTER" prefHeight="120.0" prefWidth="250.0" styleClass="publication-card">
+                                            <children>
+                                                <Label style="-fx-text-fill: grey;" text="COMPTES BANNIS" />
+                                                <Label fx:id="bannedUsersLabel" style="-fx-text-fill: #ef4444; -fx-font-size: 32; -fx-font-weight: bold;" text="0" />
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="CENTER" prefHeight="120.0" prefWidth="250.0" styleClass="publication-card">
+                                            <children>
+                                                <Label style="-fx-text-fill: grey;" text="COMMENTAIRES" />
+                                                <Label fx:id="totalCommentsLabel" style="-fx-text-fill: -fx-gold; -fx-font-size: 32; -fx-font-weight: bold;" text="0" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Charts -->
+                                <HBox spacing="30.0">
+                                    <children>
+                                        <VBox spacing="15.0" styleClass="publication-card" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label styleClass="publication-title" text="📊 Top Contributeurs" />
+                                                <BarChart fx:id="contributorsChart" prefHeight="350.0" style="-fx-background-color: transparent;">
+                                                    <xAxis><CategoryAxis side="BOTTOM" tickLabelFill="WHITE" /></xAxis>
+                                                    <yAxis><NumberAxis side="LEFT" tickLabelFill="WHITE" /></yAxis>
+                                                </BarChart>
+                                            </children>
+                                        </VBox>
+                                        
+                                        <VBox spacing="15.0" styleClass="publication-card" prefWidth="400.0">
+                                            <children>
+                                                <Label styleClass="publication-title" text="🌓 Ratio Utilisateurs" />
+                                                <PieChart fx:id="userRatioChart" prefHeight="350.0" style="-fx-background-color: transparent;" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                
+                                <VBox spacing="15.0" styleClass="publication-card">
+                                    <children>
+                                        <Label styleClass="publication-title" text="📈 Engagement par Publication (Top 5)" />
+                                        <BarChart fx:id="engagementChart" prefHeight="400.0">
+                                            <xAxis><CategoryAxis side="BOTTOM" tickLabelFill="WHITE" /></xAxis>
+                                            <yAxis><NumberAxis side="LEFT" tickLabelFill="WHITE" /></yAxis>
+                                        </BarChart>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -9,6 +9,8 @@ public class User {
     private String email;
     private String telephone;
     private String role;
+    private int est_signale = 0; // 0 = active, 1 = banned
+    private String raison_signalement;
 
     // ─── Constructeurs ───────────────────────────────────────────────────────────
 
@@ -16,16 +18,28 @@ public class User {
 
     public User(String nom, String prenom, String password, String email,
                 String telephone, String role) {
+        this(nom, prenom, password, email, telephone, role, 0, null);
+    }
+
+    public User(String nom, String prenom, String password, String email,
+                String telephone, String role, int est_signale, String raison_signalement) {
         this.nom = nom;
         this.prenom = prenom;
         this.password = password;
         this.email = email;
         this.telephone = telephone;
         this.role = role;
+        this.est_signale = est_signale;
+        this.raison_signalement = raison_signalement;
     }
 
     public User(int id_user, String nom, String prenom, String password,
                 String email, String telephone, String role) {
+        this(id_user, nom, prenom, password, email, telephone, role, 0, null);
+    }
+
+    public User(int id_user, String nom, String prenom, String password,
+                String email, String telephone, String role, int est_signale, String raison_signalement) {
         this.id_user = id_user;
         this.nom = nom;
         this.prenom = prenom;
@@ -33,6 +47,8 @@ public class User {
         this.email = email;
         this.telephone = telephone;
         this.role = role;
+        this.est_signale = est_signale;
+        this.raison_signalement = raison_signalement;
     }
 
     // ─── Getters & Setters ────────────────────────────────────────────────────────
@@ -57,6 +73,15 @@ public class User {
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+
+    public int getEst_signale() { return est_signale; }
+    public void setEst_signale(int est_signale) { this.est_signale = est_signale; }
+
+    public String getRaison_signalement() { return raison_signalement; }
+    public void setRaison_signalement(String raison_signalement) { this.raison_signalement = raison_signalement; }
+
+    public String getStatus() { return est_signale == 1 ? "banned" : "active"; }
+    public void setStatus(String status) { this.est_signale = "banned".equals(status) ? 1 : 0; }
 
     // ─── toString ─────────────────────────────────────────────────────────────────
 

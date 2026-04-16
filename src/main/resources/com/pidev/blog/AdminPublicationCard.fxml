@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox fx:id="cardContainer" spacing="15" style="-fx-border-color: rgba(212,175,55,0.4); -fx-border-width: 2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: #1a1a1a; -fx-padding: 20;" stylesheets="@../styles/blog.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pidev.controllers.blog.AdminPublicationCardController">
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <children>
+                <StackPane>
+                    <children>
+                        <Circle fill="#2c3e50" radius="25" stroke="#d4af37" strokeWidth="1" />
+                        <Label fx:id="avatarInitial" style="-fx-text-fill: #d4af37; -fx-font-weight: bold; -fx-font-size: 18;" text="A" />
+                    </children>
+                </StackPane>
+                <VBox HBox.hgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <children>
+                                <Label fx:id="usernameLabel" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15;" text="Auteur" />
+                                <Label style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-font-size: 10; -fx-padding: 2 6; -fx-background-radius: 5; -fx-font-weight: bold;" text="MODÉRATION" />
+                            </children>
+                        </HBox>
+                        <Label fx:id="dateLabel" style="-fx-text-fill: grey; -fx-font-size: 12;" text="Date de publication" />
+                    </children>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <MenuButton fx:id="adminMenu" style="-fx-background-color: transparent; -fx-text-fill: #d4af37; -fx-border-color: #d4af37; -fx-border-radius: 5;" text="ACTIONS 🛠️">
+                    <items>
+                        <MenuItem onAction="#handleEdit" text="Modifier la publication" />
+                        <MenuItem onAction="#handleDelete" text="Supprimer définitivment" />
+                        <MenuItem onAction="#handleBanAuthor" text="Bannir l'utilisateur" />
+                    </items>
+                </MenuButton>
+            </children>
+        </HBox>
+
+        <Separator opacity="0.1" />
+
+        <VBox spacing="10">
+            <children>
+                <Label fx:id="titreLabel" style="-fx-text-fill: #d4af37; -fx-font-size: 20; -fx-font-weight: bold;" text="Titre de la Publication" wrapText="true" />
+                <Text fx:id="descriptionText" fill="WHITE" style="-fx-font-size: 14;" text="Description du contenu..." wrappingWidth="550" />
+                <ImageView fx:id="publicationImage" fitHeight="300.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+        </VBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: rgba(255,255,255,0.03); -fx-padding: 10; -fx-background-radius: 10;">
+            <children>
+                <Label fx:id="statsLabel" style="-fx-text-fill: #d4af37; -fx-font-weight: bold;" text="Engagement: 0 Likes | 0 Dislikes" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#toggleComments" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5;" text="Gérer les Commentaires 💬" />
+            </children>
+        </HBox>
+
+        <VBox fx:id="adminCommentsSection" managed="false" spacing="10" visible="false">
+            <children>
+                <Label style="-fx-text-fill: grey; -fx-font-size: 11; -fx-font-weight: bold;" text="LISTE DES COMMENTAIRES (MODÉRABLE)" />
+                <VBox fx:id="commentsContainer" spacing="10" />
+            </children>
+        </VBox>
+    </children>
+</VBox>

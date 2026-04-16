@@ -1,0 +1,176 @@
+.root {
+    -fx-gold: #d4af37;
+    -fx-gold-dark: #b8860b;
+    -fx-bg-dark: #050508;
+    -fx-bg-card: rgba(21, 21, 33, 0.7);
+    -fx-border-gold: rgba(212, 175, 55, 0.2);
+    -fx-font-family: "Poppins", "Outfit", "Bahnschrift", sans-serif;
+}
+
+.app-root {
+    -fx-background-color: linear-gradient(to bottom right, #050508, #0f0f1a, #050508);
+    -fx-text-fill: #e9e9ee;
+}
+
+/* Glassmorphism Effect */
+.glass-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 0);
+}
+
+.title {
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: 900;
+}
+
+.subtitle {
+    -fx-text-fill: rgba(255,255,255,0.5);
+    -fx-font-size: 12px;
+}
+
+/* Enhanced Navbar */
+.navbar {
+    -fx-background-color: rgba(11, 11, 18, 0.85);
+    -fx-padding: 20 40;
+    -fx-border-color: rgba(212, 175, 55, 0.15);
+    -fx-border-width: 0 0 2 0;
+}
+
+.nav-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b3b3b3;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.nav-link:hover {
+    -fx-text-fill: -fx-gold;
+}
+
+/* Premium Publication Card */
+.publication-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8));
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-border-color: rgba(212, 175, 55, 0.1);
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 40, 0, 0, 15);
+    -fx-padding: 30;
+}
+
+.publication-card:hover {
+    -fx-border-color: rgba(212, 175, 55, 0.4);
+}
+
+.publication-title {
+    -fx-text-fill: white;
+    -fx-font-size: 26px;
+    -fx-font-weight: 900;
+}
+
+.publication-description {
+    -fx-text-fill: #d1d1d1;
+    -fx-font-size: 15px;
+}
+
+/* Reactions Ultra-UX */
+.reaction-btn {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-text-fill: #e0e0e0;
+    -fx-background-radius: 40;
+    -fx-padding: 10 25;
+    -fx-font-weight: 800;
+    -fx-cursor: hand;
+}
+
+.reaction-btn:hover {
+    -fx-background-color: rgba(212, 175, 55, 0.1);
+}
+
+.like-active {
+    -fx-background-color: rgba(34, 197, 94, 0.2);
+    -fx-text-fill: #4ade80;
+    -fx-border-color: #22c55e;
+    -fx-border-width: 1;
+    -fx-border-radius: 40;
+}
+
+.dislike-active {
+    -fx-background-color: rgba(239, 68, 68, 0.2);
+    -fx-text-fill: #f87171;
+    -fx-border-color: #ef4444;
+    -fx-border-width: 1;
+    -fx-border-radius: 40;
+}
+
+/* Forms (Popup Style) */
+.form-card {
+    -fx-background-color: #0b0b12;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 60, 0, 0, 0);
+}
+
+.btn-gold {
+    -fx-background-color: linear-gradient(to right, #d4af37, #b8860b);
+    -fx-text-fill: #0b0b12;
+    -fx-font-weight: 900;
+    -fx-background-radius: 12;
+    -fx-padding: 15 35;
+    -fx-cursor: hand;
+}
+
+.btn-gold:hover {
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.6), 25, 0, 0, 0);
+}
+
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b3b3b3;
+    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-padding: 12 25;
+}
+
+.btn-ghost:hover {
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
+
+.blog-input {
+    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-border-color: rgba(255,255,255,0.1);
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 15;
+    -fx-prompt-text-fill: rgba(255,255,255,0.3);
+}
+
+.blog-input:focused {
+    -fx-border-color: #d4af37;
+    -fx-background-color: rgba(255,255,255,0.08);
+}
+
+.blog-input .content {
+    -fx-background-color: transparent !important;
+}
+
+.blog-input:focused .content {
+    -fx-background-color: transparent !important;
+}
+
+.blog-input .scroll-pane, .blog-input .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}

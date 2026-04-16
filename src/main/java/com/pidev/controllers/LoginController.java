@@ -47,6 +47,14 @@ public class LoginController {
                 .orElse(null);
 
         if (userTrouve != null) {
+            // Logic for DB-based ban will be restored once columns are identified (Debug logs)
+            /* 
+            if (userTrouve.getEst_signale() == 1) {
+                afficherErreur("🚫 Votre compte a été banni par un administrateur.");
+                return;
+            }
+            */
+            com.pidev.tools.AuthSession.setCurrentUser(userTrouve);
             afficherSucces("✅ Connexion réussie !");
             ouvrirAccueil(userTrouve);
         } else {
@@ -56,13 +64,26 @@ public class LoginController {
 
     private void ouvrirAccueil(User user) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pidev/UserList.fxml"));
+            System.out.println("DEBUG: User Role from DB = '" + user.getRole() + "'");
+            
+            String fxml = "/com/pidev/Dashboard.fxml";
+            String role = (user.getRole() != null) ? user.getRole().toLowerCase() : "";
+            
+            if (role.contains("admin")) {
+                System.out.println("DEBUG: User identified as ADMIN -> Loading AdminDashboard");
+                fxml = "/com/pidev/AdminDashboard.fxml";
+            } else {
+                System.out.println("DEBUG: User identified as MOCK/USER -> Loading Standard Dashboard");
+            }
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
             Stage stage = (Stage) tfEmail.getScene().getWindow();
-            stage.setTitle("Bienvenue " + user.getNom());
-            stage.setScene(new Scene(root, 820, 550));
+            stage.setTitle("Tableau de Bord - " + user.getNom() + " [" + user.getRole() + "]");
+            stage.setScene(new Scene(root, 1100, 720));
         } catch (IOException e) {
             afficherErreur("Erreur ouverture : " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

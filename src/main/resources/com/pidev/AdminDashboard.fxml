@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1100.0" style="-fx-background-color: #0f172a;" stylesheets="@styles/blog.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pidev.controllers.DashboardController">
+    <children>
+        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-border-color: #d4af37; -fx-border-width: 0 0 3 0;">
+                    <children>
+                        <Label style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;" text="ADMIN PANEL" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="welcomeLabel" style="-fx-text-fill: #d4af37;" text="Admin Name" />
+                        <Button mnemonicParsing="false" onAction="#seDeconnecter" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 5;" text="Déconnexion" />
+                    </children>
+                </HBox>
+            </top>
+            <center>
+                <VBox alignment="CENTER" spacing="40.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label style="-fx-text-fill: white; -fx-font-size: 40; -fx-font-weight: bold;" text="Dashboard d'administration" />
+                        
+                        <FlowPane alignment="CENTER" hgap="30.0" prefWrapLength="1000.0" vgap="30.0">
+                            <children>
+                                <!-- User Management -->
+                                <VBox alignment="CENTER" onMouseClicked="#ouvrirGestion" prefHeight="250.0" prefWidth="300.0" spacing="15.0" style="-fx-background-color: #1e293b; -fx-background-radius: 15; -fx-border-color: rgba(212,175,55,0.2); -fx-border-radius: 15; -fx-cursor: hand;">
+                                    <children>
+                                        <Label style="-fx-font-size: 50;" text="🛡️" />
+                                        <Label style="-fx-text-fill: #d4af37; -fx-font-size: 20; -fx-font-weight: bold;" text="Utilisateurs" />
+                                        <Label style="-fx-text-fill: grey;" text="Bannir, gérer les rôles." />
+                                        <Button mnemonicParsing="false" onAction="#ouvrirGestion" style="-fx-background-color: #d4af37; -fx-text-fill: #0f172a; -fx-font-weight: bold; -fx-background-radius: 10;" text="GÉRER" />
+                                    </children>
+                                </VBox>
+                                
+                                <!-- Blog Moderation -->
+                                <VBox alignment="CENTER" onMouseClicked="#ouvrirBlog" prefHeight="250.0" prefWidth="300.0" spacing="15.0" style="-fx-background-color: #1e293b; -fx-background-radius: 15; -fx-border-color: rgba(212,175,55,0.2); -fx-border-radius: 15; -fx-cursor: hand;">
+                                    <children>
+                                        <Label style="-fx-font-size: 50;" text="📝" />
+                                        <Label style="-fx-text-fill: #d4af37; -fx-font-size: 20; -fx-font-weight: bold;" text="Publications" />
+                                        <Label style="-fx-text-fill: grey;" text="Modérer tout le contenu." />
+                                        <Button mnemonicParsing="false" onAction="#ouvrirBlog" style="-fx-background-color: #d4af37; -fx-text-fill: #0f172a; -fx-font-weight: bold; -fx-background-radius: 10;" text="MODÉRER" />
+                                    </children>
+                                </VBox>
+                                
+                                <!-- Comment Moderation -->
+                                <VBox alignment="CENTER" onMouseClicked="#ouvrirModerationComments" prefHeight="250.0" prefWidth="300.0" spacing="15.0" style="-fx-background-color: #1e293b; -fx-background-radius: 15; -fx-border-color: rgba(212,175,55,0.2); -fx-border-radius: 15; -fx-cursor: hand;">
+                                    <children>
+                                        <Label style="-fx-font-size: 50;" text="💬" />
+                                        <Label style="-fx-text-fill: #d4af37; -fx-font-size: 20; -fx-font-weight: bold;" text="Commentaires" />
+                                        <Label style="-fx-text-fill: grey;" text="Nettoyer les discussions." />
+                                        <Button mnemonicParsing="false" onAction="#ouvrirModerationComments" style="-fx-background-color: #d4af37; -fx-text-fill: #0f172a; -fx-font-weight: bold; -fx-background-radius: 10;" text="NETTOYER" />
+                                    </children>
+                                </VBox>
+                                
+                                <!-- Advanced Statistics -->
+                                <VBox alignment="CENTER" onMouseClicked="#ouvrirStats" prefHeight="250.0" prefWidth="300.0" spacing="15.0" style="-fx-background-color: #1e293b; -fx-background-radius: 15; -fx-border-color: rgba(212,175,55,0.2); -fx-border-radius: 15; -fx-cursor: hand;">
+                                    <children>
+                                        <Label style="-fx-font-size: 50;" text="📊" />
+                                        <Label style="-fx-text-fill: #d4af37; -fx-font-size: 20; -fx-font-weight: bold;" text="Statistiques" />
+                                        <Label style="-fx-text-fill: grey;" text="Analyses &amp; Graphiques avancés." />
+                                        <Button mnemonicParsing="false" onAction="#ouvrirStats" style="-fx-background-color: #d4af37; -fx-text-fill: #0f172a; -fx-font-weight: bold; -fx-background-radius: 10;" text="ANALYSES" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </FlowPane>
+                    </children>
+                    <padding>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                    </padding>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

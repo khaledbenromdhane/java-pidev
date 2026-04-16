@@ -8,8 +8,10 @@ module com.pidev.pidev {
     opens com.pidev to javafx.fxml;
     opens com.pidev.controllers to javafx.fxml;
     opens com.pidev.entities to javafx.fxml;
+    opens com.pidev.controllers.blog to javafx.fxml;
 
     exports com.pidev;
     exports com.pidev.entities;
     exports com.pidev.controllers;
+    exports com.pidev.controllers.blog;
 }
