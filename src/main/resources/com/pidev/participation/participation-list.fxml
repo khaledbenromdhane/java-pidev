@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     Frontoffice – Événement List
-     Converted from: evenement/index.html.twig
+     Frontoffice – Participation List
+     Converted from: participation/index.html.twig
      ═══════════════════════════════════════════════════════════════ -->
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.pidev.controllers.EvenementListController"
+            fx:controller="com.pidev.controllers.ParticipationListController"
             stylesheets="@/com/pidev/styles/admin.css" styleClass="app-root">
     <top>
         <VBox>
@@ -19,10 +19,11 @@
                     <Insets top="24" right="32" bottom="24" left="32"/>
                 </padding>
                 <VBox spacing="6" HBox.hgrow="ALWAYS">
-                    <Label text="📅  Événements" styleClass="page-title"/>
-                    <Label text="Gérez tous les événements de la plateforme" styleClass="subtitle"/>
+                    <Label text="🎫  Mes Participations" styleClass="page-title"/>
+                    <Label text="Vos réservations aux événements" styleClass="subtitle"/>
                 </VBox>
-                <Button text="+ Ajouter un Événement" styleClass="btn-admin-primary" onAction="#onAdd"/>
+                <Button text="+ Ajouter une Participation" styleClass="btn-admin-primary"
+                        onAction="#onAdd"/>
             </HBox>
 
             <!-- Search Bar -->
@@ -32,7 +33,8 @@
                     <Insets top="12" right="24" bottom="12" left="24"/>
                 </padding>
                 <Label text="🔍" styleClass="text-muted"/>
-                <TextField fx:id="searchField" promptText="Rechercher par nom, lieu, type, description…"
+                <TextField fx:id="searchField"
+                           promptText="Rechercher par événement, statut, mode de paiement…"
                            styleClass="search-input" HBox.hgrow="ALWAYS"/>
                 <Button text="🔍 Rechercher" styleClass="btn-admin-primary" onAction="#onSearch"
                         style="-fx-padding: 8 16; -fx-font-size: 12px;"/>
@@ -47,7 +49,7 @@
                 <Insets top="16" right="24" bottom="24" left="24"/>
             </padding>
 
-            <!-- Search info label -->
+            <!-- Search info -->
             <Label fx:id="searchInfoLabel" text="" styleClass="text-muted"
                    style="-fx-padding: 0 0 10 0; -fx-font-size: 12px;" visible="false" managed="false"/>
 
@@ -59,14 +61,11 @@
                     </columnResizePolicy>
                     <columns>
                         <TableColumn fx:id="colId" text="#" prefWidth="60" sortable="true"/>
-                        <TableColumn fx:id="colNom" text="Nom" prefWidth="180" sortable="true"/>
-                        <TableColumn fx:id="colType" text="Type" prefWidth="140" sortable="true"/>
-                        <TableColumn fx:id="colParticipants" text="Participants" prefWidth="100" sortable="true"/>
-                        <TableColumn fx:id="colDate" text="Date" prefWidth="110" sortable="true"/>
-                        <TableColumn fx:id="colHeure" text="Heure" prefWidth="80" sortable="true"/>
-                        <TableColumn fx:id="colLieu" text="Lieu" prefWidth="140" sortable="true"/>
-                        <TableColumn fx:id="colPaiement" text="Paiement" prefWidth="100" sortable="true"/>
-                        <TableColumn fx:id="colDescription" text="Description" prefWidth="200" sortable="false"/>
+                        <TableColumn fx:id="colEvenement" text="Événement" prefWidth="200" sortable="true"/>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="120" sortable="true"/>
+                        <TableColumn fx:id="colPlaces" text="Places" prefWidth="80" sortable="true"/>
+                        <TableColumn fx:id="colStatut" text="Statut" prefWidth="120" sortable="true"/>
+                        <TableColumn fx:id="colPaiement" text="Paiement" prefWidth="120" sortable="true"/>
                         <TableColumn fx:id="colActions" text="Actions" prefWidth="130" sortable="false"/>
                     </columns>
                 </TableView>
