@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pidev.controllers.RegisterController"
+            prefHeight="580.0" prefWidth="450.0"
+            style="-fx-background-color: #f4f4f4;">
+
+    <!-- Titre -->
+    <Label text="📝 Inscription"
+           style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"
+           AnchorPane.topAnchor="25" AnchorPane.leftAnchor="140"/>
+
+    <!-- Nom -->
+    <Label text="Nom :" style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="80" AnchorPane.leftAnchor="40"/>
+    <TextField fx:id="tfNom" promptText="Entrez votre nom" prefWidth="340"
+               AnchorPane.topAnchor="100" AnchorPane.leftAnchor="40"/>
+
+    <!-- Prénom -->
+    <Label text="Prénom :" style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="140" AnchorPane.leftAnchor="40"/>
+    <TextField fx:id="tfPrenom" promptText="Entrez votre prénom" prefWidth="340"
+               AnchorPane.topAnchor="160" AnchorPane.leftAnchor="40"/>
+
+    <!-- Email -->
+    <Label text="Email :" style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="200" AnchorPane.leftAnchor="40"/>
+    <TextField fx:id="tfEmail" promptText="Entrez votre email" prefWidth="340"
+               AnchorPane.topAnchor="220" AnchorPane.leftAnchor="40"/>
+
+    <!-- Téléphone -->
+    <Label text="Téléphone :" style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="260" AnchorPane.leftAnchor="40"/>
+    <TextField fx:id="tfTelephone" promptText="Ex: 22334455" prefWidth="340"
+               AnchorPane.topAnchor="280" AnchorPane.leftAnchor="40"/>
+
+    <!-- Mot de passe -->
+    <Label text="Mot de passe :" style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="320" AnchorPane.leftAnchor="40"/>
+    <PasswordField fx:id="pfPassword" promptText="Min. 4 caractères" prefWidth="340"
+                  AnchorPane.topAnchor="340" AnchorPane.leftAnchor="40"/>
+
+    <!-- Confirmer mot de passe -->
+    <Label text="Confirmer mot de passe :" style="-fx-font-weight: bold;"
+           AnchorPane.topAnchor="380" AnchorPane.leftAnchor="40"/>
+    <PasswordField fx:id="pfConfirmPassword" promptText="Répétez le mot de passe" prefWidth="340"
+                  AnchorPane.topAnchor="400" AnchorPane.leftAnchor="40"/>
+
+    <!-- Message -->
+    <Label fx:id="lblMessage" style="-fx-font-size: 12;"
+           AnchorPane.topAnchor="445" AnchorPane.leftAnchor="40"/>
+
+    <!-- Bouton Register -->
+    <Button text="S'inscrire" onAction="#sInscrire" prefWidth="340"
+            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-font-size: 14;"
+            AnchorPane.topAnchor="470" AnchorPane.leftAnchor="40"/>
+
+    <!-- Lien Login -->
+    <Label text="Déjà un compte ?" style="-fx-text-fill: #7f8c8d;"
+           AnchorPane.topAnchor="525" AnchorPane.leftAnchor="100"/>
+    <Hyperlink text="Se connecter" onAction="#ouvrirLogin"
+               style="-fx-text-fill: #2980b9; -fx-font-weight: bold;"
+               AnchorPane.topAnchor="523" AnchorPane.leftAnchor="242"/>
+
+</AnchorPane>

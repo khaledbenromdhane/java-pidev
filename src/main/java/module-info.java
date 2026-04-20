@@ -8,6 +8,7 @@ open module com.pidev.pidev {
     requires javafx.media;
     requires java.sql;
     requires com.google.zxing;
+    requires kotlin.stdlib;
 
     exports com.pidev;
     exports com.pidev.entities;
@@ -15,4 +16,3 @@ open module com.pidev.pidev {
     exports com.pidev.services;
     exports com.pidev.tools;
 }
-

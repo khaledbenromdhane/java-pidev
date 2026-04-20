@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pidev.controllers.UserFormController"
+            prefHeight="420.0" prefWidth="450.0"
+            style="-fx-background-color: #f4f4f4;">
+
+    <!-- Titre -->
+    <Label fx:id="lblTitre" text="➕ Ajouter un utilisateur"
+           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"
+           AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"/>
+
+    <!-- Formulaire -->
+    <GridPane hgap="15" vgap="14"
+              AnchorPane.topAnchor="65" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+        <Label text="Nom :"            GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="tfNom"       GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="250" promptText="Entrez le nom"/>
+
+        <Label text="Prénom :"         GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="tfPrenom"    GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="Entrez le prénom"/>
+
+        <Label text="Email :"          GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="tfEmail"     GridPane.rowIndex="2" GridPane.columnIndex="1" promptText="Entrez l'email"/>
+
+        <Label text="Téléphone :"      GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="tfTelephone" GridPane.rowIndex="3" GridPane.columnIndex="1" promptText="Entrez le téléphone"/>
+
+        <Label text="Mot de passe :"   GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+        <PasswordField fx:id="pfPassword" GridPane.rowIndex="4" GridPane.columnIndex="1" promptText="Entrez le mot de passe"/>
+
+        <Label text="Rôle :"           GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cbRole"       GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="250"/>
+
+    </GridPane>
+
+    <!-- Boutons -->
+    <HBox spacing="10"
+          AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="20">
+        <Button text="💾 Enregistrer" onAction="#enregistrer"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+        <Button text="❌ Annuler" onAction="#annuler"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+    </HBox>
+
+    <!-- Message -->
+    <Label fx:id="lblMessage"
+           AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="20"
+           style="-fx-font-size: 13;"/>
+
+</AnchorPane>
