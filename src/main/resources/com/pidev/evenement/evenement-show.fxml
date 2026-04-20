@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Frontoffice – Événement Show (Detail View)
+     Converted from: evenement/show.html.twig
+     ═══════════════════════════════════════════════════════════════ -->
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pidev.controllers.EvenementShowController"
+            stylesheets="@/com/pidev/styles/admin.css" styleClass="app-root">
+    <top>
+        <HBox styleClass="page-header" spacing="16" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="24" right="32" bottom="24" left="32"/>
+            </padding>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="👁  Détails de l'Événement" styleClass="page-title"/>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Hyperlink fx:id="backLink" text="Événements" onAction="#onBack"
+                               style="-fx-text-fill: #d4af37; -fx-font-size: 12px; -fx-border-color: transparent;"/>
+                    <Label text="›" styleClass="breadcrumb-label"/>
+                    <Label fx:id="breadcrumbName" text="Événement" styleClass="breadcrumb-label"/>
+                </HBox>
+            </VBox>
+            <Button text="← Retour à la liste" styleClass="btn-ghost" onAction="#onBack"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+            <VBox alignment="CENTER">
+                <padding>
+                    <Insets top="24" right="32" bottom="32" left="32"/>
+                </padding>
+
+                <VBox styleClass="detail-card" spacing="0" maxWidth="800">
+                    <!-- ID Badge -->
+                    <HBox spacing="8" alignment="CENTER_LEFT" style="-fx-padding: 0 0 16 0;">
+                        <Label fx:id="idBadge" text="# ID: 1" styleClass="id-badge"/>
+                    </HBox>
+
+                    <!-- Event Image -->
+                    <HBox fx:id="imageContainer" alignment="CENTER" style="-fx-padding: 0 0 20 0;" managed="false" visible="false">
+                        <ImageView fx:id="eventImage" fitWidth="700" fitHeight="300" preserveRatio="true"
+                                   style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.1, 0, 2);"/>
+                    </HBox>
+
+                    <!-- Detail Rows -->
+                    <!-- Nom -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="CENTER_LEFT">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="🔖" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Nom"/>
+                        </HBox>
+                        <Label fx:id="nomValue" text="—" styleClass="detail-value"/>
+                    </HBox>
+
+                    <!-- Type -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="CENTER_LEFT">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="🏷" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Type"/>
+                        </HBox>
+                        <Label fx:id="typeValue" text="—" styleClass="badge-type"/>
+                    </HBox>
+
+                    <!-- Participants -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="CENTER_LEFT">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="👥" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Participants"/>
+                        </HBox>
+                        <Label fx:id="participantsValue" text="—" styleClass="detail-value"/>
+                    </HBox>
+
+                    <!-- Date -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="CENTER_LEFT">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="📅" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Date"/>
+                        </HBox>
+                        <Label fx:id="dateValue" text="—" styleClass="detail-value"/>
+                    </HBox>
+
+                    <!-- Heure -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="CENTER_LEFT">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="🕐" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Heure"/>
+                        </HBox>
+                        <Label fx:id="heureValue" text="—" styleClass="detail-value"/>
+                    </HBox>
+
+                    <!-- Lieu -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="CENTER_LEFT">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="📍" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Lieu"/>
+                        </HBox>
+                        <Label fx:id="lieuValue" text="—" styleClass="detail-value"/>
+                    </HBox>
+
+                    <!-- Paiement -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="CENTER_LEFT">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="💳" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Paiement"/>
+                        </HBox>
+                        <Label fx:id="paiementValue" text="—" styleClass="badge-free"/>
+                    </HBox>
+
+                    <!-- Description -->
+                    <HBox styleClass="detail-row" spacing="16" alignment="TOP_LEFT"
+                          style="-fx-border-width: 0;">
+                        <HBox spacing="6" alignment="CENTER_LEFT" styleClass="detail-label">
+                            <Label text="📝" style="-fx-text-fill: #d4af37;"/>
+                            <Label text="Description"/>
+                        </HBox>
+                        <Label fx:id="descriptionValue" text="—" styleClass="detail-value" wrapText="true"/>
+                    </HBox>
+
+                    <!-- Divider -->
+                    <Separator style="-fx-background-color: rgba(255,255,255,0.06); -fx-padding: 16 0;"/>
+
+                    <!-- Action Buttons -->
+                    <HBox spacing="12" alignment="CENTER_RIGHT" style="-fx-padding: 16 0 0 0;">
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="deleteBtn" text="🗑 Supprimer" styleClass="btn-danger" onAction="#onDelete"/>
+                        <Button fx:id="editBtn" text="✏ Modifier" styleClass="btn-admin-primary" onAction="#onEdit"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

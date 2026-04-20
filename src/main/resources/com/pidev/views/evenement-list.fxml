@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pidev.controllers.EvenementListController"
+            styleClass="app-root" stylesheets="@/com/pidev/styles/evenement.css">
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="page-scroll">
+            <content>
+                <VBox styleClass="page-shell">
+
+                    <HBox fx:id="headerTop" styleClass="header-top" alignment="CENTER_LEFT" spacing="28">
+                        <padding>
+                            <Insets top="12" right="22" bottom="12" left="22"/>
+                        </padding>
+                        <Label fx:id="topQuestionLabel" text="☎ Des questions ?" styleClass="top-link"/>
+                        <Label fx:id="topEmailLabel" text="✉ info@artvista.com" styleClass="top-link"/>
+                        <Label fx:id="topHoursLabel" text="🕒 Lun - Ven: 8:00 - 18:00" styleClass="top-link"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <HBox fx:id="accountActions" alignment="CENTER_RIGHT" spacing="10">
+                            <MenuButton fx:id="accountMenuButton" text="👤 ben romdhane" styleClass="account-menu">
+                                <items>
+                                    <MenuItem text="Mon profil" onAction="#onAccountProfile"/>
+                                    <MenuItem text="Déconnexion" onAction="#onAccountLogout"/>
+                                </items>
+                            </MenuButton>
+                            <Button fx:id="voirAdminBtn" text="Voir admin" styleClass="voir-admin-btn" onAction="#onVoirAdmin"/>
+                        </HBox>
+                    </HBox>
+
+                    <HBox fx:id="headerNav" styleClass="header-nav" alignment="CENTER_LEFT" spacing="22">
+                        <padding>
+                            <Insets top="18" right="22" bottom="18" left="22"/>
+                        </padding>
+                        <Label fx:id="logoLabel" text="Artvista" styleClass="logo-text"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <HBox fx:id="navButtonsBox" spacing="16" alignment="CENTER_LEFT">
+                            <Button fx:id="navAccueilBtn" text="ACCUEIL" styleClass="nav-btn" onAction="#onNavAccueil"/>
+                            <Button fx:id="navOeuvresBtn" text="ŒUVRES" styleClass="nav-btn" onAction="#onNavOeuvres"/>
+                            <Button fx:id="navEvenementsBtn" text="📅 ÉVÉNEMENTS" styleClass="nav-btn active" onAction="#onNavEvenements"/>
+                            <Button fx:id="navBlogBtn" text="BLOG" styleClass="nav-btn" onAction="#onNavBlog"/>
+                            <Button fx:id="navFormationBtn" text="FORMATION" styleClass="nav-btn" onAction="#onNavFormation"/>
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="ticketsBtn" text="ÉVÉNEMENTS &amp; TICKETS" styleClass="ticket-btn" onAction="#onNavEvenements"/>
+                    </HBox>
+
+                    <StackPane styleClass="hero-banner">
+                        <VBox alignment="CENTER" spacing="10">
+                            <Label text="Événements" styleClass="hero-title"/>
+                            <Label text="ACCUEIL / ÉVÉNEMENTS" styleClass="hero-breadcrumb"/>
+                        </VBox>
+                    </StackPane>
+
+                    <VBox styleClass="main-content" spacing="16">
+                        <padding>
+                            <Insets top="26" right="22" bottom="28" left="22"/>
+                        </padding>
+
+                        <Label text="Tous les Événements" styleClass="section-title"/>
+
+                        <HBox styleClass="search-bar" alignment="CENTER_LEFT" spacing="8">
+                            <Label text="🔍" styleClass="search-icon"/>
+                            <TextField fx:id="searchField" promptText="Rechercher par nom d'événement…" styleClass="search-input">
+                                <HBox.hgrow>
+                                    <Priority fx:constant="ALWAYS"/>
+                                </HBox.hgrow>
+                            </TextField>
+                            <Button text="Rechercher" styleClass="search-btn" onAction="#onSearch"/>
+                            <Button fx:id="resetBtn" text="✕" styleClass="clear-btn" onAction="#onReset"/>
+                        </HBox>
+
+                        <Label fx:id="searchInfoLabel" styleClass="search-info" visible="false" managed="false"/>
+
+                        <HBox styleClass="sort-bar" alignment="CENTER_LEFT" spacing="7">
+                            <Label text="✦ Trier :" styleClass="sort-label"/>
+                            <ToggleButton fx:id="sortDateBtn" text="Date" styleClass="sort-pill" onAction="#onSortDate"/>
+                            <ToggleButton fx:id="sortNomBtn" text="Nom" styleClass="sort-pill" onAction="#onSortNom"/>
+                            <ToggleButton fx:id="sortTypeBtn" text="Type" styleClass="sort-pill" onAction="#onSortType"/>
+                            <ToggleButton fx:id="sortPlaceBtn" text="Places" styleClass="sort-pill" onAction="#onSortPlaces"/>
+                            <ToggleButton fx:id="sortLieuBtn" text="Lieu" styleClass="sort-pill" onAction="#onSortLieu"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <ToggleButton fx:id="orderToggle" text="DESC" styleClass="order-pill" onAction="#onToggleOrder"/>
+                        </HBox>
+
+                        <FlowPane fx:id="evtGrid" styleClass="evt-grid" hgap="20" vgap="20" prefWrapLength="1300"/>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>
