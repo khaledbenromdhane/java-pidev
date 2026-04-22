@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.java.controllers.GalerieController"
+        prefWidth="1200" prefHeight="760"
+        styleClass="app-root">
+
+    <left>
+        <VBox prefWidth="248" styleClass="sidebar">
+
+            <HBox styleClass="sidebar-logo-box"
+                  style="-fx-padding: 26 20 22 20; -fx-spacing: 12; -fx-alignment: CENTER_LEFT;">
+                <Label text="🎨" style="-fx-font-size: 28;"/>
+                <VBox spacing="1">
+                    <Label text="ArtManager" styleClass="sidebar-logo"/>
+                    <Label text="Administration" styleClass="sidebar-logo-sub"/>
+                </VBox>
+            </HBox>
+
+            <HBox styleClass="sidebar-admin-box"
+                  style="-fx-padding: 13 16; -fx-spacing: 10; -fx-alignment: CENTER_LEFT;">
+                <Label text="⚙️"
+                       style="-fx-font-size: 18; -fx-background-color: rgba(212,175,55,0.12);
+                               -fx-padding: 7; -fx-background-radius: 50;"/>
+                <VBox spacing="2">
+                    <Label text="Administrateur" styleClass="sidebar-admin-name"/>
+                    <Label text="admin@artmanager.tn" styleClass="sidebar-admin-email"/>
+                </VBox>
+            </HBox>
+
+            <Label text="  MENU PRINCIPAL" styleClass="sidebar-section-label"
+                   style="-fx-padding: 16 20 6 20;"/>
+
+            <Button fx:id="btnGaleries"
+                    text="   🖼️   Galeries"
+                    onAction="#loadGaleriesAdminPage"
+                    maxWidth="Infinity"
+                    styleClass="nav-item"/>
+
+            <Button fx:id="btnOeuvres"
+                    text="   🎨   Œuvres"
+                    onAction="#loadOeuvresAdminPage"
+                    maxWidth="Infinity"
+                    styleClass="nav-item"/>
+
+            <Label text="  VUE PUBLIQUE" styleClass="sidebar-section-label"
+                   style="-fx-padding: 14 20 6 20;"/>
+
+            <Button fx:id="btnFront"
+                    text="   🌐   Ouvrir le Front"
+                    onAction="#openFront"
+                    maxWidth="Infinity"
+                    styleClass="nav-item"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <HBox styleClass="sidebar-footer"
+                  style="-fx-padding: 12 18; -fx-spacing: 8; -fx-alignment: CENTER_LEFT;">
+                <Label text="v1.0.0" styleClass="sidebar-footer-text"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="© 2026" styleClass="sidebar-footer-text"/>
+            </HBox>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area"/>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.java.controllers.OeuvreController"
+        styleClass="app-root">
+
+    <top>
+        <VBox>
+            <!-- Page header -->
+            <HBox spacing="14" styleClass="page-header">
+                <padding><Insets top="22" right="26" bottom="22" left="26"/></padding>
+
+                <Button fx:id="btnRetour"
+                        text="← Retour"
+                        onAction="#goBack"
+                        visible="false"
+                        styleClass="btn-ghost"/>
+
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label fx:id="pageTitleLabel"
+                           text="🎨  Gestion des Œuvres"
+                           styleClass="title"/>
+                    <Label fx:id="pageSubtitleLabel"
+                           text="Gérez l'ensemble des œuvres d'art"
+                           styleClass="subtitle"/>
+                </VBox>
+
+                <!-- Filtre statut -->
+                <ComboBox fx:id="filterStatut"
+                          onAction="#onFilterChange"
+                          promptText="Filtrer par statut"
+                          styleClass="filter-combo"/>
+
+                <Button text="＋  Nouvelle Œuvre"
+                        onAction="#openAddDialog"
+                        styleClass="btn-gold"/>
+            </HBox>
+
+            <!-- Barre de recherche -->
+            <HBox spacing="12" styleClass="search-bar">
+                <padding><Insets top="12" right="26" bottom="12" left="26"/></padding>
+                <Label text="Recherche :" styleClass="search-label"/>
+                <TextField fx:id="searchField"
+                           promptText="Titre, état, artiste..."
+                           onKeyReleased="#onSearch"
+                           styleClass="search-input"
+                           HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" styleClass="btn-gold" onAction="#onSearch"/>
+                <Button text="Effacer" styleClass="btn-ghost" onAction="#clearSearch"/>
+            </HBox>
+
+            <!-- Stats bar + légende -->
+            <HBox spacing="20" styleClass="stats-bar">
+                <padding><Insets top="9" right="26" bottom="9" left="26"/></padding>
+                <Label fx:id="totalLabel" text="" styleClass="stats-count"/>
+                <Label text="  ·  " style="-fx-text-fill: rgba(212,175,55,0.20);"/>
+                <Label text="● Disponible" styleClass="legend-dispo"/>
+                <Label text="● Réservé"    styleClass="legend-reserve"/>
+                <Label text="● Vendu"      styleClass="legend-vendu"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background-color: #0b0b12; -fx-background: #0b0b12; -fx-border-width: 0;"
+                    hbarPolicy="NEVER">
+            <FlowPane fx:id="oeuvreContainer"
+                      hgap="20" vgap="20"
+                      styleClass="cards-container"
+                      style="-fx-padding: 24; -fx-background-color: #0b0b12;"/>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

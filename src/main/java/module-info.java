@@ -1,15 +1,16 @@
-module com.pidev.pidev {
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires javafx.web;
+module com.example.java {
     requires java.sql;
-    requires kotlin.stdlib;
+    requires javafx.graphics;
+    requires javafx.fxml;
+    requires javafx.controls;
+    requires javafx.web;
+    requires java.desktop;
+    requires org.apache.pdfbox;
 
-    opens com.pidev to javafx.fxml;
-    opens com.pidev.controllers to javafx.fxml;
-    opens com.pidev.entities to javafx.fxml;
 
-    exports com.pidev;
-    exports com.pidev.entities;
-    exports com.pidev.controllers;
+    opens com.example.java to javafx.fxml;
+    opens com.example.java.controllers to javafx.fxml;
+
+    exports com.example.java;
+    exports com.example.java.controllers;
 }

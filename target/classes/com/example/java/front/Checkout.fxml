@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.java.controllers.CheckoutController"
+        prefWidth="1100" prefHeight="760"
+        styleClass="app-root">
+
+    <top>
+        <HBox spacing="14" styleClass="navbar"
+              style="-fx-padding: 12 44; -fx-alignment: CENTER_LEFT;">
+            <Button text="← Retour"
+                    onAction="#goBack"
+                    styleClass="btn-ghost"/>
+
+            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label text="Checkout"
+                       style="-fx-text-fill:white; -fx-font-size:20px; -fx-font-weight:700;"/>
+                <Label text="Paiement Stripe et facture"
+                       style="-fx-text-fill:rgba(255,255,255,0.45); -fx-font-size:12px;"/>
+            </VBox>
+
+            <Button fx:id="stripeCheckoutButton"
+                    text="Payer avec Stripe"
+                    onAction="#openStripeCheckout"
+                    styleClass="btn-gold"/>
+        </HBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.36"
+                   style="-fx-background-color:#0b0b12;">
+            <VBox spacing="14"
+                  style="-fx-padding: 22; -fx-background-color:#0d0d18;"
+                  prefWidth="390">
+                <Label text="Panier"
+                       style="-fx-text-fill:#d4af37; -fx-font-size:17px; -fx-font-weight:700;"/>
+
+                <ScrollPane fitToWidth="true"
+                            VBox.vgrow="ALWAYS"
+                            style="-fx-background-color:transparent; -fx-background:transparent; -fx-border-width:0;"
+                            hbarPolicy="NEVER">
+                    <VBox fx:id="itemsContainer"
+                          spacing="10"
+                          style="-fx-background-color:transparent;"/>
+                </ScrollPane>
+
+                <Label fx:id="totalLabel"
+                       text="Total : 0.00 TND"
+                       style="-fx-text-fill:#f7d777; -fx-font-size:16px; -fx-font-weight:700;"/>
+
+                <VBox spacing="9"
+                      style="-fx-background-color:rgba(255,255,255,0.035);
+                             -fx-background-radius:12;
+                             -fx-border-color:rgba(212,175,55,0.14);
+                             -fx-border-radius:12;
+                             -fx-border-width:1;
+                             -fx-padding:12;">
+                    <Label text="Informations client"
+                           style="-fx-text-fill:#d4af37; -fx-font-size:13px; -fx-font-weight:700;"/>
+
+                    <HBox spacing="8">
+                        <TextField fx:id="prenomField"
+                                   promptText="Prenom *"
+                                   styleClass="search-input"
+                                   HBox.hgrow="ALWAYS"/>
+                        <TextField fx:id="nomField"
+                                   promptText="Nom *"
+                                   styleClass="search-input"
+                                   HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <TextField fx:id="emailField"
+                               promptText="Email *"
+                               styleClass="search-input"/>
+
+                    <TextField fx:id="telephoneField"
+                               promptText="Telephone *"
+                               styleClass="search-input"/>
+
+                    <TextField fx:id="adresseField"
+                               promptText="Adresse complete *"
+                               styleClass="search-input"/>
+                </VBox>
+
+                <HBox spacing="10">
+                    <Button text="Vider"
+                            onAction="#clearCart"
+                            styleClass="btn-ghost"/>
+                    <Button fx:id="downloadInvoiceButton"
+                            text="Telecharger PDF"
+                            onAction="#downloadInvoice"
+                            styleClass="btn-ghost"/>
+                    <Button fx:id="sendInvoiceButton"
+                            text="Envoyer facture PDF"
+                            onAction="#sendInvoice"
+                            styleClass="btn-gold"
+                            HBox.hgrow="ALWAYS"
+                            maxWidth="1.7976931348623157E308"/>
+                </HBox>
+
+                <Label fx:id="messageLabel"
+                       text=""
+                       wrapText="true"
+                       style="-fx-font-size:12px;"/>
+            </VBox>
+
+            <VBox style="-fx-background-color:#0b0b12; -fx-padding: 18;">
+                <Label text="Paiement Stripe"
+                       style="-fx-text-fill:rgba(255,255,255,0.75); -fx-font-size:13px; -fx-font-weight:700;"/>
+                <Label fx:id="stripeInfoLabel"
+                       text=""
+                       wrapText="true"
+                       style="-fx-text-fill:rgba(255,255,255,0.55); -fx-font-size:12px;"/>
+                <WebView fx:id="stripeWebView"
+                         VBox.vgrow="ALWAYS"
+                         prefWidth="700"
+                         prefHeight="680"/>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

@@ -60,6 +60,13 @@
             <version>8.3.0</version>
         </dependency>
 
+        <!-- PDF invoices -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>3.0.7</version>
+        </dependency>
+
         <!-- UI & outils -->
         <dependency>
             <groupId>org.controlsfx</groupId>

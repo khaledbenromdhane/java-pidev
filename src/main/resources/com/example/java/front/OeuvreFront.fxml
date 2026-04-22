@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.java.controllers.OeuvreController"
+        prefWidth="1100" prefHeight="760"
+        styleClass="app-root">
+
+    <!-- ═══ NAVBAR TOP ═══ -->
+    <top>
+        <VBox>
+            <HBox spacing="0" styleClass="navbar"
+                  style="-fx-padding: 0 44; -fx-min-height: 62; -fx-alignment: CENTER_LEFT;">
+
+                <HBox spacing="6" style="-fx-alignment: CENTER_LEFT;">
+                    <Label text="🎨" style="-fx-font-size: 24;"/>
+                    <Label text="Art" styleClass="navbar-logo-text"/>
+                    <Label text="Galerie" styleClass="navbar-logo-sub"/>
+                </HBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <HBox spacing="2" style="-fx-alignment: CENTER;">
+                    <Button text="Accueil"  onAction="#goToGaleries" styleClass="nav-link"/>
+                    <Button text="Galeries" onAction="#goToGaleries" styleClass="nav-link"/>
+                    <Button text="À Propos" styleClass="nav-link"/>
+                </HBox>
+
+                <Region prefWidth="20"/>
+
+                <HBox style="-fx-background-color: rgba(255,255,255,0.04);
+                              -fx-background-radius: 22;
+                              -fx-border-color: rgba(212,175,55,0.14);
+                              -fx-border-radius: 22; -fx-border-width: 1;
+                              -fx-alignment: CENTER_LEFT;">
+                    <Label text="  🔍  " style="-fx-text-fill: rgba(212,175,55,0.45);"/>
+                    <TextField fx:id="searchField"
+                               promptText="Rechercher une œuvre..."
+                               onKeyReleased="#onSearch"
+                               styleClass="search-input"
+                               style="-fx-background-color: transparent; -fx-border-width: 0;
+                                       -fx-pref-width: 175; -fx-padding: 8 14 8 0;"/>
+                </HBox>
+
+                <Region prefWidth="12"/>
+
+                <Button fx:id="cartButton"
+                        text="Panier (0)"
+                        onAction="#openCheckout"
+                        styleClass="btn-gold"/>
+            </HBox>
+
+            <!-- Breadcrumb -->
+            <HBox spacing="8" styleClass="breadcrumb-bar"
+                  style="-fx-padding: 10 44; -fx-alignment: CENTER_LEFT;">
+                <Button text="← Toutes les galeries"
+                        onAction="#goToGaleries"
+                        styleClass="breadcrumb-link"/>
+                <Label text=" › " styleClass="breadcrumb-sep"/>
+                <Label fx:id="breadcrumbLabel" text="" styleClass="breadcrumb-current"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ═══ CONTENT ═══ -->
+    <center>
+        <VBox styleClass="app-root">
+
+            <!-- Hero galerie -->
+            <VBox styleClass="hero-section" style="-fx-padding: 34 56; -fx-spacing: 10;">
+                <HBox spacing="16" style="-fx-alignment: CENTER_LEFT;">
+                    <Label text="🖼️" style="-fx-font-size: 36;"/>
+                    <VBox spacing="5">
+                        <Label fx:id="galerieNomLabel" text=""
+                               styleClass="hero-title" style="-fx-font-size: 24px;"/>
+                        <Label fx:id="galerieCatLabel" text="" styleClass="hero-subtitle"/>
+                    </VBox>
+                </HBox>
+                <HBox spacing="14" style="-fx-padding: 4 0 0 0; -fx-alignment: CENTER_LEFT;">
+                    <Label fx:id="totalLabel" text="" styleClass="hero-badge"/>
+                    <Label fx:id="galerieEmployesLabel" text=""
+                           style="-fx-background-color: rgba(168,85,247,0.10);
+                                   -fx-text-fill: rgba(168,85,247,0.80);
+                                   -fx-font-size: 12px; -fx-padding: 5 14;
+                                   -fx-background-radius: 20;
+                                   -fx-border-color: rgba(168,85,247,0.22);
+                                   -fx-border-radius: 20; -fx-border-width: 1;"/>
+                </HBox>
+            </VBox>
+
+            <!-- Filtres statut -->
+            <HBox spacing="8" styleClass="filter-bar"
+                  style="-fx-padding: 14 44; -fx-alignment: CENTER_LEFT;">
+                <Label text="Filtrer :" styleClass="filter-label"/>
+                <Button text="Tous"          onAction="#filterTous"       styleClass="filter-btn-all"/>
+                <Button text="✅ Disponible" onAction="#filterDisponible" styleClass="filter-btn-dispo"/>
+                <Button text="🕐 Réservé"   onAction="#filterReserve"    styleClass="filter-btn-reserve"/>
+                <Button text="🔴 Vendu"     onAction="#filterVendu"      styleClass="filter-btn-vendu"/>
+            </HBox>
+
+            <!-- Cards oeuvres -->
+            <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true"
+                        style="-fx-background-color: #0b0b12; -fx-background: #0b0b12; -fx-border-width: 0;"
+                        hbarPolicy="NEVER">
+                <FlowPane fx:id="oeuvreContainer"
+                          hgap="22" vgap="22"
+                          style="-fx-padding: 26 44; -fx-background-color: #0b0b12;"/>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <!-- ═══ FOOTER ═══ -->
+    <bottom>
+        <HBox styleClass="footer" style="-fx-padding: 14 44; -fx-alignment: CENTER_LEFT;">
+            <Label text="🎨 ArtGalerie — Votre espace artistique" styleClass="footer-text"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="© 2026 — Tous droits réservés" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.java.controllers.GalerieController"
+        prefWidth="1100" prefHeight="760"
+        styleClass="app-root">
+
+    <!-- ═══ NAVBAR TOP ═══ -->
+    <top>
+        <VBox>
+            <HBox spacing="0" styleClass="navbar"
+                  style="-fx-padding: 0 44; -fx-min-height: 62; -fx-alignment: CENTER_LEFT;">
+
+                <!-- Logo -->
+                <HBox spacing="6" style="-fx-alignment: CENTER_LEFT;">
+                    <Label text="🎨" style="-fx-font-size: 24;"/>
+                    <Label text="Art" styleClass="navbar-logo-text"/>
+                    <Label text="Galerie" styleClass="navbar-logo-sub"/>
+                </HBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Nav links -->
+                <HBox spacing="2" style="-fx-alignment: CENTER;">
+                    <Button text="Accueil"  styleClass="nav-link-active"/>
+                    <Button text="Galeries" styleClass="nav-link-active"/>
+                    <Button text="À Propos" styleClass="nav-link"/>
+                </HBox>
+
+                <Region prefWidth="20"/>
+
+                <!-- Recherche -->
+                <HBox style="-fx-background-color: rgba(255,255,255,0.04);
+                              -fx-background-radius: 22;
+                              -fx-border-color: rgba(212,175,55,0.14);
+                              -fx-border-radius: 22; -fx-border-width: 1;
+                              -fx-alignment: CENTER_LEFT;">
+                    <Label text="  🔍  " style="-fx-text-fill: rgba(212,175,55,0.45);"/>
+                    <TextField fx:id="searchField"
+                               promptText="Rechercher une galerie..."
+                               onKeyReleased="#onSearch"
+                               styleClass="search-input"
+                               style="-fx-background-color: transparent; -fx-border-width: 0;
+                                       -fx-pref-width: 175; -fx-padding: 8 14 8 0;"/>
+                </HBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ═══ CONTENT ═══ -->
+    <center>
+        <VBox styleClass="app-root">
+
+            <!-- Hero banner -->
+            <VBox styleClass="hero-section" style="-fx-padding: 50 56; -fx-spacing: 12;">
+                <Label text="Découvrez nos Galeries d'Art" styleClass="hero-title"/>
+                <Label text="Explorez notre collection d'œuvres d'exception, entre tradition et modernité"
+                       styleClass="hero-subtitle"/>
+                <HBox spacing="12" style="-fx-padding: 10 0 0 0; -fx-alignment: CENTER_LEFT;">
+                    <Label fx:id="heroTotalLabel" text="" styleClass="hero-badge"/>
+                </HBox>
+            </VBox>
+
+            <!-- Cards section -->
+            <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true"
+                        style="-fx-background-color: #0b0b12; -fx-background: #0b0b12; -fx-border-width: 0;"
+                        hbarPolicy="NEVER">
+                <VBox style="-fx-padding: 28 44; -fx-spacing: 14; -fx-background-color: #0b0b12;">
+                    <Label text="Toutes nos Galeries" styleClass="card-section-title"/>
+                    <FlowPane fx:id="galerieContainer"
+                              hgap="22" vgap="22"
+                              style="-fx-background-color: transparent;"/>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <!-- ═══ FOOTER ═══ -->
+    <bottom>
+        <HBox styleClass="footer" style="-fx-padding: 14 44; -fx-alignment: CENTER_LEFT;">
+            <Label text="🎨 ArtGalerie — Votre espace artistique"
+                   styleClass="footer-text"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="© 2026 — Tous droits réservés" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
