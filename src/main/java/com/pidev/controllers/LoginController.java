@@ -40,7 +40,7 @@ public class LoginController {
         // Vérification en base
         List<User> users = service.afficher();
         User userTrouve = users.stream()
-                .filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password))
+                .filter(u -> u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(password))
                 .findFirst().orElse(null);
 
         if (userTrouve != null) {
@@ -63,13 +63,19 @@ public class LoginController {
         naviguerVers("/com/pidev/Register.fxml", "Inscription", 450, 580);
     }
 
+    @FXML
+    private void ouvrirMdpOublie() {
+        naviguerVers("/com/pidev/ForgotPassword.fxml", "Récupération de mot de passe", 430, 500);
+    }
+
     private void naviguerVers(String fxml, String titre, double w, double h) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
             Stage stage = (Stage) tfEmail.getScene().getWindow();
             stage.setTitle(titre);
-            stage.setScene(new Scene(root, w, h));
+            stage.getScene().setRoot(root);
+            stage.setMaximized(true);
         } catch (IOException e) {
             afficherErreur("Erreur : " + e.getMessage());
         }

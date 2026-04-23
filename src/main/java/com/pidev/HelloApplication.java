@@ -14,6 +14,7 @@ public class HelloApplication extends Application {
 
         primaryStage.setTitle("Connexion");
         primaryStage.setScene(new Scene(root, 420, 420));
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 }

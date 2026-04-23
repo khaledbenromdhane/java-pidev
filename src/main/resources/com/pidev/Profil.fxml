@@ -2,155 +2,216 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.pidev.controllers.ProfilController"
-            prefHeight="700.0" prefWidth="1100.0"
-            style="-fx-background-color: #f8faff;">
+            prefWidth="1100" prefHeight="700"
+            style="-fx-background-color: #0d0d0f;">
 
-    <!-- ══════════════════════════════════════════════
-         SIDEBAR
-    ══════════════════════════════════════════════ -->
+    <!-- ===== SIDEBAR ===== -->
     <left>
-        <VBox prefWidth="240"
-              style="-fx-background-color: #0f172a; -fx-padding: 0;">
+        <VBox prefWidth="255" spacing="0"
+              style="-fx-background-color: #111114; -fx-border-color: #2a2a35; -fx-border-width: 0 1 0 0;">
 
             <!-- Logo -->
-            <VBox alignment="CENTER" style="-fx-padding: 28 20; -fx-background-color: #1e293b;">
-                <Label text="◈ PIDEV"
-                       style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;"/>
-                <Label text="Mon Profil"
-                       style="-fx-font-size: 10; -fx-text-fill: #64748b;"/>
-            </VBox>
+            <HBox alignment="CENTER_LEFT" spacing="10" prefHeight="58"
+                  style="-fx-padding: 0 0 0 18; -fx-border-color: #2a2a35; -fx-border-width: 0 0 1 0;">
+                <StackPane prefWidth="32" prefHeight="32"
+                           style="-fx-background-color: #f0b429; -fx-background-radius: 7;">
+                    <Label text="T" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1a1000;"/>
+                </StackPane>
+                <Label text="Tun'Arche"
+                       style="-fx-font-family: 'Georgia'; -fx-font-size: 19; -fx-font-weight: bold; -fx-text-fill: #f0f0f0;"/>
+            </HBox>
 
-            <!-- User info -->
-            <VBox alignment="CENTER" spacing="4"
-                  style="-fx-padding: 20; -fx-background-color: #1e293b;
-                         -fx-border-color: #334155; -fx-border-width: 1 0 1 0;">
-                <Label text="👤" style="-fx-font-size: 28;"/>
+            <!-- Avatar -->
+            <VBox alignment="CENTER" spacing="8"
+                  style="-fx-padding: 24 20; -fx-border-color: #2a2a35; -fx-border-width: 0 0 1 0;">
+                <StackPane prefWidth="70" prefHeight="70">
+                    <ImageView fx:id="ivSidebarAvatar" fitWidth="70" fitHeight="70" pickOnBounds="true" preserveRatio="true">
+                        <!-- L'image sera chargée dynamiquement -->
+                    </ImageView>
+                    <Circle fx:id="clipSidebar" radius="35" centerX="35" centerY="35" visible="false"/>
+                </StackPane>
                 <Label fx:id="lblSidebarNom" text="Utilisateur"
-                       style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                       style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #f0f0f0;"/>
                 <Label fx:id="lblSidebarRole" text="USER"
-                       style="-fx-font-size: 10; -fx-text-fill: #1a56db; -fx-font-weight: bold;"/>
+                       style="-fx-font-size: 10; -fx-text-fill: #f0b429; -fx-font-weight: bold;"/>
             </VBox>
 
             <!-- Menu -->
-            <VBox spacing="4" style="-fx-padding: 20 12;">
-                <Button text="  🏠  Accueil" onAction="#retourAccueil"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: transparent; -fx-text-fill: #cbd5e1;
-                               -fx-font-size: 13; -fx-padding: 11 16;
-                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;"/>
-                <Button text="  👤  Mon Profil"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #1a56db; -fx-text-fill: white;
-                               -fx-font-size: 13; -fx-padding: 11 16;
-                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;"/>
+            <VBox style="-fx-padding: 18 0 8 0;">
+                <Label text="NAVIGATION"
+                       style="-fx-font-size: 10; -fx-font-weight: bold; -fx-text-fill: #444455;
+                              -fx-padding: 0 20 10 20;"/>
+
+                <!-- retourAccueil() ✓ -->
+                <HBox alignment="CENTER_LEFT" spacing="12" prefHeight="44"
+                      style="-fx-padding: 0 20; -fx-cursor: hand;"
+                      onMouseClicked="#retourAccueil">
+                    <Label text="&#127968;" style="-fx-font-size: 14; -fx-text-fill: #888899;"/>
+                    <Label text="Accueil" style="-fx-font-size: 13; -fx-text-fill: #ccccdd;"/>
+                </HBox>
+
+                <!-- Mon Profil actif -->
+                <HBox alignment="CENTER_LEFT" spacing="12" prefHeight="44"
+                      style="-fx-background-color: #c8891a; -fx-padding: 0 20; -fx-cursor: hand;">
+                    <Label text="&#128100;" style="-fx-font-size: 14; -fx-text-fill: #ffffff;"/>
+                    <Label text="Mon Profil"
+                           style="-fx-font-size: 13; -fx-text-fill: #ffffff; -fx-font-weight: bold;"/>
+                </HBox>
             </VBox>
 
             <Region VBox.vgrow="ALWAYS"/>
 
-            <!-- Boutons bas -->
-            <VBox spacing="8" style="-fx-padding: 15 12;">
-                <Button text="  🔙  Retour" onAction="#retourAccueil"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #1e293b; -fx-text-fill: #94a3b8;
-                               -fx-font-size: 12; -fx-padding: 10 16;
-                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;
-                               -fx-border-color: #334155; -fx-border-radius: 8;"/>
-                <Button text="  🚪  Déconnexion" onAction="#deconnecter"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #7f1d1d; -fx-text-fill: white;
-                               -fx-font-size: 12; -fx-padding: 10 16;
-                               -fx-alignment: CENTER-LEFT; -fx-background-radius: 8;"/>
+            <!-- Bas sidebar -->
+            <VBox style="-fx-padding: 0 0 14 0; -fx-border-color: #2a2a35; -fx-border-width: 1 0 0 0;">
+                <!-- retourAccueil() ✓ -->
+                <HBox alignment="CENTER_LEFT" spacing="12" prefHeight="44"
+                      style="-fx-padding: 0 20; -fx-cursor: hand;"
+                      onMouseClicked="#retourAccueil">
+                    <Label text="&#8592;" style="-fx-font-size: 14; -fx-text-fill: #888899;"/>
+                    <Label text="Retour" style="-fx-font-size: 13; -fx-text-fill: #ccccdd;"/>
+                </HBox>
+                <!-- deconnecter() ✓ -->
+                <HBox alignment="CENTER_LEFT" spacing="12" prefHeight="44"
+                      style="-fx-padding: 0 20; -fx-cursor: hand;"
+                      onMouseClicked="#deconnecter">
+                    <Label text="&#10140;" style="-fx-font-size: 14; -fx-text-fill: #e84040;"/>
+                    <Label text="Deconnexion"
+                           style="-fx-font-size: 13; -fx-text-fill: #e84040; -fx-font-weight: bold;"/>
+                </HBox>
             </VBox>
         </VBox>
     </left>
 
-    <!-- ══════════════════════════════════════════════
-         CONTENU PROFIL
-    ══════════════════════════════════════════════ -->
+    <!-- ===== CONTENU ===== -->
     <center>
-        <VBox spacing="25" style="-fx-padding: 50 60;" alignment="TOP_CENTER">
+        <VBox spacing="0" style="-fx-padding: 34 42; -fx-background-color: #0d0d0f;" alignment="TOP_LEFT">
 
-            <Label text="👤 Mon Profil"
-                   style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
-            <Label text="Modifiez vos informations personnelles"
-                   style="-fx-font-size: 13; -fx-text-fill: #64748b;"/>
+            <VBox spacing="5" style="-fx-padding: 0 0 26 0;">
+                <Label text="Mon Profil"
+                       style="-fx-font-family: 'Georgia'; -fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #f0f0f0;"/>
+                <Label text="Modifiez vos informations personnelles"
+                       style="-fx-font-size: 13; -fx-text-fill: #555566;"/>
+            </VBox>
 
-            <!-- Carte profil -->
-            <VBox spacing="16" prefWidth="520"
-                  style="-fx-background-color: white;
-                         -fx-background-radius: 16;
-                         -fx-border-color: #e2e8f0;
-                         -fx-border-width: 1;
-                         -fx-border-radius: 16;
-                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 16, 0, 0, 4);
-                         -fx-padding: 35;">
+            <!-- Formulaire -->
+            <VBox spacing="18" maxWidth="560"
+                  style="-fx-background-color: #1a1a20; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                         -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 32 34;">
 
-                <GridPane hgap="20" vgap="16">
+                <!-- Photo Section -->
+                <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+                    <StackPane prefWidth="100" prefHeight="100">
+                        <ImageView fx:id="ivProfilPhoto" fitWidth="100" fitHeight="100" pickOnBounds="true" preserveRatio="true"/>
+                        <Circle fx:id="clipProfil" radius="50" centerX="50" centerY="50" visible="false"/>
+                    </StackPane>
+                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                        <Label text="PHOTO OU AVATAR" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                        <HBox spacing="10">
+                            <Button text="Changer la photo" onAction="#choisirPhoto"
+                                    style="-fx-background-color: #2a2a35; -fx-text-fill: #f0f0f0; -fx-font-size: 11;
+                                           -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 6 12;"/>
+                            <Button text="Choisir Avatar" onAction="#allerStudio"
+                                    style="-fx-background-color: #f0b429; -fx-text-fill: #1a1000; -fx-font-size: 11;
+                                           -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 6 12;"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
 
-                    <Label text="Nom :"
-                           style="-fx-font-weight: bold; -fx-text-fill: #374151; -fx-font-size: 13;"
-                           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                    <TextField fx:id="tfNom" prefWidth="300"
-                               style="-fx-background-color: #f8faff; -fx-border-color: #e2e8f0;
-                                      -fx-border-radius: 8; -fx-padding: 9 12; -fx-font-size: 13;"
-                               GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <!-- Nom + Prénom -->
+                <HBox spacing="16">
+                    <VBox spacing="7" HBox.hgrow="ALWAYS">
+                        <Label text="NOM" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                        <TextField fx:id="tfNom"
+                                   style="-fx-background-color: #0d0d0f; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                                          -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #f0f0f0;
+                                          -fx-font-size: 13; -fx-padding: 10 14;"
+                                   prefHeight="42"/>
+                    </VBox>
+                    <VBox spacing="7" HBox.hgrow="ALWAYS">
+                        <Label text="PRENOM" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                        <TextField fx:id="tfPrenom"
+                                   style="-fx-background-color: #0d0d0f; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                                          -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #f0f0f0;
+                                          -fx-font-size: 13; -fx-padding: 10 14;"
+                                   prefHeight="42"/>
+                    </VBox>
+                </HBox>
 
-                    <Label text="Prénom :"
-                           style="-fx-font-weight: bold; -fx-text-fill: #374151; -fx-font-size: 13;"
-                           GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                    <TextField fx:id="tfPrenom" prefWidth="300"
-                               style="-fx-background-color: #f8faff; -fx-border-color: #e2e8f0;
-                                      -fx-border-radius: 8; -fx-padding: 9 12; -fx-font-size: 13;"
-                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <!-- Email -->
+                <VBox spacing="7">
+                    <Label text="E-MAIL" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                    <TextField fx:id="tfEmail"
+                               style="-fx-background-color: #0d0d0f; -fx-border-color: #f0b429; -fx-border-width: 1.5;
+                                      -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #f0f0f0;
+                                      -fx-font-size: 13; -fx-padding: 10 14;"
+                               prefHeight="42" maxWidth="Infinity"/>
+                </VBox>
 
-                    <Label text="Email :"
-                           style="-fx-font-weight: bold; -fx-text-fill: #374151; -fx-font-size: 13;"
-                           GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                    <TextField fx:id="tfEmail" prefWidth="300"
-                               style="-fx-background-color: #f8faff; -fx-border-color: #e2e8f0;
-                                      -fx-border-radius: 8; -fx-padding: 9 12; -fx-font-size: 13;"
-                               GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <!-- Téléphone -->
+                <VBox spacing="7">
+                    <Label text="TELEPHONE" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                    <TextField fx:id="tfTelephone"
+                               style="-fx-background-color: #0d0d0f; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                                      -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #f0f0f0;
+                                      -fx-font-size: 13; -fx-padding: 10 14;"
+                               prefHeight="42" maxWidth="Infinity"/>
+                </VBox>
 
-                    <Label text="Téléphone :"
-                           style="-fx-font-weight: bold; -fx-text-fill: #374151; -fx-font-size: 13;"
-                           GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                    <TextField fx:id="tfTelephone" prefWidth="300"
-                               style="-fx-background-color: #f8faff; -fx-border-color: #e2e8f0;
-                                      -fx-border-radius: 8; -fx-padding: 9 12; -fx-font-size: 13;"
-                               GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <!-- Rôle (readonly) -->
+                <VBox spacing="7">
+                    <Label text="ROLE" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                    <TextField fx:id="tfRole" editable="false"
+                               style="-fx-background-color: #111114; -fx-border-color: #1a1a25; -fx-border-width: 1;
+                                      -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #444455;
+                                      -fx-font-size: 13; -fx-padding: 10 14;"
+                               prefHeight="42" maxWidth="Infinity"/>
+                </VBox>
 
-                    <Label text="Rôle :"
-                           style="-fx-font-weight: bold; -fx-text-fill: #374151; -fx-font-size: 13;"
-                           GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                    <TextField fx:id="tfRole" prefWidth="300" editable="false"
-                               style="-fx-background-color: #f1f5f9; -fx-border-color: #e2e8f0;
-                                      -fx-border-radius: 8; -fx-padding: 9 12; -fx-font-size: 13;
-                                      -fx-text-fill: #64748b;"
-                               GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <!-- Mot de passe -->
+                <VBox spacing="7">
+                    <Label text="NOUVEAU MOT DE PASSE"
+                           style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                    <PasswordField fx:id="pfPassword" promptText="Laisser vide pour ne pas changer"
+                                   style="-fx-background-color: #0d0d0f; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                                          -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #f0f0f0;
+                                          -fx-prompt-text-fill: #333344; -fx-font-size: 13; -fx-padding: 10 14;"
+                                   prefHeight="42" maxWidth="Infinity"/>
+                </VBox>
 
-                    <Label text="Nouveau mot de passe :"
-                           style="-fx-font-weight: bold; -fx-text-fill: #374151; -fx-font-size: 13;"
-                           GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                    <PasswordField fx:id="pfPassword" prefWidth="300"
-                                  promptText="Laisser vide pour ne pas changer"
-                                  style="-fx-background-color: #f8faff; -fx-border-color: #e2e8f0;
-                                         -fx-border-radius: 8; -fx-padding: 9 12; -fx-font-size: 13;"
-                                  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-                </GridPane>
+                <!-- Message -->
+                <Label fx:id="lblMessage" text=""
+                       style="-fx-font-size: 12;" maxWidth="Infinity" wrapText="true"/>
 
-                <Label fx:id="lblMessage" style="-fx-font-size: 12;"/>
+                <!-- Bouton enregistrer → enregistrer() ✓ -->
+                <Button text="ENREGISTRER LES MODIFICATIONS" onAction="#enregistrer"
+                        maxWidth="Infinity" prefHeight="46"
+                        style="-fx-background-color: #f0b429; -fx-text-fill: #1a1000; -fx-font-size: 13;
+                               -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;
+                               -fx-border-color: transparent;"/>
 
-                <Button text="💾  Enregistrer les modifications" onAction="#enregistrer"
-                        style="-fx-background-color: #1a56db; -fx-text-fill: white;
-                               -fx-font-weight: bold; -fx-padding: 12 24;
-                               -fx-background-radius: 10; -fx-font-size: 13;
-                               -fx-cursor: hand;"/>
             </VBox>
         </VBox>
     </center>
+
+    <!-- ===== FOOTER ===== -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" prefHeight="34"
+              style="-fx-background-color: #111114; -fx-border-color: #2a2a35;
+                     -fx-border-width: 1 0 0 0; -fx-padding: 0 24;">
+            <Label text="© 2026 " style="-fx-font-size: 11; -fx-text-fill: #444455;"/>
+            <Label text="Tun'Arche" style="-fx-font-size: 11; -fx-text-fill: #f0b429; -fx-font-weight: bold;"/>
+            <Label text=". All rights reserved." style="-fx-font-size: 11; -fx-text-fill: #444455;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Crafted with ♥ for Arts &amp; Events"
+                   style="-fx-font-size: 11; -fx-text-fill: #444455;"/>
+        </HBox>
+    </bottom>
 
 </BorderPane>

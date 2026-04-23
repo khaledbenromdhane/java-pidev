@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.pidev.controllers.AvatarStudioController"
+      spacing="30" alignment="CENTER" prefWidth="600" prefHeight="700"
+      style="-fx-background-color: #0d0d0f; -fx-padding: 40;">
+
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="← Retour" onAction="#retourProfil"
+                style="-fx-background-color: transparent; -fx-text-fill: #888899; -fx-cursor: hand;"/>
+        <Label text="STUDIO AVATAR" 
+               style="-fx-font-family: 'Georgia'; -fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <!-- Prévisualisation -->
+    <StackPane>
+        <Circle fx:id="circlePreview" radius="120" fill="#1a1a20" stroke="#f0b429" strokeWidth="3"/>
+        <ProgressIndicator fx:id="progressLoading" maxWidth="50" maxHeight="50" visible="false"/>
+    </StackPane>
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" hbarPolicy="NEVER">
+        <VBox spacing="15" maxWidth="450" alignment="CENTER" 
+              style="-fx-background-color: #1a1a20; -fx-padding: 25; -fx-background-radius: 20; -fx-border-color: #2a2a35; -fx-border-radius: 20;">
+            
+            <VBox spacing="8">
+                <Label text="GENRE" style="-fx-text-fill: #f0b429; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                <ComboBox fx:id="cbGenre" maxWidth="Infinity" onAction="#changerGenre"
+                          style="-fx-background-color: #0d0d0f; -fx-text-fill: white; -fx-background-radius: 8;"/>
+            </VBox>
+
+            <HBox spacing="15">
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="VÊTEMENTS" style="-fx-text-fill: #888899; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cbVetements" maxWidth="Infinity" onAction="#mettreAJourPreview"
+                              style="-fx-background-color: #0d0d0f; -fx-text-fill: white; -fx-background-radius: 8;"/>
+                </VBox>
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="COIFFURE" style="-fx-text-fill: #888899; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cbCheveux" maxWidth="Infinity" onAction="#mettreAJourPreview"
+                              style="-fx-background-color: #0d0d0f; -fx-text-fill: white; -fx-background-radius: 8;"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="15">
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="COULEUR DE PEAU" style="-fx-text-fill: #888899; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cbPeau" maxWidth="Infinity" onAction="#mettreAJourPreview"
+                              style="-fx-background-color: #0d0d0f; -fx-text-fill: white; -fx-background-radius: 8;"/>
+                </VBox>
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="LUNETTES" style="-fx-text-fill: #888899; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cbLunettes" maxWidth="Infinity" onAction="#mettreAJourPreview"
+                              style="-fx-background-color: #0d0d0f; -fx-text-fill: white; -fx-background-radius: 8;"/>
+                </VBox>
+            </HBox>
+
+            <VBox spacing="8">
+                <Label text="PILOSITÉ FACIALE (HOMME)" style="-fx-text-fill: #888899; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                <ComboBox fx:id="cbBarbe" maxWidth="Infinity" onAction="#mettreAJourPreview"
+                          style="-fx-background-color: #0d0d0f; -fx-text-fill: white; -fx-background-radius: 8;"/>
+            </VBox>
+
+            <Button text="🎲 Aléatoire" onAction="#genererAleatoire" maxWidth="Infinity"
+                    style="-fx-background-color: #2a2a35; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        </VBox>
+    </ScrollPane>
+
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <Button text="VALIDER CET AVATAR" onAction="#validerAvatar" maxWidth="Infinity" prefHeight="50"
+            style="-fx-background-color: #f0b429; -fx-text-fill: #1a1000; -fx-font-size: 16; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand;"/>
+
+</VBox>

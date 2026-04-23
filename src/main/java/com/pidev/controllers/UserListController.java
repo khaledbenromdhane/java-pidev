@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class UserListController implements Initializable {
 
     @FXML private TableView<User>            tableUser;
-    @FXML private TableColumn<User, Integer> colId;
     @FXML private TableColumn<User, String>  colNom;
     @FXML private TableColumn<User, String>  colPrenom;
     @FXML private TableColumn<User, String>  colEmail;
@@ -40,7 +39,6 @@ public class UserListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Colonnes
-        colId.setCellValueFactory(new PropertyValueFactory<>("id_user"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -53,10 +51,9 @@ public class UserListController implements Initializable {
                 "Nom (Z → A)",
                 "Prénom (A → Z)",
                 "Prénom (Z → A)",
-                "Role (ADMIN en premier)",
-                "ID (croissant)"
+                "Role (ADMIN en premier)"
         );
-        cbTri.setValue("ID (croissant)");
+        cbTri.setValue("Nom (A → Z)");
 
         chargerDonnees();
 
@@ -95,7 +92,6 @@ public class UserListController implements Initializable {
                 case "Prénom (A → Z)"         -> filtre.sort(Comparator.comparing(User::getPrenom));
                 case "Prénom (Z → A)"         -> filtre.sort(Comparator.comparing(User::getPrenom).reversed());
                 case "Role (ADMIN en premier)"-> filtre.sort(Comparator.comparing(User::getRole));
-                case "ID (croissant)"         -> filtre.sort(Comparator.comparing(User::getId_user));
             }
         }
 
@@ -114,7 +110,7 @@ public class UserListController implements Initializable {
     @FXML
     private void reinitialiser() {
         tfRecherche.clear();
-        cbTri.setValue("ID (croissant)");
+        cbTri.setValue("Nom (A → Z)");
         filtrerEtTrier();
     }
 
@@ -122,7 +118,7 @@ public class UserListController implements Initializable {
     @FXML
     public void afficherTous() {
         tfRecherche.clear();
-        cbTri.setValue("ID (croissant)");
+        cbTri.setValue("Nom (A → Z)");
         chargerDonnees();
     }
 
@@ -143,6 +139,7 @@ public class UserListController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Ajouter un utilisateur");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {
             afficherAlerte("Erreur : " + e.getMessage());
@@ -165,6 +162,7 @@ public class UserListController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Modifier un utilisateur");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {
             afficherAlerte("Erreur : " + e.getMessage());

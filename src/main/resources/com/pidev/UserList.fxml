@@ -10,54 +10,51 @@
             prefHeight="600.0" prefWidth="900.0"
             style="-fx-background-color: #f4f4f4;">
 
-    <!-- Titre -->
-    <Label text="👥 Gestion des Utilisateurs"
-           style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"
-           AnchorPane.topAnchor="15" AnchorPane.leftAnchor="20"/>
+    <!-- En-tête Unifié -->
+    <VBox spacing="15" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <!-- Titre et Compteur -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="👥 Gestion des Utilisateurs"
+                   style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblCompteur" text="Total : 0 utilisateur(s)"
+                   style="-fx-text-fill: #7f8c8d; -fx-font-size: 14; -fx-font-weight: bold;"/>
+        </HBox>
 
-    <!-- Barre recherche + tri -->
-    <HBox spacing="10"
-          AnchorPane.topAnchor="55" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <!-- Contrôles et Actions -->
+        <HBox alignment="CENTER_LEFT" spacing="12"
+              style="-fx-background-color: white; -fx-padding: 12 16; -fx-background-radius: 8; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+            
+            <TextField fx:id="tfRecherche" promptText="🔍 Rechercher par nom, prénom, email..."
+                       prefWidth="280" style="-fx-padding: 8 12; -fx-background-radius: 6; -fx-border-color: #bdc3c7; -fx-border-radius: 6;"/>
 
-        <TextField fx:id="tfRecherche" promptText="🔍 Rechercher par nom, prénom ou email..."
-                   prefWidth="350"
-                   style="-fx-padding: 7;"/>
+            <ComboBox fx:id="cbTri" promptText="Trier par..."
+                      prefWidth="180" style="-fx-padding: 4 8; -fx-background-radius: 6; -fx-border-color: #bdc3c7; -fx-border-radius: 6;"/>
 
-        <ComboBox fx:id="cbTri" promptText="Trier par..."
-                  prefWidth="180"
-                  style="-fx-padding: 4;"/>
+            <Button text="🔍" onAction="#rechercher"
+                    style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 12; -fx-background-radius: 6; -fx-cursor: hand;"/>
+            <Button text="🔄" onAction="#reinitialiser"
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 12; -fx-background-radius: 6; -fx-cursor: hand;"/>
 
-        <Button text="🔍 Rechercher" onAction="#rechercher"
-                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 7 14;"/>
+            <Region HBox.hgrow="ALWAYS"/>
 
-        <Button text="🔄 Réinitialiser" onAction="#reinitialiser"
-                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 7 14;"/>
-    </HBox>
-
-    <!-- Boutons CRUD -->
-    <HBox spacing="10"
-          AnchorPane.topAnchor="100" AnchorPane.leftAnchor="20">
-        <Button text="➕ Ajouter" onAction="#ouvrirAjouter"
-                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
-        <Button text="✏️ Modifier" onAction="#ouvrirModifier"
-                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
-        <Button text="🗑️ Supprimer" onAction="#supprimer"
-                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
-        <Button text="📋 Afficher tous" onAction="#afficherTous"
-                style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
-    </HBox>
-
-    <!-- Compteur -->
-    <Label fx:id="lblCompteur" text="Total : 0 utilisateur(s)"
-           style="-fx-text-fill: #7f8c8d; -fx-font-size: 12;"
-           AnchorPane.topAnchor="105" AnchorPane.rightAnchor="20"/>
+            <!-- Boutons d'action droite -->
+            <Button text="📋 Tous" onAction="#afficherTous"
+                    style="-fx-background-color: #ecf0f1; -fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-padding: 8 16; -fx-background-radius: 6; -fx-cursor: hand;"/>
+            <Button text="✏️ Modifier" onAction="#ouvrirModifier"
+                    style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16; -fx-background-radius: 6; -fx-cursor: hand;"/>
+            <Button text="🗑️ Supprimer" onAction="#supprimer"
+                    style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16; -fx-background-radius: 6; -fx-cursor: hand;"/>
+            <Button text="➕ Ajouter" onAction="#ouvrirAjouter"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16; -fx-background-radius: 6; -fx-cursor: hand;"/>
+        </HBox>
+    </VBox>
 
     <!-- Tableau -->
     <TableView fx:id="tableUser"
                AnchorPane.topAnchor="140" AnchorPane.leftAnchor="20"
                AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
         <columns>
-            <TableColumn fx:id="colId"        text="ID"        prefWidth="50"/>
             <TableColumn fx:id="colNom"       text="Nom"       prefWidth="130"/>
             <TableColumn fx:id="colPrenom"    text="Prénom"    prefWidth="130"/>
             <TableColumn fx:id="colEmail"     text="Email"     prefWidth="220"/>

@@ -7,6 +7,7 @@ module com.pidev.pidev {
     requires java.desktop;        // ← pour java.awt.Color
     requires com.github.librepdf.openpdf;
     requires javafx.base;
+    requires java.mail;
 
     opens com.pidev to javafx.fxml;
     opens com.pidev.controllers to javafx.fxml;

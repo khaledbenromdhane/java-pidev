@@ -40,7 +40,6 @@ public class AdminDashboardController implements Initializable {
 
     // ── Tableau ───────────────────────────────────────────────────────────────────
     @FXML private TableView<User>            tableUser;
-    @FXML private TableColumn<User, Integer> colId;
     @FXML private TableColumn<User, String>  colNom;
     @FXML private TableColumn<User, String>  colPrenom;
     @FXML private TableColumn<User, String>  colEmail;
@@ -67,6 +66,7 @@ public class AdminDashboardController implements Initializable {
     @FXML private Label    lblPctUser;
     @FXML private Label    lblPctTel;
     @FXML private Label    lblPctGmail;
+    @FXML private javafx.scene.shape.Circle circleAdminAvatar;
 
     // ── Barres ────────────────────────────────────────────────────────────────────
     @FXML private Region   barAdmin;
@@ -83,7 +83,6 @@ public class AdminDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id_user"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -94,19 +93,95 @@ public class AdminDashboardController implements Initializable {
         if (admin != null) {
             lblAdminNom.setText(admin.getNom() + " " + admin.getPrenom());
             lblBienvenue.setText("Tableau de bord — " + admin.getNom());
+            chargerPhoto(admin);
         }
 
         lblDate.setText("Aujourd'hui : " +
                 LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        cbTri.getItems().addAll("ID (croissant)", "Nom (A-Z)", "Nom (Z-A)",
+        cbTri.getItems().addAll("Nom (A-Z)", "Nom (Z-A)",
                 "Prenom (A-Z)", "Role (ADMIN en premier)");
-        cbTri.setValue("ID (croissant)");
+        cbTri.setValue("Nom (A-Z)");
 
         chargerDonnees();
 
         tfRecherche.textProperty().addListener((obs, o, n) -> filtrerEtTrier());
         cbTri.valueProperty().addListener((obs, o, n) -> filtrerEtTrier());
+    }
+
+    private void chargerPhoto(User admin) {
+        String photoPath = admin.getPhoto();
+        System.out.println("DEBUG Admin: photoPath = " + photoPath);
+
+        if (photoPath != null && !photoPath.isEmpty()) {
+            try {
+                javafx.scene.image.Image img;
+                if (photoPath.startsWith("http")) {
+                    String encodedPath = photoPath.replace(" ", "%20");
+                    img = new javafx.scene.image.Image(encodedPath, true);
+                    setCircleImage(img);
+                    System.out.println("✅ Image URL chargée dans le header Admin (encoded)");
+                } else {
+                    java.io.File file = new java.io.File(photoPath);
+                    if (file.exists()) {
+                        img = new javafx.scene.image.Image(file.toURI().toString());
+                        setCircleImage(img);
+                        System.out.println("✅ Image locale chargée dans le header Admin");
+                    } else {
+                        System.err.println("⚠️ Fichier image non trouvé Admin: " + photoPath);
+                        chargerAvatarParDefaut(admin);
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("❌ Erreur chargement image Admin: " + e.getMessage());
+                chargerAvatarParDefaut(admin);
+            }
+        } else {
+            chargerAvatarParDefaut(admin);
+        }
+    }
+
+    private void chargerAvatarParDefaut(User user) {
+        try {
+            String name = java.net.URLEncoder.encode(user.getNom() + " " + user.getPrenom(), "UTF-8");
+            String avatarUrl = "https://api.dicebear.com/7.x/initials/png?seed=" + name + "&backgroundColor=00acc1,1e88e5,5e35b1";
+            
+            javafx.scene.image.Image img = new javafx.scene.image.Image(avatarUrl, true);
+            img.progressProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal.doubleValue() == 1.0) {
+                    javafx.application.Platform.runLater(() -> setCircleImage(img));
+                }
+            });
+            // Suppression de l'appel immédiat ici pour éviter le crash
+        } catch (java.io.UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCircleImage(javafx.scene.image.Image img) {
+        if (img == null) return;
+
+        if (img.isError()) {
+            System.out.println("DEBUG Admin: Erreur détectée sur l'image");
+            return;
+        }
+
+        // Si déjà chargée, on applique tout de suite
+        if (img.getProgress() == 1.0) {
+            // (0,0,1,1, true) permet d'étirer l'image pour qu'elle remplisse TOUT le cercle
+            circleAdminAvatar.setFill(new javafx.scene.paint.ImagePattern(img, 0, 0, 1, 1, true));
+            System.out.println("✅ Image appliquée immédiatement (Full)");
+        } else {
+            // Sinon on attend la fin
+            img.progressProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal.doubleValue() == 1.0 && !img.isError()) {
+                    javafx.application.Platform.runLater(() -> {
+                        circleAdminAvatar.setFill(new javafx.scene.paint.ImagePattern(img, 0, 0, 1, 1, true));
+                        System.out.println("✅ Image appliquée après chargement (Full)");
+                    });
+                }
+            });
+        }
     }
 
     // ── Charger ───────────────────────────────────────────────────────────────────
@@ -207,7 +282,7 @@ public class AdminDashboardController implements Initializable {
             case "Nom (Z-A)"               -> filtre.sort(Comparator.comparing(User::getNom).reversed());
             case "Prenom (A-Z)"            -> filtre.sort(Comparator.comparing(User::getPrenom));
             case "Role (ADMIN en premier)" -> filtre.sort(Comparator.comparing(User::getRole));
-            default                         -> filtre.sort(Comparator.comparing(User::getId_user));
+            default                         -> filtre.sort(Comparator.comparing(User::getNom));
         }
 
         tableUser.setItems(FXCollections.observableArrayList(filtre));
@@ -294,12 +369,12 @@ public class AdminDashboardController implements Initializable {
             // Tableau utilisateurs
             document.add(new Paragraph("Liste des utilisateurs", fontSection));
 
-            PdfPTable table = new PdfPTable(6);
+            PdfPTable table = new PdfPTable(5);
             table.setWidthPercentage(100);
-            table.setWidths(new float[]{0.5f, 1.5f, 1.5f, 2.5f, 1.5f, 1f});
+            table.setWidths(new float[]{1.5f, 1.5f, 2.5f, 1.5f, 1f});
             table.setSpacingBefore(10);
 
-            for (String h : new String[]{"ID", "Nom", "Prenom", "Email", "Telephone", "Role"}) {
+            for (String h : new String[]{"Nom", "Prenom", "Email", "Telephone", "Role"}) {
                 PdfPCell cell = new PdfPCell(new Phrase(h, fontBlanc));
                 cell.setBackgroundColor(new Color(15, 23, 42));
                 cell.setPadding(8);
@@ -312,7 +387,7 @@ public class AdminDashboardController implements Initializable {
             for (User u : tableUser.getItems()) {
                 Color bgRow = pair ? new Color(248, 250, 255) : Color.WHITE;
                 for (String data : new String[]{
-                        String.valueOf(u.getId_user()), u.getNom(), u.getPrenom(),
+                        u.getNom(), u.getPrenom(),
                         u.getEmail(),
                         u.getTelephone() != null ? u.getTelephone() : "-",
                         u.getRole()}) {
@@ -370,6 +445,7 @@ public class AdminDashboardController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> chargerDonnees());
+            stage.setMaximized(true);
             stage.show();
         } catch (IOException e) { e.printStackTrace(); }
     }
@@ -395,12 +471,25 @@ public class AdminDashboardController implements Initializable {
 
     private void naviguerVers(String fxml, String titre, double w, double h) {
         try {
+            System.out.println("DEBUG Admin: Navigation vers " + fxml);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
-            Stage stage = (Stage) tableUser.getScene().getWindow();
+            
+            // On récupère le stage via n'importe quel élément injecté
+            Stage stage = (Stage) lblAdminNom.getScene().getWindow();
             stage.setTitle(titre);
-            stage.setScene(new Scene(root, w, h));
-        } catch (IOException e) { e.printStackTrace(); }
+            stage.getScene().setRoot(root);
+            stage.setMaximized(true);
+            System.out.println("✅ Navigation réussie");
+        } catch (IOException e) {
+            System.err.println("❌ Erreur de navigation : " + e.getMessage());
+            e.printStackTrace();
+            afficherAlerte("Erreur de chargement de la page : " + fxml + "\n" + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("❌ Erreur inattendue : " + e.getMessage());
+            e.printStackTrace();
+            afficherAlerte("Une erreur inattendue est survenue lors de la navigation.");
+        }
     }
 
     private void afficherAlerte(String msg) {

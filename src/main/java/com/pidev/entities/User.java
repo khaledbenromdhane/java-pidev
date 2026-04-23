@@ -9,23 +9,25 @@ public class User {
     private String email;
     private String telephone;
     private String role;
+    private String photo;
 
     // ─── Constructeurs ───────────────────────────────────────────────────────────
 
     public User() {}
 
     public User(String nom, String prenom, String password, String email,
-                String telephone, String role) {
+                String telephone, String role, String photo) {
         this.nom = nom;
         this.prenom = prenom;
         this.password = password;
         this.email = email;
         this.telephone = telephone;
         this.role = role;
+        this.photo = photo;
     }
 
     public User(int id_user, String nom, String prenom, String password,
-                String email, String telephone, String role) {
+                String email, String telephone, String role, String photo) {
         this.id_user = id_user;
         this.nom = nom;
         this.prenom = prenom;
@@ -33,6 +35,7 @@ public class User {
         this.email = email;
         this.telephone = telephone;
         this.role = role;
+        this.photo = photo;
     }
 
     // ─── Getters & Setters ────────────────────────────────────────────────────────
@@ -58,6 +61,9 @@ public class User {
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
+    public String getPhoto() { return photo; }
+    public void setPhoto(String photo) { this.photo = photo; }
+
     // ─── toString ─────────────────────────────────────────────────────────────────
 
     @Override
@@ -69,6 +75,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", role='" + role + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }
