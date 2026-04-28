@@ -19,10 +19,6 @@ public class CloudinaryService {
             "secure", true
         ));
     }
-
-
-
-
     
 
     public static synchronized CloudinaryService getInstance() {
