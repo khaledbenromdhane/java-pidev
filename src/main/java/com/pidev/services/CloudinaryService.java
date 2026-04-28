@@ -20,6 +20,11 @@ public class CloudinaryService {
         ));
     }
 
+
+
+
+    
+
     public static synchronized CloudinaryService getInstance() {
         if (instance == null) {
             instance = new CloudinaryService();
