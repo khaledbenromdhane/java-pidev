@@ -21,6 +21,7 @@
                             </children>
                         </HBox>
                         <ComboBox fx:id="sortCombo" prefWidth="180.0" promptText="Trier par..." style="-fx-background-color: #334155; -fx-text-fill: white;" />
+                        <Button mnemonicParsing="false" onAction="#ouvrirAjouter" style="-fx-background-color: #d4af37; -fx-text-fill: black; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 5 15;" text="➕ CRÉER" />
                         <Button mnemonicParsing="false" onAction="#retour" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 5;" text="QUITTER" />
                     </children>
                 </HBox>

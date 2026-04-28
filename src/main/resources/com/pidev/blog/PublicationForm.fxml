@@ -7,7 +7,7 @@
 
 <AnchorPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pidev.controllers.blog.PublicationFormController">
     <children>
-        <VBox spacing="30" styleClass="form-card" stylesheets="@../styles/blog.css" prefWidth="550.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <VBox spacing="30" styleClass="form-card" stylesheets="@../styles/client.css" prefWidth="550.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
             <children>
                 <VBox spacing="5">
                     <children>
@@ -18,7 +18,7 @@
                 
                 <VBox spacing="10">
                     <children>
-                        <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="TITRE DE LA PUBLICATION" />
+                        <Label style="-fx-font-weight: bold;" text="TITRE DE LA PUBLICATION" />
                         <TextField fx:id="titreField" promptText="Un titre accrocheur..." styleClass="blog-input" />
                         <Label fx:id="titreError" managed="false" style="-fx-text-fill: #ff6b6b; -fx-font-size: 11;" visible="false" />
                     </children>
@@ -26,7 +26,7 @@
                 
                 <VBox spacing="10">
                     <children>
-                        <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="CONTENU" />
+                        <Label style="-fx-font-weight: bold;" text="CONTENU" />
                         <TextArea fx:id="descArea" prefHeight="200.0" promptText="Écrivez votre texte ici..." styleClass="blog-input" wrapText="true" />
                         <Label fx:id="descError" managed="false" style="-fx-text-fill: #ff6b6b; -fx-font-size: 11;" visible="false" />
                     </children>
@@ -34,11 +34,12 @@
                 
                 <VBox spacing="10">
                     <children>
-                        <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="URL DE L'IMAGE PRINCIPALE" />
+                        <Label style="-fx-font-weight: bold;" text="URL DE L'IMAGE PRINCIPALE" />
                         <HBox spacing="10" alignment="CENTER_LEFT">
                             <children>
                                 <TextField fx:id="imageField" HBox.hgrow="ALWAYS" promptText="Lien vers l'image..." styleClass="blog-input" />
                                 <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" styleClass="btn-ghost" text="📁" />
+                                <Button fx:id="analyzeBtn" mnemonicParsing="false" onAction="#handleAiAnalyze" style="-fx-background-color: transparent; -fx-border-color: #D4AF37; -fx-text-fill: #D4AF37; -fx-border-radius: 5; -fx-cursor: hand; -fx-padding: 5 15;" text="✨ AI Analyze" />
                             </children>
                         </HBox>
                         <Label fx:id="imageError" managed="false" style="-fx-text-fill: #ff6b6b; -fx-font-size: 11;" visible="false" />

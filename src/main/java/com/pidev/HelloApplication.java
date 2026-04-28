@@ -1,5 +1,6 @@
 package com.pidev;
 
+import com.pidev.services.LocalWebServerService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,5 +16,10 @@ public class HelloApplication extends Application {
         primaryStage.setTitle("Connexion");
         primaryStage.setScene(new Scene(root, 420, 420));
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() {
+        LocalWebServerService.getInstance().stopServer();
     }
 }

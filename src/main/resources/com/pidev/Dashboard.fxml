@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="app-root" stylesheets="@styles/blog.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pidev.controllers.DashboardController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="app-root" stylesheets="@styles/client.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pidev.controllers.DashboardController">
     <children>
         <VBox alignment="CENTER" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>

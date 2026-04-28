@@ -18,15 +18,20 @@ public final class BadWordsFilter {
     }
 
     public static boolean containsBadWords(String text) {
+        return countBadWords(text) > 0;
+    }
+
+    public static int countBadWords(String text) {
         if (text == null || text.trim().isEmpty()) {
-            return false;
+            return 0;
         }
+        int count = 0;
         String lowerText = text.toLowerCase();
         for (String word : BAD_WORDS) {
             if (lowerText.contains(word)) {
-                return true;
+                count++;
             }
         }
-        return false;
+        return count;
     }
 }
