@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Frontoffice – Participation List
+     Converted from: participation/index.html.twig
+     ═══════════════════════════════════════════════════════════════ -->
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pidev.controllers.ParticipationListController"
+            stylesheets="@/com/pidev/styles/admin.css" styleClass="app-root">
+    <top>
+        <VBox>
+            <!-- Page Header -->
+            <HBox styleClass="page-header" spacing="16" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="24" right="32" bottom="24" left="32"/>
+                </padding>
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="🎫  Mes Participations" styleClass="page-title"/>
+                    <Label text="Vos réservations aux événements" styleClass="subtitle"/>
+                </VBox>
+                <Button text="+ Ajouter une Participation" styleClass="btn-admin-primary"
+                        onAction="#onAdd"/>
+            </HBox>
+
+            <!-- Search Bar -->
+            <HBox spacing="12" alignment="CENTER_LEFT"
+                  style="-fx-background-color: rgba(255,255,255,0.04); -fx-border-color: rgba(212,175,55,0.15); -fx-border-radius: 10; -fx-background-radius: 10;">
+                <padding>
+                    <Insets top="12" right="24" bottom="12" left="24"/>
+                </padding>
+                <Label text="🔍" styleClass="text-muted"/>
+                <TextField fx:id="searchField"
+                           promptText="Rechercher par événement, statut, mode de paiement…"
+                           styleClass="search-input" HBox.hgrow="ALWAYS"/>
+                <Button text="🔍 Rechercher" styleClass="btn-admin-primary" onAction="#onSearch"
+                        style="-fx-padding: 8 16; -fx-font-size: 12px;"/>
+                <Button fx:id="resetBtn" text="✕ Effacer" styleClass="btn-ghost" onAction="#onReset"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox>
+            <padding>
+                <Insets top="16" right="24" bottom="24" left="24"/>
+            </padding>
+
+            <!-- Search info -->
+            <Label fx:id="searchInfoLabel" text="" styleClass="text-muted"
+                   style="-fx-padding: 0 0 10 0; -fx-font-size: 12px;" visible="false" managed="false"/>
+
+            <!-- Table Card -->
+            <VBox styleClass="admin-table-card" VBox.vgrow="ALWAYS">
+                <TableView fx:id="table" VBox.vgrow="ALWAYS">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn fx:id="colId" text="#" prefWidth="60" sortable="true"/>
+                        <TableColumn fx:id="colEvenement" text="Événement" prefWidth="200" sortable="true"/>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="120" sortable="true"/>
+                        <TableColumn fx:id="colPlaces" text="Places" prefWidth="80" sortable="true"/>
+                        <TableColumn fx:id="colStatut" text="Statut" prefWidth="120" sortable="true"/>
+                        <TableColumn fx:id="colPaiement" text="Paiement" prefWidth="120" sortable="true"/>
+                        <TableColumn fx:id="colActions" text="Actions" prefWidth="130" sortable="false"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
