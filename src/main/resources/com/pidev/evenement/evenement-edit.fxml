@@ -104,13 +104,19 @@
                         <TextArea fx:id="descriptionArea" styleClass="form-textarea" promptText="Décrivez votre événement en détail…"
                                   prefRowCount="4"
                                   GridPane.rowIndex="10" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                        <HBox spacing="8" alignment="CENTER_LEFT"
+                              GridPane.rowIndex="11" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            <Button fx:id="generateDescBtn" text="✨ Générer avec IA" styleClass="btn-generate"
+                                    onAction="#onGenerateDescription"/>
+                            <Label fx:id="generateStatus" text="" styleClass="form-hint"/>
+                        </HBox>
                            <Label fx:id="descError" text="" styleClass="form-error"
-                               GridPane.rowIndex="11" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                               GridPane.rowIndex="12" GridPane.columnIndex="0" GridPane.columnSpan="2"
                                managed="false" visible="false"/>
 
                         <!-- Paiement Toggle -->
                         <HBox styleClass="toggle-wrap" spacing="16" alignment="CENTER_LEFT"
-                            GridPane.rowIndex="12" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            GridPane.rowIndex="13" GridPane.columnIndex="0" GridPane.columnSpan="2">
                             <HBox spacing="10" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                                 <Label text="💳" style="-fx-text-fill: #d4af37; -fx-font-size: 18px;"/>
                                 <VBox spacing="2">
@@ -122,27 +128,27 @@
                         </HBox>
 
                            <Label text="💶  Prix (€)" styleClass="form-label"
-                               GridPane.rowIndex="13" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                               GridPane.rowIndex="14" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
                            <TextField fx:id="prixField" styleClass="form-input" promptText="Ex: 25.00"
-                                GridPane.rowIndex="14" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                GridPane.rowIndex="15" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
                            <Label fx:id="prixError" text="" styleClass="form-error"
-                               GridPane.rowIndex="15" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                               GridPane.rowIndex="16" GridPane.columnIndex="0" GridPane.columnSpan="2"
                                managed="false" visible="false"/>
 
                         <!-- Image -->
                         <Label text="🖼  Image de l'événement" styleClass="form-label"
-                               GridPane.rowIndex="16" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                               GridPane.rowIndex="17" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
                         <HBox spacing="12" alignment="CENTER_LEFT"
-                              GridPane.rowIndex="17" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                              GridPane.rowIndex="18" GridPane.columnIndex="0" GridPane.columnSpan="2">
                             <Button fx:id="imageBtn" text="Choisir un fichier…" styleClass="btn-ghost" onAction="#onChooseImage"/>
                             <Label fx:id="imageNameLabel" text="Aucun fichier choisi" styleClass="form-hint"/>
                         </HBox>
                            <Label fx:id="imageError" text="" styleClass="form-error"
-                               GridPane.rowIndex="18" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                               GridPane.rowIndex="19" GridPane.columnIndex="0" GridPane.columnSpan="2"
                                managed="false" visible="false"/>
                            <Label text="Formats acceptés : JPG, PNG, GIF, WEBP. Taille max : 780 Ko."
                                styleClass="form-hint"
-                               GridPane.rowIndex="19" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                               GridPane.rowIndex="20" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
 
                         <!-- Column constraints for 2 equal cols -->
                         <columnConstraints>

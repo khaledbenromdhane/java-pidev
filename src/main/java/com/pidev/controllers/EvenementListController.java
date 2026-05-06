@@ -28,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -36,7 +37,20 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -62,6 +76,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.EnumMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EvenementListController implements Initializable {
 
@@ -108,20 +123,32 @@ public class EvenementListController implements Initializable {
     @FXML private ToggleButton sortLieuBtn;
     @FXML private ToggleButton orderToggle;
     @FXML private FlowPane evtGrid;
+    @FXML private HBox paymentBanner;
+    @FXML private Label paymentBannerTitle;
+    @FXML private Label paymentBannerMessage;
 
     private final List<Evenement> allEvents = new ArrayList<>();
     private final Map<Integer, ReservationState> reservationsByEvent = new HashMap<>();
     private List<Evenement> renderedEvents = new ArrayList<>();
+    private final HttpClient httpClient = HttpClient.newHttpClient();
 
     private SortField sortField = SortField.DATE;
     private boolean descending = true;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH'h'mm");
+    private static final String BACKEND_BASE_URL = "http://localhost:8081";
+    private static final String BACKEND_CHECKOUT_URL = BACKEND_BASE_URL + "/api/stripe/checkout";
+    private static final String BACKEND_VERIFY_URL = BACKEND_BASE_URL + "/api/stripe/verify";
+    private static final String BACKEND_CANCEL_URL = BACKEND_BASE_URL + "/api/stripe/cancel";
+    private static final String STRIPE_SUCCESS_URL = BACKEND_BASE_URL + "/stripe/return/success";
+    private static final String STRIPE_CANCEL_URL = BACKEND_BASE_URL + "/stripe/return/cancel";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadEventsFromDatabase();
+        loadReservationsFromDatabase();
+        hidePaymentBanner();
 
         searchField.textProperty().addListener((obs, oldV, newV) -> {
             resetBtn.setVisible(newV != null && !newV.isBlank());
@@ -251,6 +278,51 @@ public class EvenementListController implements Initializable {
                     event.setImage(stringValue(rs, columns, "image"));
                     event.setPrix(floatValue(rs, columns, "prix"));
                     allEvents.add(event);
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private void loadReservationsFromDatabase() {
+        reservationsByEvent.clear();
+
+        try {
+            Connection connection = myconnexion.getInstance().getConnection();
+            if (connection == null) {
+                return;
+            }
+
+            String tableName = resolveParticipationTable(connection);
+            if (tableName == null) {
+                return;
+            }
+
+            try (Statement statement = connection.createStatement();
+                 ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY id_participation DESC")) {
+
+                ResultSetMetaData metaData = rs.getMetaData();
+                Set<String> columns = new HashSet<>();
+                for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                    columns.add(metaData.getColumnName(i).toLowerCase(Locale.ROOT));
+                }
+
+                while (rs.next()) {
+                    int eventId = intValue(rs, columns, "id_evenement", "event_id", "evenement_id");
+                    if (eventId <= 0 || reservationsByEvent.containsKey(eventId)) {
+                        continue;
+                    }
+
+                    String statut = stringValue(rs, columns, "statut", "status");
+                    if (statut != null && statut.toLowerCase(Locale.ROOT).contains("annul")) {
+                        continue;
+                    }
+
+                    int participationId = intValue(rs, columns, "id_participation", "id");
+                    int places = intValue(rs, columns, "nbr_participation", "nbrparticipation", "places");
+                    String payment = stringValue(rs, columns, "mode_paiement", "modepaiement", "payment_mode");
+
+                    reservationsByEvent.put(eventId, new ReservationState(participationId, Math.max(1, places), payment));
                 }
             }
         } catch (Exception ignored) {
@@ -395,12 +467,34 @@ public class EvenementListController implements Initializable {
             try {
                 ReservationDraft value = draft.get();
                 int participationId = insertReservation(event, value.places(), value.paymentMethod());
-                reservationsByEvent.put(event.getId(), new ReservationState(participationId, value.places(), value.paymentMethod()));
-                qrBtn.setVisible(true);
-                qrBtn.setManaged(true);
-                editBtn.setVisible(true);
-                editBtn.setManaged(true);
-                showInfo("Succès", "Réservation enregistrée avec succès.");
+                if (Boolean.TRUE.equals(event.getPaiement()) && "Carte".equalsIgnoreCase(value.paymentMethod())) {
+                    launchStripeCheckout(event, participationId, value.places(),
+                            () -> {
+                                reservationsByEvent.put(event.getId(), new ReservationState(participationId, value.places(), value.paymentMethod()));
+                                qrBtn.setVisible(true);
+                                qrBtn.setManaged(true);
+                                editBtn.setVisible(true);
+                                editBtn.setManaged(true);
+                                showPaymentBanner("success", "Paiement reussi", "Votre reservation est confirmee et visible dans vos participations.");
+                                refreshGrid();
+                            },
+                            () -> {
+                                reservationsByEvent.remove(event.getId());
+                                qrBtn.setVisible(false);
+                                qrBtn.setManaged(false);
+                                editBtn.setVisible(false);
+                                editBtn.setManaged(false);
+                                showPaymentBanner("error", "Paiement echoue", "Le paiement a ete annule ou a echoue. Veuillez reessayer.");
+                                refreshGrid();
+                            });
+                } else {
+                    reservationsByEvent.put(event.getId(), new ReservationState(participationId, value.places(), value.paymentMethod()));
+                    qrBtn.setVisible(true);
+                    qrBtn.setManaged(true);
+                    editBtn.setVisible(true);
+                    editBtn.setManaged(true);
+                    showInfo("Succès", "Réservation enregistrée avec succès.");
+                }
             } catch (Exception ex) {
                 showError("Erreur", "Impossible d'enregistrer la réservation.");
             }
@@ -505,8 +599,13 @@ public class EvenementListController implements Initializable {
             int selected = placesSpinner.getValue();
             boolean invalidPlaces = selected <= 0 || selected > maxSelectable;
             boolean invalidPayment = paidEvent && (paymentBox.getValue() == null || paymentBox.getValue().isBlank());
+            boolean invalidPrice = paidEvent && (event.getPrix() == null || event.getPrix() <= 0);
 
-            if (invalidPlaces) {
+            if (invalidPrice) {
+                validationLabel.setText("Prix invalide pour cet evenement.");
+                validationLabel.setVisible(true);
+                validationLabel.setManaged(true);
+            } else if (invalidPlaces) {
                 validationLabel.setText("Le nombre de participations ne peut pas dépasser les places disponibles.");
                 validationLabel.setVisible(true);
                 validationLabel.setManaged(true);
@@ -519,7 +618,12 @@ public class EvenementListController implements Initializable {
                 validationLabel.setManaged(false);
             }
 
-            confirmButton.setDisable(invalidPlaces || invalidPayment || maxSelectable <= 0);
+            confirmButton.setDisable(invalidPrice || invalidPlaces || invalidPayment || maxSelectable <= 0);
+            if (paidEvent && "Card".equalsIgnoreCase(paymentBox.getValue())) {
+                confirmButton.setText(existingState == null ? "Payer par Stripe" : "Mettre a jour + Stripe");
+            } else {
+                confirmButton.setText(existingState == null ? "Confirmer" : "Enregistrer");
+            }
         };
 
         placesSpinner.valueProperty().addListener((obs, oldV, newV) -> revalidate.run());
@@ -543,8 +647,158 @@ public class EvenementListController implements Initializable {
         return dialog.showAndWait();
     }
 
+    private void launchStripeCheckout(Evenement event, int participationId, int places, Runnable onSuccess, Runnable onCancel) {
+        try {
+            String checkoutUrl = createCheckoutSessionUrl(event, participationId, places);
+            openCheckoutWindow(checkoutUrl, onSuccess, onCancel);
+        } catch (Exception ex) {
+            System.err.println("Stripe checkout error: " + ex.getMessage());
+            String details = ex.getMessage() == null ? "" : ex.getMessage();
+            showPaymentBanner("error", "Paiement indisponible", "Checkout failed: " + details);
+            if (onCancel != null) {
+                onCancel.run();
+            }
+        }
+    }
+
+    private String createCheckoutSessionUrl(Evenement event, int participationId, int places) throws IOException, InterruptedException {
+        float prix = event.getPrix() == null ? 0f : event.getPrix();
+        if (prix <= 0) {
+            throw new IllegalArgumentException("Montant invalide");
+        }
+
+        JSONObject payload = new JSONObject();
+        payload.put("participationId", participationId);
+        payload.put("eventId", event.getId());
+        payload.put("eventName", event.getNom());
+        payload.put("unitPrice", prix);
+        payload.put("places", places);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BACKEND_CHECKOUT_URL))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(payload.toString()))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() != 200) {
+            throw new IOException("Checkout HTTP " + response.statusCode() + ": " + response.body());
+        }
+
+        JSONObject json = new JSONObject(response.body());
+        return json.getString("url");
+    }
+
+    private void openCheckoutWindow(String checkoutUrl, Runnable onSuccess, Runnable onCancel) {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Paiement Stripe");
+
+        WebView webView = new WebView();
+        WebEngine engine = webView.getEngine();
+        AtomicBoolean handled = new AtomicBoolean(false);
+
+        engine.locationProperty().addListener((obs, oldV, newV) -> {
+            if (newV == null || handled.get()) {
+                return;
+            }
+
+            if (newV.startsWith(STRIPE_SUCCESS_URL)) {
+                handled.set(true);
+                boolean paid = verifyStripePayment(newV);
+                stage.close();
+                if (paid) {
+                    if (onSuccess != null) {
+                        onSuccess.run();
+                    }
+                } else {
+                    if (onCancel != null) {
+                        onCancel.run();
+                    }
+                }
+            } else if (newV.startsWith(STRIPE_CANCEL_URL)) {
+                handled.set(true);
+                stage.close();
+                notifyBackendCancel(newV);
+                if (onCancel != null) {
+                    onCancel.run();
+                }
+            }
+        });
+
+        stage.setOnCloseRequest(event -> {
+            if (handled.compareAndSet(false, true)) {
+                if (onCancel != null) {
+                    onCancel.run();
+                }
+            }
+        });
+
+        engine.load(checkoutUrl);
+        stage.setScene(new Scene(webView, 980, 720));
+        stage.show();
+    }
+
+    private boolean verifyStripePayment(String url) {
+        String sessionId = extractQueryParam(url, "session_id");
+        if (sessionId == null || sessionId.isBlank()) {
+            return false;
+        }
+
+        try {
+            URI uri = URI.create(BACKEND_VERIFY_URL + "?sessionId=" + sessionId);
+            HttpRequest request = HttpRequest.newBuilder().uri(uri).GET().build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                return false;
+            }
+            JSONObject json = new JSONObject(response.body());
+            return json.optBoolean("paid", false);
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    private void notifyBackendCancel(String url) {
+        String pid = extractQueryParam(url, "pid");
+        if (pid == null || pid.isBlank()) {
+            return;
+        }
+
+        try {
+            JSONObject payload = new JSONObject();
+            payload.put("participationId", Integer.parseInt(pid));
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BACKEND_CANCEL_URL))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(payload.toString()))
+                    .build();
+            httpClient.send(request, HttpResponse.BodyHandlers.discarding());
+        } catch (Exception ignored) {
+        }
+    }
+
+    private String extractQueryParam(String url, String key) {
+        try {
+            URI uri = new URI(url);
+            String query = uri.getQuery();
+            if (query == null || query.isBlank()) {
+                return null;
+            }
+            for (String part : query.split("&")) {
+                String[] tokens = part.split("=", 2);
+                if (tokens.length == 2 && key.equals(tokens[0])) {
+                    return URLDecoder.decode(tokens[1], StandardCharsets.UTF_8);
+                }
+            }
+        } catch (URISyntaxException ignored) {
+        }
+        return null;
+    }
+
     private void showQrDialog(Evenement event, ReservationState state) {
         StringBuilder payload = new StringBuilder();
+        payload.append("Participation: ").append(state.participationId).append('\n');
         payload.append("Event: ").append(event.getNom()).append('\n');
         payload.append("Date: ").append(event.getDate()).append(' ').append(event.getHeure()).append('\n');
         payload.append("Places: ").append(state.places).append('\n');
@@ -651,6 +905,24 @@ public class EvenementListController implements Initializable {
             }
             ps.setInt(3, participationId);
             ps.executeUpdate();
+        }
+    }
+
+    private void updateReservationStatus(int participationId, String status) {
+        try {
+            Connection connection = myconnexion.getInstance().getConnection();
+            String table = resolveParticipationTable(connection);
+            if (table == null) {
+                return;
+            }
+
+            String sql = "UPDATE " + table + " SET statut=? WHERE id_participation=?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status);
+                ps.setInt(2, participationId);
+                ps.executeUpdate();
+            }
+        } catch (Exception ignored) {
         }
     }
 
@@ -855,7 +1127,7 @@ public class EvenementListController implements Initializable {
 
     @FXML
     private void onNavFormation(ActionEvent event) {
-        NavigationHelper.navigateTo(event, NavigationHelper.PART_LIST);
+        // Intentionally left blank: keep button clickable without navigation.
     }
 
     @FXML
@@ -877,6 +1149,35 @@ public class EvenementListController implements Initializable {
         alert.showAndWait();
     }
 
+    @FXML
+    private void onClosePaymentBanner() {
+        hidePaymentBanner();
+    }
+
+    private void showPaymentBanner(String variant, String title, String message) {
+        if (paymentBanner == null) {
+            return;
+        }
+        paymentBanner.getStyleClass().removeAll("payment-banner-success", "payment-banner-error");
+        if ("success".equalsIgnoreCase(variant)) {
+            paymentBanner.getStyleClass().add("payment-banner-success");
+        } else {
+            paymentBanner.getStyleClass().add("payment-banner-error");
+        }
+        paymentBannerTitle.setText(title);
+        paymentBannerMessage.setText(message);
+        paymentBanner.setVisible(true);
+        paymentBanner.setManaged(true);
+    }
+
+    private void hidePaymentBanner() {
+        if (paymentBanner == null) {
+            return;
+        }
+        paymentBanner.setVisible(false);
+        paymentBanner.setManaged(false);
+    }
+
     private String resolveImage(String rawImage) {
         if (rawImage == null || rawImage.isBlank()) {
             return "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop";
@@ -885,6 +1186,17 @@ public class EvenementListController implements Initializable {
         String value = rawImage.trim();
         if (value.startsWith("http://") || value.startsWith("https://")) {
             return value;
+        }
+
+        try {
+            java.nio.file.Path candidate = java.nio.file.Path.of(value);
+            if (!candidate.isAbsolute()) {
+                candidate = java.nio.file.Path.of(System.getProperty("user.dir"), "uploads", "evenements", value);
+            }
+            if (java.nio.file.Files.exists(candidate)) {
+                return candidate.toUri().toString();
+            }
+        } catch (Exception ignored) {
         }
 
         return "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop";

@@ -16,6 +16,7 @@ import java.io.IOException;
 public class NavigationHelper {
 
     // ── Admin Backoffice paths ──
+    public static final String ADMIN_SCAN = "/com/pidev/backoffice/admin-scan.fxml";
     public static final String ADMIN_EVENEMENTS = "/com/pidev/backoffice/admin-evenements.fxml";
     public static final String ADMIN_PARTICIPATIONS = "/com/pidev/backoffice/admin-participations.fxml";
 

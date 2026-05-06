@@ -1,7 +1,10 @@
 package com.pidev.controllers;
 
 import com.pidev.entities.Evenement;
+import com.pidev.services.CrudService;
 import com.pidev.services.EvenementJdbcService;
+import com.pidev.services.GeminiService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -34,10 +37,14 @@ public class EvenementFormController implements Initializable {
     @FXML private TextArea descriptionArea;
     @FXML private CheckBox paiementCheck;
     @FXML private Button imageBtn;
+    @FXML private Button generateDescBtn;
     @FXML private Label imageNameLabel;
+    @FXML private Label generateStatus;
     @FXML private Label nomError, typeError, dateError, heureError, lieuError, descError, prixError, imageError;
 
     private final EvenementJdbcService service = new EvenementJdbcService();
+    private final CrudService<Evenement, Integer> crudService = service;
+    private final GeminiService geminiService = new GeminiService();
     private File selectedImageFile;
     private Runnable onSaved;
 
@@ -58,6 +65,44 @@ public class EvenementFormController implements Initializable {
     }
 
     @FXML
+    private void onGenerateDescription() {
+        String nom = nomField.getText();
+        String type = typeBox.getValue();
+        String lieu = lieuField.getText();
+        String date = datePicker.getValue() == null ? "" : datePicker.getValue().toString();
+        String heure = heureField.getText();
+        int nbParticipants = participantsSpinner.getValue();
+
+        // Require at least a name
+        if (nom == null || nom.isBlank()) {
+            showError("Champ requis", "Veuillez saisir au moins le nom de l'événement avant de générer une description.");
+            return;
+        }
+
+        generateDescBtn.setDisable(true);
+        generateStatus.setText("⏳ Génération en cours…");
+
+        Thread thread = new Thread(() -> {
+            try {
+                String description = geminiService.generateDescription(nom, type, lieu, date, heure, nbParticipants);
+                Platform.runLater(() -> {
+                    descriptionArea.setText(description);
+                    generateStatus.setText("✅ Description générée !");
+                    generateDescBtn.setDisable(false);
+                });
+            } catch (Exception ex) {
+                Platform.runLater(() -> {
+                    generateStatus.setText("❌ Erreur lors de la génération");
+                    generateDescBtn.setDisable(false);
+                    showError("Erreur IA", "Impossible de générer la description : " + ex.getMessage());
+                });
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    @FXML
     private void onSave() {
         clearErrors();
 
@@ -72,7 +117,7 @@ public class EvenementFormController implements Initializable {
             Evenement evt = toEntity(data);
             String storedImage = service.storeImage(selectedImageFile, null);
             evt.setImage(storedImage);
-            service.create(evt);
+            crudService.create(evt);
 
             showInfo("Succès", "Événement créé avec succès !");
             if (onSaved != null) {

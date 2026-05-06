@@ -2,6 +2,7 @@ package com.pidev.controllers;
 
 import com.pidev.entities.Evenement;
 import com.pidev.entities.Participation;
+import com.pidev.services.CrudService;
 import com.pidev.services.EvenementJdbcService;
 import com.pidev.services.ParticipationJdbcService;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ public class ParticipationFormController implements Initializable {
     @FXML private Label paiementLabel, paiementHint;
 
     private final ParticipationJdbcService participationService = new ParticipationJdbcService();
+    private final CrudService<Participation, Integer> participationCrudService = participationService;
     private final EvenementJdbcService evenementService = new EvenementJdbcService();
     private final Map<String, Evenement> eventsByLabel = new HashMap<>();
     private Runnable onSaved;
@@ -84,7 +86,7 @@ public class ParticipationFormController implements Initializable {
             p.setScanned(false);
             p.setScannedAt(null);
 
-            participationService.create(p);
+            participationCrudService.create(p);
             showInfo("Succès", "Participation créée avec succès !");
             if (onSaved != null) {
                 onSaved.run();

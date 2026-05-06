@@ -911,3 +911,379 @@
 .scroll-pane .scroll-bar:vertical .track {
     -fx-background-color: transparent;
 }
+
+/* Scan page */
+.scan-sidebar-active {
+    -fx-background-color: linear-gradient(to right,
+        rgba(212,175,55,0.18),
+        rgba(168,85,247,0.08));
+    -fx-text-fill: #f7d777;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-padding: 8 14 8 36;
+    -fx-border-color: rgba(212,175,55,0.4);
+    -fx-border-width: 0 0 0 2;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.scan-hero-card {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%,
+        rgba(26,26,46,0.96),
+        rgba(22,33,62,0.96),
+        rgba(12,35,60,0.96));
+    -fx-border-color: rgba(212,175,55,0.16);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 26;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.28), 22, 0.2, 0, 8);
+}
+
+.scan-kicker {
+    -fx-text-fill: #f4d778;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-letter-spacing: 1.2px;
+}
+
+.scan-hero-title {
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: 800;
+}
+
+.scan-hero-text {
+    -fx-text-fill: rgba(255,255,255,0.72);
+    -fx-font-size: 13px;
+    -fx-line-spacing: 3px;
+}
+
+.scan-tag {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-text-fill: rgba(255,255,255,0.86);
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 8 14;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+.scan-stat-card {
+    -fx-background-color: rgba(8,12,22,0.42);
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-padding: 16 18;
+}
+
+.scan-stat-label {
+    -fx-text-fill: rgba(255,255,255,0.5);
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-letter-spacing: 0.8px;
+}
+
+.scan-stat-strong {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+}
+
+.scan-section-card {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%,
+        rgba(20,20,32,0.96), rgba(16,16,26,0.96));
+    -fx-border-color: rgba(212,175,55,0.16);
+    -fx-border-radius: 18;
+    -fx-background-radius: 18;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.26), 18, 0.16, 0, 6);
+}
+
+.scan-section-header {
+    -fx-padding: 20 22 18 22;
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-width: 0 0 1 0;
+}
+
+.scan-section-body {
+    -fx-padding: 22;
+}
+
+.scan-section-kicker {
+    -fx-text-fill: #f4d778;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.scan-section-title {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+}
+
+.scan-section-text {
+    -fx-text-fill: rgba(255,255,255,0.58);
+    -fx-font-size: 12px;
+}
+
+.btn-scan-primary {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #d4af37, #b8860b);
+    -fx-text-fill: #0a0a0f;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 12;
+    -fx-padding: 10 18;
+    -fx-cursor: hand;
+}
+
+.btn-scan-primary:hover {
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 16, 0.16, 0, 4);
+}
+
+.btn-scan-stop {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #dc3545, #b42331);
+    -fx-text-fill: white;
+}
+
+.scan-state-pill {
+    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+    -fx-padding: 8 14;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.scan-state-pill-idle {
+    -fx-text-fill: rgba(255,255,255,0.7);
+}
+
+.scan-state-pill-live {
+    -fx-background-color: rgba(40,167,69,0.16);
+    -fx-border-color: rgba(40,167,69,0.34);
+    -fx-text-fill: #97e3a8;
+}
+
+.scan-camera-shell {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%,
+        rgba(8,17,31,0.96),
+        rgba(10,19,33,0.96),
+        rgba(14,26,44,0.96));
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 22;
+    -fx-background-radius: 22;
+    -fx-padding: 18;
+}
+
+.scan-camera-frame {
+    -fx-alignment: center;
+    -fx-min-height: 290;
+    -fx-background-color: rgba(0,0,0,0.25);
+    -fx-border-color: rgba(212,175,55,0.28);
+    -fx-border-radius: 18;
+    -fx-background-radius: 18;
+    -fx-border-style: segments(5, 5);
+    -fx-padding: 22;
+}
+
+.scan-camera-mark {
+    -fx-background-color: rgba(212,175,55,0.18);
+    -fx-text-fill: #f7d777;
+    -fx-background-radius: 16;
+    -fx-padding: 14 18;
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+}
+
+.scan-camera-title {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+}
+
+.scan-camera-subtitle {
+    -fx-text-fill: rgba(255,255,255,0.56);
+    -fx-font-size: 12px;
+    -fx-text-alignment: center;
+}
+
+.scan-chip {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-text-fill: rgba(255,255,255,0.82);
+    -fx-background-radius: 999;
+    -fx-padding: 8 13;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+}
+
+.scan-chip-cyan {
+    -fx-background-color: rgba(23,162,184,0.14);
+    -fx-text-fill: #7fdceb;
+}
+
+.scan-manual-label {
+    -fx-text-fill: rgba(255,255,255,0.82);
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.scan-input-row {
+    -fx-alignment: center-left;
+}
+
+.scan-status-banner {
+    -fx-alignment: center-left;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-padding: 16 18;
+    -fx-border-color: rgba(255,255,255,0.08);
+}
+
+.scan-status-idle,
+.scan-status-info {
+    -fx-background-color: rgba(23,162,184,0.10);
+    -fx-border-color: rgba(23,162,184,0.24);
+}
+
+.scan-status-success {
+    -fx-background-color: rgba(40,167,69,0.10);
+    -fx-border-color: rgba(40,167,69,0.24);
+}
+
+.scan-status-warning {
+    -fx-background-color: rgba(255,193,7,0.10);
+    -fx-border-color: rgba(255,193,7,0.24);
+}
+
+.scan-status-error {
+    -fx-background-color: rgba(255,76,76,0.10);
+    -fx-border-color: rgba(255,76,76,0.24);
+}
+
+.scan-status-icon {
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-padding: 11 14;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+}
+
+.scan-status-title {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+
+.scan-status-message {
+    -fx-text-fill: rgba(255,255,255,0.72);
+    -fx-font-size: 12px;
+}
+
+.scan-side-card {
+    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-padding: 16;
+}
+
+.scan-side-title {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+
+.scan-side-line {
+    -fx-text-fill: rgba(255,255,255,0.68);
+    -fx-font-size: 12px;
+}
+
+.scan-event-cell {
+    -fx-alignment: center-left;
+}
+
+.scan-event-name {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.scan-event-meta {
+    -fx-text-fill: rgba(255,255,255,0.52);
+    -fx-font-size: 11px;
+}
+
+.scan-badge {
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 5 11;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.scan-badge-success {
+    -fx-background-color: rgba(40,167,69,0.15);
+    -fx-text-fill: #97e3a8;
+}
+
+.scan-badge-warning {
+    -fx-background-color: rgba(255,193,7,0.15);
+    -fx-text-fill: #ffd858;
+}
+
+.scan-badge-error {
+    -fx-background-color: rgba(255,76,76,0.15);
+    -fx-text-fill: #ff9a9a;
+}
+
+.scan-badge-info {
+    -fx-background-color: rgba(23,162,184,0.15);
+    -fx-text-fill: #7fdceb;
+}
+
+.scan-badge-card {
+    -fx-background-color: rgba(23,162,184,0.15);
+    -fx-text-fill: #7fdceb;
+}
+
+.scan-badge-cash {
+    -fx-background-color: rgba(168,85,247,0.15);
+    -fx-text-fill: #c7a2ff;
+}
+
+.scan-badge-free {
+    -fx-background-color: rgba(212,175,55,0.15);
+    -fx-text-fill: #f7d777;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AI GENERATE BUTTON
+   ═══════════════════════════════════════════════════════════ */
+.btn-generate {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%,
+        rgba(168,85,247,0.25),
+        rgba(212,175,55,0.18));
+    -fx-border-color: rgba(168,85,247,0.4);
+    -fx-text-fill: #c8a6ff;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-generate:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%,
+        rgba(168,85,247,0.35),
+        rgba(212,175,55,0.28));
+    -fx-border-color: rgba(168,85,247,0.6);
+    -fx-effect: dropshadow(gaussian, rgba(168,85,247,0.3), 12, 0.2, 0, 2);
+}
+
+.btn-generate:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
