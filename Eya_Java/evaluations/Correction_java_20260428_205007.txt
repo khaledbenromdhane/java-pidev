@@ -1,0 +1,24 @@
+FICHE DE CORRECTION - java
+Score : 0/20
+
+Q: [VRAI/FAUX] : La formation est-elle avancée ?
+R: Vrai
+
+Q: [DEFINITION] : Définissez un terme clé.
+R: Java est un langage de programmation de haut niveau, orienté objet et robuste, créé par Sun Microsystems (maintenant Oracle) en 1995. Il se distingue par sa portabilité ("Write Once, Run Anywhere"), fonctionnant sur presque tous les appareils via la Java Virtual Machine (JVM). Largement utilisé, il est populaire pour les applications d'entreprise, web, et mobiles.
+
+Q: [OUVERTE] : Citez un avantage.
+R: Java est un langage de programmation de haut niveau, orienté objet et robuste, créé par Sun Microsystems (maintenant Oracle) en 1995. Il se distingue par sa portabilité ("Write Once, Run Anywhere"), fonctionnant sur presque tous les appareils via la Java Virtual Machine (JVM). Largement utilisé, il est populaire pour les applications d'entreprise, web, et mobiles.
+
+Q: [DEFINITION] : Expliquez un concept.
+R: Java est un langage de programmation de haut niveau, orienté objet et robuste, créé par Sun Microsystems (maintenant Oracle) en 1995. Il se distingue par sa portabilité ("Write Once, Run Anywhere"), fonctionnant sur presque tous les appareils via la Java Virtual Machine (JVM). Largement utilisé, il est populaire pour les applications d'entreprise, web, et mobiles.
+
+Q: [OUVERTE] : Expliquez l'objectif de java.
+R: vvv
+
+Q: [VRAI/FAUX] : Est-ce gratuit ?
+R: Vrai
+
+
+CORRECTION :
+Erreur lors de la correction.

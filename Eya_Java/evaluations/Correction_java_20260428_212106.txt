@@ -1,0 +1,29 @@
+FICHE DE CORRECTION - java
+Score : 0/20
+
+Q: [VRAI/FAUX] : La formation est-elle avancée ?
+R: Vrai
+
+Q: [DEFINITION] : Définissez un terme clé.
+R:  La JVM (Java Virtual Machine) est un composant essentiel qui permet d'exécuter le bytecode Java sur n'importe quel système d'exploitation
+
+
+
+Q: [OUVERTE] : Citez un avantage.
+R: Sa gestion automatique de la mémoire via le Garbage Collector, ce qui évite les fuites de mémoire
+
+Q: [DEFINITION] : Expliquez un concept.
+R: 
+ L'Orientation Objet est un concept où le code est organisé en "classes" et "objets" représentant des entités du monde réel.
+
+Q: [OUVERTE] : Expliquez l'objectif de java.
+R:  L'objectif principal de Java est de permettre la création d'applications robustes et sécurisées avec une portabilité totale grâce au concept "Write Once, Run Anywhere".
+
+
+
+Q: [VRAI/FAUX] : Est-ce gratuit ?
+R: Vrai
+
+
+CORRECTION :
+Erreur lors de la correction (status non 200).

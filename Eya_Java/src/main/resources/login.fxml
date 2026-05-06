@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #0d0d12;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.LoginController">
+   <children>
+      <VBox fx:id="mainContainer" alignment="CENTER" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label style="-fx-text-fill: white; -fx-font-size: 40px; -fx-font-weight: bold;" text="Artvista" />
+                  <Label style="-fx-text-fill: #88888b; -fx-font-size: 18px;" text="Système de Gestion des Formations &amp; Évaluations" />
+               </children>
+            </VBox>
+            
+            <HBox alignment="CENTER" spacing="40.0">
+               <children>
+                  <!-- Admin Card -->
+                  <VBox alignment="CENTER" prefHeight="350.0" prefWidth="300.0" spacing="25.0" styleClass="login-card">
+                     <children>
+                        <Label style="-fx-font-size: 50px;" text="⚙️" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" text="ADMINISTRATEUR" />
+                              <Label alignment="CENTER" style="-fx-text-fill: #88888b; -fx-font-size: 13px;" text="Gestion des formations, des&#10;évaluations et statistiques." textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#handleAdminLogin" prefHeight="45.0" prefWidth="200.0" styleClass="btn-login-admin" text="ACCÉDER AU DASHBOARD" />
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                  </VBox>
+                  
+                  <!-- User Card -->
+                  <VBox alignment="CENTER" prefHeight="350.0" prefWidth="300.0" spacing="25.0" styleClass="login-card">
+                     <children>
+                        <Label style="-fx-font-size: 50px;" text="🎓" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" text="ÉTUDIANT" />
+                              <Label alignment="CENTER" style="-fx-text-fill: #88888b; -fx-font-size: 13px;" text="Consultez le catalogue et&#10;passez vos certifications." textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#handleUserLogin" prefHeight="45.0" prefWidth="200.0" styleClass="btn-login-user" text="VOIR LE CATALOGUE" />
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <Label style="-fx-text-fill: #555558; -fx-font-size: 12px;" text="© 2026 Artvista - Plateforme Éducative Moderne" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

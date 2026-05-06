@@ -1,0 +1,28 @@
+FICHE DE CORRECTION - java
+Score : 0/20
+
+Q: [DEFINITION] : Expliquez un terme technique.
+R:  L'Orientation Objet est un concept où le code est organisé en "classes" et "objets" représentant des entités du monde réel.
+
+
+
+Q: [VRAI/FAUX] : Ce sujet est-il complexe ?
+R: Faux
+
+Q: [OUVERTE] : Décrivez l'objectif principal de Formation
+R:  L'objectif principal de Java est de permettre la création d'applications robustes et sécurisées avec une portabilité totale grâce au concept "Write Once, Run Anywhere".
+
+Q: [DEFINITION] : Définissez un concept clé.
+R: La JVM (Java Virtual Machine) est un composant essentiel qui permet d'exécuter le bytecode Java sur n'importe quel système d'exploitation
+
+
+
+Q: [OUVERTE] : Quel est le bénéfice majeur ?
+R: Sa gestion automatique de la mémoire via le Garbage Collector, ce qui évite les fuites de mémoire.
+
+Q: [VRAI/FAUX] : Est-ce accessible ?
+R: Vrai
+
+
+CORRECTION :
+Erreur API Gemini (Code 404)

@@ -1,0 +1,23 @@
+FICHE D'ÉVALUATION - java
+Date : Tue Apr 28 20:47:18 WAT 2026
+Score obtenu : 0/20
+------------------------------------------
+
+Question : [OUVERTE] : Citez un avantage majeur mentionné.
+Réponse : moderne et pretique
+
+Question : [DEFINITION] : Définissez un terme clé de java.
+Réponse : Java est un langage de programmation de haut niveau, orienté objet et robuste, créé par Sun Microsystems (maintenant Oracle) en 1995. Il se distingue par sa portabilité ("Write Once, Run Anywhere"), fonctionnant sur presque tous les appareils via la Java Virtual Machine (JVM). Largement utilisé, il est populaire pour les applications d'entreprise, web, et mobiles.
+
+Question : [VRAI/FAUX] : Ce contenu est-il obsolète ?
+Réponse : Vrai
+
+Question : [VRAI/FAUX] : La formation traite-t-elle de sujets avancés ?
+Réponse : Vrai
+
+Question : [DEFINITION] : Expliquez un processus décrit.
+Réponse : Java est un langage de programmation de haut niveau, orienté objet et robuste, créé par Sun Microsystems (maintenant Oracle) en 1995. Il se distingue par sa portabilité ("Write Once, Run Anywhere"), fonctionnant sur presque tous les appareils via la Java Virtual Machine (JVM). Largement utilisé, il est populaire pour les applications d'entreprise, web, et mobiles.
+
+Question : [OUVERTE] : Expliquez l'objectif de java.
+Réponse : coder
+

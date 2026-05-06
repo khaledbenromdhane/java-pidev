@@ -1,0 +1,24 @@
+FICHE DE CORRECTION - musique
+Score : 0/20
+
+Q: [OUVERTE] : Expliquez l'objectif de musique.
+R: vvvvv
+
+Q: [VRAI/FAUX] : La formation est-elle avancée ?
+R: Vrai
+
+Q: [DEFINITION] : Définissez un terme clé.
+R: vvvvv
+
+Q: [OUVERTE] : Citez un avantage.
+R: vvvvv
+
+Q: [DEFINITION] : Expliquez un concept.
+R: vvvvv
+
+Q: [VRAI/FAUX] : Est-ce gratuit ?
+R: Vrai
+
+
+CORRECTION :
+Erreur lors de la correction.

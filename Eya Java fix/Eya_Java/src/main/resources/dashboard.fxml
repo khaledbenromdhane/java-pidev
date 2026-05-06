@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.paint.Color?>
+
+<BorderPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.DashboardController">
+   <top>
+      <VBox spacing="10.0" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+         </padding>
+         <Label fx:id="titleLabel" text="Tableau de Bord - Gestion des Formations" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="subtitleLabel" text="Système de gestion des formations et évaluations" textFill="#bdc3c7">
+            <font>
+               <Font name="System" size="14.0" />
+            </font>
+         </Label>
+      </VBox>
+   </top>
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+         <VBox spacing="20.0" style="-fx-padding: 20;">
+            <padding>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+
+            <!-- Section Statistiques -->
+            <VBox spacing="15.0">
+               <Label text="📊 Statistiques Générales" style="-fx-font-size: 18px; -fx-font-weight: bold;">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+               <GridPane hgap="20.0" vgap="15.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+
+                  <!-- Carte Formations -->
+                  <VBox fx:id="formationsCard" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); -fx-padding: 20;" GridPane.columnIndex="0">
+                     <Label fx:id="formationsCountLabel" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #3498db;">
+                        <font>
+                           <Font name="System Bold" size="32.0" />
+                        </font>
+                     </Label>
+                     <Label text="Formations" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+                     <Label fx:id="formationsStatusLabel" text="Total" style="-fx-font-size: 12px; -fx-text-fill: #95a5a6;" />
+                  </VBox>
+
+                  <!-- Carte Évaluations -->
+                  <VBox fx:id="evaluationsCard" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); -fx-padding: 20;" GridPane.columnIndex="1">
+                     <Label fx:id="evaluationsCountLabel" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;">
+                        <font>
+                           <Font name="System Bold" size="32.0" />
+                        </font>
+                     </Label>
+                     <Label text="Évaluations" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+                     <Label fx:id="evaluationsStatusLabel" text="Total" style="-fx-font-size: 12px; -fx-text-fill: #95a5a6;" />
+                  </VBox>
+
+                  <!-- Carte Note Moyenne -->
+                  <VBox fx:id="averageRatingCard" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); -fx-padding: 20;" GridPane.columnIndex="2">
+                     <Label fx:id="averageRatingLabel" text="0.0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #27ae60;">
+                        <font>
+                           <Font name="System Bold" size="32.0" />
+                        </font>
+                     </Label>
+                     <Label text="Note Moyenne" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+                     <Label text="/5" style="-fx-font-size: 12px; -fx-text-fill: #95a5a6;" />
+                  </VBox>
+               </GridPane>
+            </VBox>
+
+            <!-- Section Actions Rapides -->
+            <VBox spacing="15.0">
+               <Label text="⚡ Actions Rapides" style="-fx-font-size: 18px; -fx-font-weight: bold;">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+               <HBox spacing="15.0">
+                  <Button fx:id="addFormationBtn" mnemonicParsing="false" onAction="#handleAddFormation" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 8;" text="➕ Nouvelle Formation">
+                     <font>
+                        <Font name="System" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="viewFormationsBtn" mnemonicParsing="false" onAction="#handleViewFormations" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 8;" text="📋 Voir Formations">
+                     <font>
+                        <Font name="System" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addEvaluationBtn" mnemonicParsing="false" onAction="#handleAddEvaluation" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 8;" text="⭐ Nouvelle Évaluation">
+                     <font>
+                        <Font name="System" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="viewEvaluationsBtn" mnemonicParsing="false" onAction="#handleViewEvaluations" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-background-radius: 8;" text="📊 Voir Évaluations">
+                     <font>
+                        <Font name="System" size="12.0" />
+                     </font>
+                  </Button>
+               </HBox>
+            </VBox>
+
+            <!-- Section Dernières Activités -->
+            <VBox spacing="15.0">
+               <Label text="🕒 Dernières Activités" style="-fx-font-size: 18px; -fx-font-weight: bold;">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+               <VBox fx:id="recentActivitiesContainer" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <Label fx:id="noActivitiesLabel" text="Aucune activité récente" style="-fx-text-fill: #95a5a6; -fx-font-style: italic;" />
+               </VBox>
+            </VBox>
+
+            <!-- Section État de la Base de Données -->
+            <VBox spacing="15.0">
+               <Label text="🗄️ État du Système" style="-fx-font-size: 18px; -fx-font-weight: bold;">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+               <HBox fx:id="databaseStatusContainer" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); -fx-padding: 20;">
+                  <Label fx:id="databaseStatusLabel" text="🔄 Vérification de la connexion..." style="-fx-font-size: 14px;" />
+                  <Label fx:id="databaseStatusIcon" text="⏳" style="-fx-font-size: 16px;" />
+               </HBox>
+            </VBox>
+         </VBox>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" spacing="10.0" style="-fx-background-color: #34495e; -fx-padding: 15;">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+         <Label fx:id="footerLabel" text="© 2024 ESPRIT - Système de Gestion des Formations" textFill="#bdc3c7">
+            <font>
+               <Font name="System" size="12.0" />
+            </font>
+         </Label>
+         <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#handleRefresh" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5;" text="🔄 Actualiser">
+            <font>
+               <Font name="System" size="11.0" />
+            </font>
+         </Button>
+      </HBox>
+   </bottom>
+</BorderPane>

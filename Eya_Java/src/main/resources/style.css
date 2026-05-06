@@ -1,0 +1,294 @@
+/* Main Design System */
+.root {
+    -fx-font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -fx-base: #121212;
+    -fx-background: #121212;
+}
+
+/* Header & Top Bar */
+.top-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #eeeeee;
+    -fx-border-width: 0 0 1 0;
+}
+
+.top-bar-label {
+    -fx-text-fill: #555555;
+    -fx-font-size: 13px;
+}
+
+.nav-bar {
+    -fx-background-color: #ffffff;
+    -fx-padding: 0 80;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5);
+    -fx-border-color: #f0f0f0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.nav-link {
+    -fx-text-fill: #1a1a1a;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 35 20;
+    -fx-transition: all 0.3s;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 3 0;
+}
+
+.nav-link:hover {
+    -fx-text-fill: #d35400;
+    -fx-border-color: #d35400;
+}
+
+.nav-link-active {
+    -fx-text-fill: #d35400;
+    -fx-border-color: #d35400;
+    -fx-border-width: 0 0 3 0;
+}
+
+.btn-admin {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 25;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.btn-admin:hover {
+    -fx-background-color: #333333;
+}
+
+.btn-orange {
+    -fx-background-color: #d35400;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 15 30;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.btn-orange:hover {
+    -fx-background-color: #e67e22;
+}
+
+/* Hero Section */
+.hero-section {
+    -fx-background-color: #000000;
+}
+
+.hero-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hero-title {
+    -fx-text-fill: white;
+    -fx-font-size: 60px;
+    -fx-font-weight: bold;
+}
+
+.hero-breadcrumb {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: normal;
+}
+
+/* Search Section */
+.search-section {
+    -fx-background-color: #2c3e50;
+    -fx-padding: 40 50;
+}
+
+.search-title {
+    -fx-text-fill: white;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+
+.search-field {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15;
+    -fx-background-radius: 5;
+    -fx-font-size: 16px;
+    -fx-pref-width: 600;
+}
+
+.btn-search {
+    -fx-background-color: #f1c40f;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-padding: 15 30;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+/* Formation Cards */
+.card {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 10;
+    -fx-border-color: #333333;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 15, 0, 0, 0);
+    -fx-padding: 0;
+    -fx-overflow: hidden;
+}
+
+.card:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(212,175,55,0.2), 20, 0, 0, 0);
+    -fx-border-color: #d4af37;
+}
+
+.card-image-placeholder {
+    -fx-background-color: #2a2a2a;
+    -fx-min-height: 200;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.card-content {
+    -fx-padding: 20;
+}
+
+.card-type {
+    -fx-text-fill: #d4af37;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 5 0;
+    -fx-letter-spacing: 1px;
+}
+
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.card-description {
+    -fx-text-fill: #aaaaaa;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 4;
+}
+
+.btn-card-action {
+    -fx-background-color: #d35400; /* Keep orange as per image */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12 25;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+}
+
+.btn-card-action:hover {
+    -fx-background-color: #e67e22;
+    -fx-effect: dropshadow(three-pass-box, rgba(230,126,34,0.4), 10, 0, 0, 0);
+}
+
+/* Custom ScrollBar */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #d35400;
+    -fx-background-radius: 10;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #f1f1f1;
+    -fx-background-radius: 10;
+}
+
+/* Artis Event Sidebar Styles */
+.side-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #88888b;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 15;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+}
+
+.side-btn:hover {
+    -fx-background-color: #1a1a1f;
+    -fx-text-fill: white;
+}
+
+.side-btn-active {
+    -fx-background-color: #1a1a1f;
+    -fx-text-fill: #d4af37;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 0 0 0 4; /* Vertical gold line */
+}
+
+.btn-logout-artis {
+    -fx-background-color: white;
+    -fx-text-fill: #ff4757;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 12 15;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER;
+}
+
+.btn-logout-artis:hover {
+    -fx-background-color: #f1f1f1;
+}
+
+/* ScrollPane adjustments for sidebar */
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Login Page Styles */
+.login-card {
+    -fx-background-color: #1a1a1f;
+    -fx-background-radius: 15;
+    -fx-border-color: #222227;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 20, 0, 0, 10);
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s;
+}
+
+.login-card:hover {
+    -fx-border-color: #d4af37;
+    -fx-translate-y: -10;
+    -fx-effect: dropshadow(three-pass-box, rgba(212,175,55,0.2), 30, 0, 0, 15);
+}
+
+.btn-login-admin {
+    -fx-background-color: #d4af37;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.btn-login-admin:hover {
+    -fx-background-color: #f1c40f;
+    -fx-effect: dropshadow(three-pass-box, rgba(212,175,55,0.4), 10, 0, 0, 0);
+}
+
+.btn-login-user {
+    -fx-background-color: transparent;
+    -fx-text-fill: #d4af37;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 1;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.btn-login-user:hover {
+    -fx-background-color: #d4af37;
+    -fx-text-fill: black;
+}
+

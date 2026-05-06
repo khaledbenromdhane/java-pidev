@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.FrontFormationsController">
+    <children>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <!-- Top Bar -->
+                <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="20.0" styleClass="top-bar">
+                    <children>
+                        <Label styleClass="top-bar-label" text="☎ Des questions ? +216 71 000 000">
+                            <padding><Insets left="50.0"/></padding>
+                        </Label>
+                        <Label styleClass="top-bar-label" text="✉ info@artvista.tn" />
+                        <Label styleClass="top-bar-label" text="🕒 Lun - Ven: 8:00 - 18:00" />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <Label styleClass="top-bar-label" text="👤 Étudiant" />
+                        <Button fx:id="voirAdminBtn" onAction="#handleBack" styleClass="btn-admin" text="⚙️ Tableau de Bord">
+                            <HBox.margin><Insets right="50.0"/></HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+
+                <!-- Navigation Bar -->
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="40.0" styleClass="nav-bar">
+                    <children>
+                        <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" text="Artvista" />
+                        <HBox alignment="CENTER" spacing="25.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label onMouseClicked="#handleHome" styleClass="nav-link" text="ACCUEIL" />
+                                <Label styleClass="nav-link" text="ŒUVRES" />
+                                <Label styleClass="nav-link" text="ÉVÉNEMENTS" />
+                                <Label styleClass="nav-link" text="BLOG" />
+                                <Label styleClass="nav-link, nav-link-active" text="FORMATION" />
+                            </children>
+                        </HBox>
+                        <Button styleClass="btn-orange" text="NOS FORMATIONS" />
+                    </children>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-pane" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox>
+                            <children>
+                                <!-- Hero Section -->
+                                <StackPane prefHeight="400.0" styleClass="hero-section">
+                                    <children>
+                                        <ImageView fitHeight="400.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                                            <image>
+                                                <Image url="@images/hero_banner.png" />
+                                            </image>
+                                        </ImageView>
+                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="hero-overlay">
+                                            <children>
+                                                <Label styleClass="hero-title" text="Formations" />
+                                                <Label styleClass="hero-breadcrumb" text="ACCUEIL / NOS FORMATIONS" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </StackPane>
+
+                                <!-- Search Section -->
+                                <VBox alignment="CENTER_LEFT" spacing="20.0" styleClass="search-section">
+                                    <children>
+                                        <Label styleClass="search-title" text="Découvrez nos Formations" />
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <TextField fx:id="searchField" promptText="Rechercher par titre ou catégorie..." styleClass="search-field" HBox.hgrow="ALWAYS" />
+                                                <Button styleClass="btn-search" text="RECHERCHER" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <!-- Content Section -->
+                                <VBox spacing="30.0" style="-fx-background-color: #f9f9f9;">
+                                    <padding>
+                                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                                    </padding>
+                                    <children>
+                                        <FlowPane fx:id="formationsFlowPane" hgap="30.0" vgap="30.0" alignment="CENTER" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
