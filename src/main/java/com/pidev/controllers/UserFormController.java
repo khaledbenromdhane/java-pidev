@@ -94,7 +94,7 @@ public class UserFormController implements Initializable {
 
         // ── Enregistrement ───────────────────────────────────────────────────────
         if ("AJOUTER".equals(mode)) {
-            User u = new User(nom, prenom, password, email, telephone, cbRole.getValue());
+            User u = new User(nom, prenom, password, email, telephone, cbRole.getValue(), null);
             service.ajouter(u);
             afficherSucces("✅ Utilisateur ajouté avec succès !");
         } else if ("MODIFIER".equals(mode)) {

@@ -1,53 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.pidev.controllers.LoginController"
-            prefHeight="420.0" prefWidth="420.0"
-            style="-fx-background-color: #f4f4f4;">
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.pidev.controllers.LoginController"
+           prefWidth="1100" prefHeight="700"
+           style="-fx-background-color: #0d0d0f;">
 
-    <!-- Titre -->
-    <Label text="🔐 Connexion"
-           style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"
-           AnchorPane.topAnchor="30" AnchorPane.leftAnchor="130"/>
+    <VBox alignment="CENTER" spacing="0">
 
-    <!-- Email -->
-    <Label text="Email :"
-           style="-fx-font-weight: bold;"
-           AnchorPane.topAnchor="100" AnchorPane.leftAnchor="40"/>
-    <TextField fx:id="tfEmail" promptText="Entrez votre email"
-               prefWidth="300"
-               AnchorPane.topAnchor="120" AnchorPane.leftAnchor="40"/>
+        <VBox alignment="CENTER" spacing="0" maxWidth="430"
+              style="-fx-background-color: #111114; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                     -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 46 42 42 42;">
 
-    <!-- Mot de passe -->
-    <Label text="Mot de passe :"
-           style="-fx-font-weight: bold;"
-           AnchorPane.topAnchor="170" AnchorPane.leftAnchor="40"/>
-    <PasswordField fx:id="pfPassword" promptText="Entrez votre mot de passe"
-                  prefWidth="300"
-                  AnchorPane.topAnchor="190" AnchorPane.leftAnchor="40"/>
+            <!-- Logo -->
+            <HBox alignment="CENTER" spacing="10" style="-fx-padding: 0 0 34 0;">
+                <StackPane prefWidth="38" prefHeight="38"
+                           style="-fx-background-color: #f0b429; -fx-background-radius: 8;">
+                    <Label text="T" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1a1000;"/>
+                </StackPane>
+                <Label text="Tun'Arche"
+                       style="-fx-font-family: 'Georgia'; -fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #f0f0f0;"/>
+            </HBox>
 
-    <!-- Message erreur -->
-    <Label fx:id="lblMessage"
-           style="-fx-text-fill: red; -fx-font-size: 12;"
-           AnchorPane.topAnchor="235" AnchorPane.leftAnchor="40"/>
+            <!-- Titre -->
+            <VBox spacing="6" alignment="CENTER" style="-fx-padding: 0 0 30 0;">
+                <Label text="Connexion"
+                       style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #f0f0f0;"/>
+                <Label text="Connectez-vous a votre compte"
+                       style="-fx-font-size: 13; -fx-text-fill: #555566;"/>
+            </VBox>
 
-    <!-- Bouton Login -->
-    <Button text="Se connecter" onAction="#seConnecter"
-            prefWidth="300"
-            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-font-size: 14;"
-            AnchorPane.topAnchor="265" AnchorPane.leftAnchor="40"/>
+            <!-- Email -->
+            <VBox spacing="7" style="-fx-padding: 0 0 16 0;">
+                <Label text="ADRESSE E-MAIL"
+                       style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                <TextField fx:id="tfEmail" promptText="votre@email.com"
+                           style="-fx-background-color: #1a1a20; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                                  -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #f0f0f0;
+                                  -fx-prompt-text-fill: #333344; -fx-font-size: 13; -fx-padding: 12 14;"
+                           prefHeight="44" maxWidth="Infinity"/>
+            </VBox>
 
-    <!-- Lien Register -->
-    <Label text="Pas encore de compte ?"
-           style="-fx-text-fill: #7f8c8d;"
-           AnchorPane.topAnchor="320" AnchorPane.leftAnchor="80"/>
-    <Hyperlink text="S'inscrire" onAction="#ouvrirRegister"
-               style="-fx-text-fill: #2980b9; -fx-font-weight: bold;"
-               AnchorPane.topAnchor="318" AnchorPane.leftAnchor="255"/>
+            <!-- Password -->
+            <VBox spacing="7" style="-fx-padding: 0 0 10 0;">
+                <Label text="MOT DE PASSE"
+                       style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #aaaacc;"/>
+                <PasswordField fx:id="pfPassword" promptText="••••••••"
+                               style="-fx-background-color: #1a1a20; -fx-border-color: #2a2a35; -fx-border-width: 1;
+                                      -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #f0f0f0;
+                                      -fx-prompt-text-fill: #333344; -fx-font-size: 13; -fx-padding: 12 14;"
+                               prefHeight="44" maxWidth="Infinity"/>
+            </VBox>
 
-</AnchorPane>
+            <!-- Mot de passe oublié -->
+            <HBox alignment="CENTER_RIGHT" style="-fx-padding: 0 0 16 0;">
+                <Button text="Mot de passe oublié ?" onAction="#ouvrirMdpOublie"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent;
+                               -fx-text-fill: #555566; -fx-font-size: 12; -fx-cursor: hand; -fx-padding: 0;"/>
+            </HBox>
+
+            <!-- Message erreur -->
+            <Label fx:id="lblMessage" text=""
+                   style="-fx-font-size: 12; -fx-padding: 0 0 14 0; -fx-wrap-text: true;"
+                   maxWidth="Infinity" wrapText="true"/>
+
+            <!-- Bouton connexion → seConnecter() ✓ -->
+            <Button text="SE CONNECTER" onAction="#seConnecter"
+                    maxWidth="Infinity" prefHeight="46"
+                    style="-fx-background-color: #f0b429; -fx-text-fill: #1a1000; -fx-font-size: 13;
+                           -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
+            <!-- Séparateur -->
+            <HBox alignment="CENTER" spacing="12" style="-fx-padding: 22 0 22 0;">
+                <Region style="-fx-background-color: #2a2a35; -fx-min-height: 1; -fx-pref-height: 1;"
+                        HBox.hgrow="ALWAYS"/>
+                <Label text="ou" style="-fx-font-size: 12; -fx-text-fill: #333344;"/>
+                <Region style="-fx-background-color: #2a2a35; -fx-min-height: 1; -fx-pref-height: 1;"
+                        HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <!-- Lien inscription → ouvrirRegister() ✓ -->
+            <HBox alignment="CENTER" spacing="6">
+                <Label text="Pas encore de compte ?" style="-fx-font-size: 13; -fx-text-fill: #555566;"/>
+                <Button text="S'inscrire" onAction="#ouvrirRegister"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent;
+                               -fx-text-fill: #f0b429; -fx-font-size: 13; -fx-font-weight: bold;
+                               -fx-cursor: hand; -fx-padding: 0;"/>
+            </HBox>
+
+        </VBox>
+
+        <!-- Footer -->
+        <HBox alignment="CENTER" spacing="4" style="-fx-padding: 22 0 0 0;">
+            <Label text="© 2026 " style="-fx-font-size: 11; -fx-text-fill: #333344;"/>
+            <Label text="Tun'Arche" style="-fx-font-size: 11; -fx-text-fill: #f0b429; -fx-font-weight: bold;"/>
+            <Label text=". Crafted with ♥ for Arts &amp; Events"
+                   style="-fx-font-size: 11; -fx-text-fill: #333344;"/>
+        </HBox>
+
+    </VBox>
+</StackPane>

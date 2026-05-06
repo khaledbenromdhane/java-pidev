@@ -82,7 +82,7 @@ public class RegisterController {
         }
 
         // ── Enregistrement ───────────────────────────────────────────────────────
-        User user = new User(nom, prenom, password, email, telephone, "USER");
+        User user = new User(nom, prenom, password, email, telephone, "USER", null);
         service.ajouter(user);
         afficherSucces("✅ Inscription réussie ! Vous pouvez vous connecter.");
 
@@ -97,7 +97,8 @@ public class RegisterController {
             Parent root = loader.load();
             Stage stage = (Stage) tfNom.getScene().getWindow();
             stage.setTitle("Connexion");
-            stage.setScene(new Scene(root, 420, 420));
+            stage.getScene().setRoot(root);
+            stage.setMaximized(true);
         } catch (IOException e) {
             afficherErreur("Erreur : " + e.getMessage());
         }
