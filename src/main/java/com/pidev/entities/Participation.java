@@ -7,8 +7,8 @@ import java.util.List;
 public class Participation {
     public static final List<String> STATUTS = List.of(
             "En attente",
-            "Confirmee",
-            "Annulee"
+            "Confirmée",
+            "Annulée"
     );
 
     public static final List<String> MODES_PAIEMENT = List.of(

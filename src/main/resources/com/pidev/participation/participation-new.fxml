@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Frontoffice – Participation Create Form
+     Converted from: participation/new.html.twig
+     ═══════════════════════════════════════════════════════════════ -->
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pidev.controllers.ParticipationFormController"
+            stylesheets="@/com/pidev/styles/admin.css" styleClass="app-root">
+    <top>
+        <HBox styleClass="page-header" spacing="16" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="24" right="32" bottom="24" left="32"/>
+            </padding>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="🎫+  Ajouter une Participation" styleClass="page-title"/>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Hyperlink text="Participations" onAction="#onBack"
+                               style="-fx-text-fill: #d4af37; -fx-font-size: 12px; -fx-border-color: transparent;"/>
+                    <Label text="›" styleClass="breadcrumb-label"/>
+                    <Label text="Ajouter" styleClass="breadcrumb-label"/>
+                </HBox>
+            </VBox>
+            <Button text="← Retour à la liste" styleClass="btn-ghost" onAction="#onBack"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+            <VBox alignment="CENTER">
+                <padding>
+                    <Insets top="20" right="32" bottom="32" left="32"/>
+                </padding>
+
+                <VBox styleClass="form-card" spacing="16" maxWidth="800">
+                    <GridPane hgap="16" vgap="12">
+                        <!-- Événement -->
+                        <Label text="📅  Événement *" styleClass="form-label"
+                               GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                        <ComboBox fx:id="evenementBox" styleClass="form-select"
+                                  promptText="Sélectionner un événement…"
+                                  GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                                  maxWidth="Infinity"/>
+                        <Label fx:id="evtError" text="" styleClass="form-error"
+                               GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                               managed="false" visible="false"/>
+
+                        <!-- Date Participation -->
+                        <Label text="📆  Date de participation *" styleClass="form-label"
+                               GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <DatePicker fx:id="datePicker" styleClass="form-date"
+                                    GridPane.rowIndex="4" GridPane.columnIndex="0" maxWidth="Infinity"/>
+                        <Label fx:id="dateError" text="" styleClass="form-error"
+                               GridPane.rowIndex="5" GridPane.columnIndex="0"
+                               managed="false" visible="false"/>
+
+                        <!-- Nombre de places -->
+                        <Label text="👥  Nombre de places *" styleClass="form-label"
+                               GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                        <Spinner fx:id="nbrSpinner" styleClass="form-select"
+                                 GridPane.rowIndex="4" GridPane.columnIndex="1" maxWidth="Infinity">
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100000" initialValue="1"/>
+                            </valueFactory>
+                        </Spinner>
+                        <Label fx:id="nbrError" text="" styleClass="form-error"
+                               GridPane.rowIndex="5" GridPane.columnIndex="1"
+                               managed="false" visible="false"/>
+
+                        <!-- Statut -->
+                        <Label text="ℹ  Statut *" styleClass="form-label"
+                               GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="statutBox" styleClass="form-select"
+                                  promptText="Sélectionner un statut…"
+                                  GridPane.rowIndex="7" GridPane.columnIndex="0" maxWidth="Infinity"/>
+                        <Label fx:id="statutError" text="" styleClass="form-error"
+                               GridPane.rowIndex="8" GridPane.columnIndex="0"
+                               managed="false" visible="false"/>
+
+                        <!-- Mode de paiement (conditional – shown only for paid events) -->
+                        <Label fx:id="paiementLabel" text="💳  Mode de paiement *" styleClass="form-label"
+                               GridPane.rowIndex="6" GridPane.columnIndex="1"
+                               managed="false" visible="false"/>
+                        <ComboBox fx:id="paiementBox" styleClass="form-select"
+                                  promptText="Sélectionner…"
+                                  GridPane.rowIndex="7" GridPane.columnIndex="1" maxWidth="Infinity"
+                                  managed="false" visible="false"/>
+                        <Label fx:id="paiementError" text="" styleClass="form-error"
+                               GridPane.rowIndex="8" GridPane.columnIndex="1"
+                               managed="false" visible="false"/>
+                        <Label fx:id="paiementHint" text="⚠ Payment required for paid events"
+                               style="-fx-text-fill: #eab308; -fx-font-size: 11px;"
+                               GridPane.rowIndex="9" GridPane.columnIndex="1"
+                               managed="false" visible="false"/>
+
+                        <!-- Column constraints -->
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                        </columnConstraints>
+                    </GridPane>
+
+                    <!-- Divider -->
+                    <Separator styleClass="section-divider"/>
+
+                    <!-- Info Box -->
+                    <HBox styleClass="info-box" spacing="10" alignment="CENTER_LEFT">
+                        <Label text="ℹ" styleClass="info-box-icon"/>
+                        <Label text="Le nombre de places demandées ne doit pas dépasser la capacité restante de l'événement."
+                               styleClass="info-box-text" wrapText="true"/>
+                    </HBox>
+
+                    <!-- Actions -->
+                    <HBox spacing="12" alignment="CENTER_RIGHT">
+                        <Button text="Annuler" styleClass="btn-ghost" onAction="#onBack"/>
+                        <Button text="✓ Créer" styleClass="btn-admin-primary" onAction="#onSave"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

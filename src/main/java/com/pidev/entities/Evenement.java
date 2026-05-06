@@ -10,7 +10,7 @@ public class Evenement {
             "Expositions d'art",
             "Festivals",
             "Spectacles de danse",
-            "Theatre",
+            "Théâtre",
             "Tournois",
             "Formations"
     );
