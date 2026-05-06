@@ -122,9 +122,9 @@
 }
 
 .hero-banner {
-    -fx-pref-height: 430;
+    -fx-pref-height: 530;
     -fx-alignment: center;
-    -fx-background-image: url("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1800&auto=format&fit=crop");
+    -fx-background-image: url("file:/C:/Users/khale/OneDrive/Desktop/eve.png");
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -288,7 +288,8 @@
 }
 
 .evt-grid {
-    -fx-padding: 8 0 20 0;
+    -fx-padding: 22 8 32 8;
+    -fx-alignment: center;
 }
 
 .evt-card {

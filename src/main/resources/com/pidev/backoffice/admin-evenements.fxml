@@ -96,7 +96,7 @@
                         </VBox>
                         <HBox spacing="8">
                             <Button text="Scanner QR" styleClass="btn-admin-outline" onAction="#onOpenScanPage"/>
-                            <Button text="Export" styleClass="btn-admin-outline" fx:id="exportBtn"/>
+                            <Button text="Export" styleClass="btn-admin-outline" fx:id="exportBtn" onAction="#onExport"/>
                             <Button text="Add evenement" styleClass="btn-admin-primary"
                                     fx:id="addEventBtn" onAction="#onAddEvent"/>
                         </HBox>

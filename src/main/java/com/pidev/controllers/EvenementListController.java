@@ -1127,7 +1127,7 @@ public class EvenementListController implements Initializable {
 
     @FXML
     private void onNavFormation(ActionEvent event) {
-        NavigationHelper.navigateTo(event, NavigationHelper.PART_LIST);
+        // Intentionally left blank: keep button clickable without navigation.
     }
 
     @FXML
@@ -1186,6 +1186,17 @@ public class EvenementListController implements Initializable {
         String value = rawImage.trim();
         if (value.startsWith("http://") || value.startsWith("https://")) {
             return value;
+        }
+
+        try {
+            java.nio.file.Path candidate = java.nio.file.Path.of(value);
+            if (!candidate.isAbsolute()) {
+                candidate = java.nio.file.Path.of(System.getProperty("user.dir"), "uploads", "evenements", value);
+            }
+            if (java.nio.file.Files.exists(candidate)) {
+                return candidate.toUri().toString();
+            }
+        } catch (Exception ignored) {
         }
 
         return "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop";

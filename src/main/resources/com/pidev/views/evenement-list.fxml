@@ -107,7 +107,9 @@
                             <ToggleButton fx:id="orderToggle" text="DESC" styleClass="order-pill" onAction="#onToggleOrder"/>
                         </HBox>
 
-                        <FlowPane fx:id="evtGrid" styleClass="evt-grid" hgap="20" vgap="20" prefWrapLength="1300"/>
+                        <StackPane alignment="TOP_CENTER">
+                            <FlowPane fx:id="evtGrid" styleClass="evt-grid" hgap="36" vgap="36" prefWrapLength="1220" maxWidth="1220"/>
+                        </StackPane>
                     </VBox>
                 </VBox>
             </content>

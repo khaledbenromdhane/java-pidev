@@ -97,7 +97,7 @@
                             </HBox>
                         </VBox>
                         <HBox spacing="8">
-                            <Button text="📤 Export" styleClass="btn-admin-outline" fx:id="exportBtn"/>
+                            <Button text="📤 Export" styleClass="btn-admin-outline" fx:id="exportBtn" onAction="#onExport"/>
                             <Button text="👤+ Add Participation" styleClass="btn-admin-primary"
                                     fx:id="addPartBtn" onAction="#onAddParticipation"/>
                         </HBox>

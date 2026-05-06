@@ -3,6 +3,7 @@ package com.pidev.controllers;
 import com.pidev.entities.Participation;
 import com.pidev.services.CrudService;
 import com.pidev.services.ParticipationJdbcService;
+import com.pidev.tools.PdfExportUtil;
 import javafx.event.ActionEvent;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -28,8 +29,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
 
 import java.io.IOException;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -80,6 +83,7 @@ public class AdminParticipationsController implements Initializable {
     @FXML private TableColumn<ParticipationRow, LocalDate> colDate;
     @FXML private TableColumn<ParticipationRow, ParticipationRow> colActions;
     @FXML private Button addPartBtn;
+    @FXML private Button exportBtn;
     @FXML private Button sidebarEvtLink;
     @FXML private Button sidebarScanLink;
 
@@ -228,6 +232,31 @@ public class AdminParticipationsController implements Initializable {
     @FXML
     private void onOpenScanPage(ActionEvent event) {
         NavigationHelper.navigateTo(event, NavigationHelper.ADMIN_SCAN);
+    }
+
+    @FXML
+    private void onExport() {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Export Participations PDF");
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files", "*.pdf"));
+        File file = chooser.showSaveDialog(participationsTable.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+
+        try {
+            PdfExportUtil.exportParticipations(
+                    file,
+                    participationsTable.getItems(),
+                    totalPartLabel.getText(),
+                    acceptedLabel.getText(),
+                    pendingLabel.getText(),
+                    refusedLabel.getText()
+            );
+            showInfo("Export", "PDF exported successfully.");
+        } catch (IOException ex) {
+            showError("Export error", "Failed to export PDF.");
+        }
     }
 
     private void openCreateModal() {

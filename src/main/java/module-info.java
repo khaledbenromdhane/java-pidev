@@ -1,5 +1,4 @@
 open module com.pidev.pidev {
-
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
@@ -7,17 +6,14 @@ open module com.pidev.pidev {
     requires javafx.web;
     requires javafx.swing;
     requires javafx.media;
-
     requires java.sql;
     requires java.net.http;
-
     requires com.google.zxing;
     requires com.google.zxing.javase;
-
     requires java.desktop;
+    requires org.apache.pdfbox;
     requires webcam.capture;
     requires org.json;
-
     requires kotlin.stdlib;
 
     exports com.pidev;
