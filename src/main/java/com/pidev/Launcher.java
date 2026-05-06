@@ -1,5 +1,6 @@
 package com.pidev;
 
+import com.pidev.tools.GestureServer;
 import com.pidev.tools.myconnexion;
 import javafx.application.Application;
 
@@ -8,7 +9,12 @@ public class Launcher {
         // Test connexion BD
         myconnexion.getInstance();
 
-        // Lancement JavaFX
-        Application.launch(HelloApplication.class, args);
+        GestureServer gestureServer = new GestureServer();
+        gestureServer.startServer();
+        try {
+            Application.launch(HelloApplication.class, args);
+        } finally {
+            gestureServer.stopServer();
+        }
     }
 }

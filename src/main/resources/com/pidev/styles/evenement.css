@@ -122,9 +122,9 @@
 }
 
 .hero-banner {
-    -fx-pref-height: 430;
+    -fx-pref-height: 530;
     -fx-alignment: center;
-    -fx-background-image: url("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1800&auto=format&fit=crop");
+    -fx-background-image: url("file:/C:/Users/khale/OneDrive/Desktop/eve.png");
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -212,6 +212,50 @@
     -fx-font-size: 14px;
 }
 
+.payment-banner {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 12 14;
+}
+
+.payment-banner-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+}
+
+.payment-banner-message {
+    -fx-text-fill: rgba(255, 255, 255, 0.75);
+    -fx-font-size: 13px;
+}
+
+.payment-banner-close {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 8;
+    -fx-text-fill: rgba(255, 255, 255, 0.75);
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-padding: 6 10;
+}
+
+.payment-banner-close:hover {
+    -fx-border-color: rgba(255, 255, 255, 0.35);
+    -fx-text-fill: #ffffff;
+}
+
+.payment-banner-success {
+    -fx-border-color: rgba(34, 197, 94, 0.65);
+    -fx-background-color: rgba(34, 197, 94, 0.15);
+}
+
+.payment-banner-error {
+    -fx-border-color: rgba(239, 68, 68, 0.6);
+    -fx-background-color: rgba(239, 68, 68, 0.15);
+}
+
 .sort-bar {
     -fx-padding: 2 0 6 0;
 }
@@ -244,7 +288,8 @@
 }
 
 .evt-grid {
-    -fx-padding: 8 0 20 0;
+    -fx-padding: 22 8 32 8;
+    -fx-alignment: center;
 }
 
 .evt-card {

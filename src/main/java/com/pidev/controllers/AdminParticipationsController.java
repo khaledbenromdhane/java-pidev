@@ -1,7 +1,10 @@
 package com.pidev.controllers;
 
 import com.pidev.entities.Participation;
+import com.pidev.services.CrudService;
 import com.pidev.services.ParticipationJdbcService;
+import com.pidev.tools.PdfExportUtil;
+import javafx.event.ActionEvent;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -26,8 +29,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
 
 import java.io.IOException;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -78,12 +83,15 @@ public class AdminParticipationsController implements Initializable {
     @FXML private TableColumn<ParticipationRow, LocalDate> colDate;
     @FXML private TableColumn<ParticipationRow, ParticipationRow> colActions;
     @FXML private Button addPartBtn;
+    @FXML private Button exportBtn;
     @FXML private Button sidebarEvtLink;
+    @FXML private Button sidebarScanLink;
 
     private final ObservableList<ParticipationRow> allRows = FXCollections.observableArrayList();
     private FilteredList<ParticipationRow> filteredRows;
     private SortedList<ParticipationRow> sortedRows;
     private final ParticipationJdbcService service = new ParticipationJdbcService();
+    private final CrudService<Participation, Integer> crudService = service;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -159,7 +167,7 @@ public class AdminParticipationsController implements Initializable {
 
     private void reloadData() {
         allRows.clear();
-        service.findAll().forEach(p -> {
+        crudService.findAll().forEach(p -> {
             String mode = p.getModePaiement() == null || p.getModePaiement().isBlank() ? "Gratuit" : p.getModePaiement();
             allRows.add(new ParticipationRow(
                     p.getId(),
@@ -216,6 +224,41 @@ public class AdminParticipationsController implements Initializable {
         NavigationHelper.navigateTo(sidebarEvtLink, NavigationHelper.ADMIN_EVENEMENTS);
     }
 
+    @FXML
+    private void onNavigateScan() {
+        NavigationHelper.navigateTo(sidebarScanLink, NavigationHelper.ADMIN_SCAN);
+    }
+
+    @FXML
+    private void onOpenScanPage(ActionEvent event) {
+        NavigationHelper.navigateTo(event, NavigationHelper.ADMIN_SCAN);
+    }
+
+    @FXML
+    private void onExport() {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Export Participations PDF");
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files", "*.pdf"));
+        File file = chooser.showSaveDialog(participationsTable.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+
+        try {
+            PdfExportUtil.exportParticipations(
+                    file,
+                    participationsTable.getItems(),
+                    totalPartLabel.getText(),
+                    acceptedLabel.getText(),
+                    pendingLabel.getText(),
+                    refusedLabel.getText()
+            );
+            showInfo("Export", "PDF exported successfully.");
+        } catch (IOException ex) {
+            showError("Export error", "Failed to export PDF.");
+        }
+    }
+
     private void openCreateModal() {
         try {
             FXMLLoader loader = NavigationHelper.getLoader(NavigationHelper.PART_NEW);
@@ -248,7 +291,7 @@ public class AdminParticipationsController implements Initializable {
         confirm.setContentText("Supprimer la participation #" + row.getId() + " ?");
         Optional<ButtonType> result = confirm.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            boolean ok = service.deleteById(row.getId());
+            boolean ok = crudService.deleteById(row.getId());
             if (ok) {
                 showInfo("Succès", "Participation supprimée avec succès !");
                 reloadData();

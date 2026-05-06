@@ -86,6 +86,14 @@
                             <Button fx:id="resetBtn" text="✕" styleClass="clear-btn" onAction="#onReset"/>
                         </HBox>
 
+                        <HBox fx:id="paymentBanner" styleClass="payment-banner" alignment="CENTER_LEFT" spacing="12" visible="false" managed="false">
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label fx:id="paymentBannerTitle" text="" styleClass="payment-banner-title"/>
+                                <Label fx:id="paymentBannerMessage" text="" styleClass="payment-banner-message" wrapText="true"/>
+                            </VBox>
+                            <Button text="Fermer" styleClass="payment-banner-close" onAction="#onClosePaymentBanner"/>
+                        </HBox>
+
                         <Label fx:id="searchInfoLabel" styleClass="search-info" visible="false" managed="false"/>
 
                         <HBox styleClass="sort-bar" alignment="CENTER_LEFT" spacing="7">
@@ -99,7 +107,9 @@
                             <ToggleButton fx:id="orderToggle" text="DESC" styleClass="order-pill" onAction="#onToggleOrder"/>
                         </HBox>
 
-                        <FlowPane fx:id="evtGrid" styleClass="evt-grid" hgap="20" vgap="20" prefWrapLength="1300"/>
+                        <StackPane alignment="TOP_CENTER">
+                            <FlowPane fx:id="evtGrid" styleClass="evt-grid" hgap="36" vgap="36" prefWrapLength="1220" maxWidth="1220"/>
+                        </StackPane>
                     </VBox>
                 </VBox>
             </content>

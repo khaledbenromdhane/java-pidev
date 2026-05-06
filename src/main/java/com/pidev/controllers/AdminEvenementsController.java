@@ -1,7 +1,10 @@
 package com.pidev.controllers;
 
 import com.pidev.entities.Evenement;
+import com.pidev.services.CrudService;
 import com.pidev.services.EvenementJdbcService;
+import com.pidev.tools.PdfExportUtil;
+import javafx.event.ActionEvent;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -26,8 +29,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
 
 import java.io.IOException;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -49,12 +54,15 @@ public class AdminEvenementsController implements Initializable {
     @FXML private TableColumn<Evenement, LocalTime> colHeure;
     @FXML private TableColumn<Evenement, Evenement> colActions;
     @FXML private Button addEventBtn;
+    @FXML private Button exportBtn;
     @FXML private Button sidebarPartLink;
+    @FXML private Button sidebarScanLink;
 
     private final ObservableList<Evenement> allEvents = FXCollections.observableArrayList();
     private FilteredList<Evenement> filteredEvents;
     private SortedList<Evenement> sortedEvents;
     private final EvenementJdbcService service = new EvenementJdbcService();
+    private final CrudService<Evenement, Integer> crudService = service;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
@@ -136,7 +144,7 @@ public class AdminEvenementsController implements Initializable {
     }
 
     private void reloadData() {
-        allEvents.setAll(service.findAll());
+        allEvents.setAll(crudService.findAll());
         refreshTypeFilter();
         applyFilters();
         updateStats();
@@ -214,6 +222,41 @@ public class AdminEvenementsController implements Initializable {
         NavigationHelper.navigateTo(sidebarPartLink, NavigationHelper.ADMIN_PARTICIPATIONS);
     }
 
+    @FXML
+    private void onNavigateScan() {
+        NavigationHelper.navigateTo(sidebarScanLink, NavigationHelper.ADMIN_SCAN);
+    }
+
+    @FXML
+    private void onOpenScanPage(ActionEvent event) {
+        NavigationHelper.navigateTo(event, NavigationHelper.ADMIN_SCAN);
+    }
+
+    @FXML
+    private void onExport() {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Export Events PDF");
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files", "*.pdf"));
+        File file = chooser.showSaveDialog(eventsTable.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+
+        try {
+            PdfExportUtil.exportEvents(
+                    file,
+                    eventsTable.getItems(),
+                    totalCountLabel.getText(),
+                    upcomingCountLabel.getText(),
+                    paidCountLabel.getText(),
+                    totalAttendeesLabel.getText()
+            );
+            showInfo("Export", "PDF exported successfully.");
+        } catch (IOException ex) {
+            showError("Export error", "Failed to export PDF.");
+        }
+    }
+
     private void openCreateModal() {
         try {
             FXMLLoader loader = NavigationHelper.getLoader(NavigationHelper.EVT_NEW);
@@ -246,7 +289,7 @@ public class AdminEvenementsController implements Initializable {
         confirm.setContentText("Supprimer l'événement \"" + event.getNom() + "\" ?");
         Optional<ButtonType> result = confirm.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            boolean ok = service.deleteById(event.getId());
+            boolean ok = crudService.deleteById(event.getId());
             if (ok) {
                 showInfo("Succès", "Événement supprimé avec succès !");
                 reloadData();
